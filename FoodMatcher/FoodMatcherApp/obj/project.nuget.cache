@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Uj3hjxSBxf6sXxcjSk43gUGsyE2AaxPrO3E5Wsx6ZyYEt2OzT3qfVDzUX/Za3hiincCAHxJmmWgnZ12xtoHffQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cloja\\source\\repos\\FoodMatcher\\FoodMatcher\\FoodMatcherApp\\FoodMatcherApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cloja\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+  ],
+  "logs": []
+}
