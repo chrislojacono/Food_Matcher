@@ -30,5 +30,18 @@ namespace FoodMatcherApp.Data_Access
 
             db.Execute(sql, user);
         }
+
+        public User GetSingleUser(string id)
+        {
+            var sql = @"select *
+                        from [Users]
+                        where Id = @Id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var user = db.QueryFirstOrDefault<User>(sql, new { Id = id });
+
+            return user;
+        }
     }
 }
