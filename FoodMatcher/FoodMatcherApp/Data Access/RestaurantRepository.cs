@@ -25,8 +25,8 @@ namespace FoodMatcherApp.Data_Access
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"INSERT INTO [dbo].[Restaurants]([Id],[Name],[Address],[Rating],[Image_Url],[Distance])
-                        VALUES(@Id,@Name,@Address,@Rating,@Image_Url,@Distance)";
+            var sql = @"INSERT INTO [dbo].[Restaurants]([Id],[Name],[Address],[Rating],[Image_Url],[Distance],[YelpId])
+                        VALUES(@Id,@Name,@Address,@Rating,@Image_Url,@Distance,@YelpId)";
 
             var id = db.Execute(sql, restaurant);
 
