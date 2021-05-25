@@ -21,5 +21,15 @@ namespace FoodMatcherApp.Data_Access
             return db.Query<Restaurant>(sql).ToList();
         }
 
+        public void AddARestaurant(Restaurant restaurant)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"INSERT INTO [dbo].[Restaurants]([Id],[Name],[Address],[Rating],[Image_Url],[Distance])
+                        VALUES(@Id,@Name,@Address,@Rating,@Image_Url,@Distance)";
+
+            var id = db.Execute(sql, restaurant);
+
+        }
     }
 }
