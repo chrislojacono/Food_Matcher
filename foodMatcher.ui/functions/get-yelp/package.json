@@ -1,0 +1,15 @@
+{
+  "name": "get-yelp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "get-yelp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "cd functions/get-yelp && npm install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "yelp-fusion": "^3.0.0"
+  }
+}
