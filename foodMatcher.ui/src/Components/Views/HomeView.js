@@ -1,38 +1,18 @@
 import React, { Component } from 'react';
+import { Button, Flex, Heading } from '@chakra-ui/react';
 import BusinessCard from '../Cards/yelpBusinessCard';
 import YelpData from '../../Helpers/Data/YelpData';
 
 export default class HomePageView extends Component {
   state = {
-    businesses: [],
-    searchTerm: 'pizza',
-    locationTerm: 'nashville, tn',
   };
 
-  componentDidMount() {
-    const {
-      searchTerm,
-      locationTerm,
-    } = this.state;
-    YelpData(locationTerm, searchTerm).then(
-      (response) => {
-        this.setState({
-          businesses: response,
-        });
-      },
-    );
-  }
-
   render() {
-    const { businesses } = this.state;
-    const renderProducts = () => businesses.map((business) => (<BusinessCard key={business.id} businessData={business} />));
     return (
-        <div className='d-flex flex-column justify-content-center align-items-center'>
-          <h1 className="m-2">Yelp stuff</h1>
-          <div className="d-flex flex-wrap justify-content-center">
-           {renderProducts()}
-          </div>
-        </div>
+      <Flex height="100vh" width="90vw" alignItems="center" background="yellow.100" justifyContent="center" direction='column' p="24" rounded={6}>
+        <Heading mb={6}>Welcome to Let's Eat!</Heading>
+        <Button colorScheme="cyan" size="lg">Start a Session!</Button>
+      </Flex>
     );
   }
 }
