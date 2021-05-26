@@ -32,8 +32,6 @@ namespace FoodMatcherApp.Data_Access
             var id = db.ExecuteScalar<Guid>(sql, session);
 
             session.Id = id;
-
-
         }
     }
 }
