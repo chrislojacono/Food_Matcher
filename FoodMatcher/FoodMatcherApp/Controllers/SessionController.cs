@@ -27,5 +27,13 @@ namespace FoodMatcherApp.Controllers
             return Created($"api/Sessions/{session.Id}", session);
         }
 
+        [HttpPut("{sessionId}/Complete")]
+        public IActionResult SessionComplete(Guid sessionId)
+        {
+            _repo.CompleteSession(sessionId);
+
+            return NoContent();
+        }
+
     }
 }
