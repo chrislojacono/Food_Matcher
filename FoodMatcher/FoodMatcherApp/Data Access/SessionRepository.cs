@@ -33,5 +33,16 @@ namespace FoodMatcherApp.Data_Access
 
             session.Id = id;
         }
+
+        public void CompleteSession(Guid sessionId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Update Sessions
+                        Set Completed = 1
+                        Where Id = @Id";
+
+            db.Execute(sql, new { Id = sessionId });
+        }
     }
 }
