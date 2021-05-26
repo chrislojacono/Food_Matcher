@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { Button, Flex, Heading } from '@chakra-ui/react';
-import BusinessCard from '../Cards/yelpBusinessCard';
-import YelpData from '../../Helpers/Data/YelpData';
+import {
+  Button,
+  Flex,
+  Heading,
+  Box,
+  Image,
+} from '@chakra-ui/react';
 
 export default class HomePageView extends Component {
-  state = {
-  };
-
   render() {
     return (
-      <Flex height="100vh" width="90vw" alignItems="center" background="yellow.100" justifyContent="center" direction='column' p="24" rounded={6}>
-        <Heading mb={6}>Welcome to Let's Eat!</Heading>
-        <Button colorScheme="cyan" size="lg">Start a Session!</Button>
+      <Flex height="30vh" width="30vw" alignItems="center" background="yellow.100" mt={300} justifyContent="center" direction='column' p="24" rounded={6} bgImg="url('../../Helpers/Images/eatBackground.jpg)">
+        <Heading mb={6} fontFamily="body">Welcome to Let's Eat!</Heading>
+        <Button colorScheme="cyan" size="lg" mt="10">Start a Session!</Button>
       </Flex>
     );
   }

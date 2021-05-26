@@ -3,5 +3,9 @@
 @import 'variables';
 
 body {
-  background-color: aliceblue;
+  background-image:  linear-gradient(to top, rgba(22, 22, 22, 0.5), rgba(82, 77, 77, 0.5)), url('../Helpers/Images/eatBackground3.jpg') !important;
+  background-repeat:no-repeat !important;
+  background-attachment:fixed !important;
+  background-position:50% 70% !important;
+  background-size: cover !important;
 }
