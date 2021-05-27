@@ -23,8 +23,8 @@ namespace FoodMatcherApp.Controllers
         [HttpPost]
         public IActionResult AddASession(Session session)
         {
-            _repo.AddASession(session);
-            return Created($"api/Sessions/{session.Id}", session);
+            var Id = _repo.AddASession(session);
+            return Ok(Id);
         }
 
         [HttpPut("{sessionId}/Complete")]

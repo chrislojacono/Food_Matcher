@@ -21,7 +21,7 @@ namespace FoodMatcherApp.Data_Access
             return db.Query<Session>(sql).ToList();
         }
 
-        public void AddASession(Session session)
+        public Guid AddASession(Session session)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -32,6 +32,8 @@ namespace FoodMatcherApp.Data_Access
             var id = db.ExecuteScalar<Guid>(sql, session);
 
             session.Id = id;
+
+            return id;
         }
 
         public void CompleteSession(Guid sessionId)
