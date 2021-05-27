@@ -71,7 +71,7 @@ class UserForm extends Component {
       };
       sessionData.AddASession(sessionObject).then((responseId) => {
         this.setState({
-          Alert: true,
+          ShowAlert: true,
         });
         setTimeout(() => {
           setTimeout(() => {
