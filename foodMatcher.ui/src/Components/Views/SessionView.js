@@ -6,6 +6,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import SessionData from '../../Helpers/Data/SessionData';
+import YelpData from '../../Helpers/Data/YelpData';
 
 export default class SessionView extends Component {
    state = {
@@ -14,7 +15,16 @@ export default class SessionView extends Component {
    }
 
    componentDidMount() {
-
+     SessionData.GetASession(this.props.match.params.id).then((response) => {
+       this.setState({
+         sessionData: response,
+       });
+       YelpData.yelpQuery(response.location, response.searchTerm).then((yelpResponse) => {
+         this.setState({
+           restaurants: yelpResponse,
+         });
+       });
+     });
    }
 
    render() {
