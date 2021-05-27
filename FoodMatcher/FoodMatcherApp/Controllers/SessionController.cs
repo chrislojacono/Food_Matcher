@@ -20,6 +20,19 @@ namespace FoodMatcherApp.Controllers
             _repo = new SessionRepository();
         }
 
+        [HttpGet("${id}")]
+        public IActionResult GetSingleSessionById(Guid id)
+        {
+            var session = _repo.GetASessionById(id);
+
+            if (session == null)
+            {
+                return NotFound("This product does not exist");
+            }
+
+            return Ok(session);
+        }
+
         [HttpPost]
         public IActionResult AddASession(Session session)
         {
