@@ -86,7 +86,7 @@ class UserForm extends Component {
 
       return (
         <>
-        {userForm ? <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10}>
+        {userForm ? <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>
         <FormControl id='FirstName' onChange={this.handleChange} isRequired>
           <FormLabel>First name</FormLabel>
           <Input placeholder='First name' />
@@ -114,7 +114,7 @@ class UserForm extends Component {
         </Button>
       </Flex>
           : <>
-        <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
+        <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
         {ShowAlert
           && <Alert status="success">
                 <AlertIcon />
