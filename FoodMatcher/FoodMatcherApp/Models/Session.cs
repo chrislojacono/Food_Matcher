@@ -9,7 +9,6 @@ namespace FoodMatcherApp.Models
     {
         public Guid Id { get; set; }
         public string Location { get; set; }
-        public string Category { get; set; }
         public string SearchTerm { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool Completed { get; set; }
