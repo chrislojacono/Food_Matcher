@@ -27,7 +27,7 @@ namespace FoodMatcherApp.Data_Access
 
             var sql = @"INSERT INTO [dbo].[Sessions]([Location],[SearchTerm], [User1Id])
                         OUTPUT inserted.Id
-                        VALUES(@Location,@Category,@SearchTerm, @User1Id)";
+                        VALUES(@Location,@SearchTerm, @User1Id)";
 
             var id = db.ExecuteScalar<Guid>(sql, session);
 
