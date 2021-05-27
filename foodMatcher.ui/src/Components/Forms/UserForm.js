@@ -5,7 +5,9 @@ import {
   FormLabel,
   Input,
   FormHelperText,
+  Button,
 } from '@chakra-ui/react';
+import userData from '../../Helpers/Data/UserData';
 
 export default class UserForm extends Component {
     state = {
@@ -21,6 +23,26 @@ export default class UserForm extends Component {
         [e.target.id]: e.target.value,
       });
     };
+
+    handleSubmit = (e) => {
+      e.preventDefault();
+      const {
+        FirstName,
+        LastName,
+        EmailAddress,
+      } = this.state;
+      const userObject = {
+        FirstName,
+        LastName,
+        EmailAddress,
+        Image_Url: this.state.Image_Url,
+      };
+      userData.AddAUser(userObject).then((response) => {
+        this.setState({
+          UserId: response,
+        });
+      });
+    }
 
     render() {
       return (
@@ -38,6 +60,18 @@ export default class UserForm extends Component {
               <Input type='email' />
               <FormHelperText>We'll never share your email.</FormHelperText>
             </FormControl>
+            <FormControl id='Image_Url' onChange={this.handleChange} isRequired>
+              <FormLabel>Image Url</FormLabel>
+              <Input placeholder='Image Url' />
+            </FormControl>
+            <Button
+              mt={4}
+              colorScheme="teal"
+              onClick={this.handleSubmit}
+              type="submit"
+            >
+              Submit
+            </Button>
           </Flex>
       );
     }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseUrl } from './config.json';
+import { baseUrl } from '../config.json';
 
 const userDataUrl = `${baseUrl}/Users`;
 
