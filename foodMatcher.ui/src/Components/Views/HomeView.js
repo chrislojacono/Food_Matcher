@@ -3,8 +3,6 @@ import {
   Button,
   Flex,
   Heading,
-  Box,
-  Image,
 } from '@chakra-ui/react';
 
 export default class HomePageView extends Component {
