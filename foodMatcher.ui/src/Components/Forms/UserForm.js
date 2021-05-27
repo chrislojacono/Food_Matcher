@@ -116,10 +116,10 @@ class UserForm extends Component {
           : <>
         <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
         {ShowAlert
-          ? <Alert status="success">
+          && <Alert status="success">
                 <AlertIcon />
                 Your session has been created!
-            </Alert> : <> </>}
+            </Alert>}
         <FormControl as="fieldset">
         <FormLabel as="legend">What are you in the mood for?</FormLabel>
           <RadioGroup defaultValue="Pizza">
