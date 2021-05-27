@@ -16,11 +16,3 @@ export default function Routes() {
       </Switch>
   );
 }
-
-const PrivateRoute = ({ component: Component, user, ...rest }) => {
-  const routeChecker = (taco) => (user
-    ? (<Component {...taco} user={user}/>)
-    : (<Redirect to={{ pathname: '/', state: { from: taco.location } }} />));
-
-  return <Route {...rest} render={(props) => routeChecker(props)}/>;
-};
