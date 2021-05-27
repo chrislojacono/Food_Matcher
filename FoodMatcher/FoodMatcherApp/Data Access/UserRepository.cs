@@ -21,14 +21,20 @@ namespace FoodMatcherApp.Data_Access
             return db.Query<User>(sql).ToList();
         }
 
-        public void AddAUser(User user)
+        public Guid AddAUser(User user)
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"INSERT INTO [dbo].[Users]([Id],[FirstName],[LastName],[EmailAddress],[Image_Url])
-                        VALUES(@Id, @FirstName,@LastName,@EmailAddress,@Image_Url)";
+            var sql = @"INSERT INTO [dbo].[Users]([FirstName],[LastName],[EmailAddress],[Image_Url])
+                        OUTPUT inserted.Id
+                        VALUES(@FirstName,@LastName,@EmailAddress,@Image_Url)";
 
-            db.Execute(sql, user);
+           var id = db.ExecuteScalar<Guid>(sql, user);
+
+           user.Id = id;
+
+           return id;
+
         }
 
         public User GetSingleUser(string id)
