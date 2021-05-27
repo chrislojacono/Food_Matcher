@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import {
   Flex,
   FormControl,
@@ -11,11 +11,13 @@ import {
   Radio,
   RadioGroup,
   HStack,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import userData from '../../Helpers/Data/UserData';
 import sessionData from '../../Helpers/Data/SessionData';
 
-export default class UserForm extends Component {
+class UserForm extends Component {
     state = {
       UserId: '',
       FirstName: '',
@@ -25,6 +27,7 @@ export default class UserForm extends Component {
       userForm: true,
       Location: '',
       SearchTerm: '',
+      ShowAlert: false,
     }
 
     handleChange = (e) => {
@@ -66,11 +69,20 @@ export default class UserForm extends Component {
         SearchTerm,
         User1Id: UserId,
       };
-      sessionData.AddASession(sessionObject).then(() => <Redirect to='/'/>);
+      sessionData.AddASession(sessionObject).then((responseId) => {
+        this.setState({
+          Alert: true,
+        });
+        setTimeout(() => {
+          setTimeout(() => {
+            this.props.history.push(`/session/${responseId}`);
+          }, 3000);
+        });
+      });
     }
 
     render() {
-      const { userForm } = this.state;
+      const { userForm, ShowAlert } = this.state;
 
       return (
         <>
@@ -103,6 +115,11 @@ export default class UserForm extends Component {
       </Flex>
           : <>
         <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
+        {ShowAlert
+          ? <Alert status="success">
+                <AlertIcon />
+                Your session has been created!
+            </Alert> : <> </>}
         <FormControl as="fieldset">
         <FormLabel as="legend">What are you in the mood for?</FormLabel>
           <RadioGroup defaultValue="Pizza">
@@ -136,3 +153,5 @@ export default class UserForm extends Component {
       );
     }
 }
+
+export default withRouter(UserForm);
