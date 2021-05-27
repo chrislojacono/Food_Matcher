@@ -12,6 +12,7 @@ export default function Routes() {
       <Switch>
         <Route exact path='/' component={() => <Home/>} />
         <Route exact path='/userForm' component={() => <UserForm/>} />
+        <Route exact path='/session/:id' component={() => <Home/>} />
       </Switch>
   );
 }

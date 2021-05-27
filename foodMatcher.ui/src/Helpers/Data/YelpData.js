@@ -8,10 +8,9 @@ const yelpQuery = (location, term) => new Promise((resolve, reject) => {
         term: `${term}`,
       },
     }).then((response) => {
-      console.warn(response);
       resolve(Object.values(response.data.results.jsonBody.businesses));
     })
     .catch((error) => reject(error));
 });
 
-export default yelpQuery;
+export default { yelpQuery };
