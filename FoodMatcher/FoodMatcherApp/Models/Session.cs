@@ -13,6 +13,8 @@ namespace FoodMatcherApp.Models
         public string SearchTerm { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool Completed { get; set; }
+        public Guid User1Id { get; set; }
+        public Guid User2Id { get; set; }
 
     }
 }
