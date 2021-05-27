@@ -102,11 +102,11 @@ export default class UserForm extends Component {
         </Button>
       </Flex>
           : <>
-        <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10}>
-        <FormControl id="SearchTerm" onChange={this.handleChange}>
+        <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
+        <FormControl as="fieldset">
         <FormLabel as="legend">What are you in the mood for?</FormLabel>
           <RadioGroup defaultValue="Pizza">
-            <HStack spacing="24px">
+            <HStack spacing="30px" wrap="wrap" justify="center">
               <Radio value="Pizza" id="SearchTerm" onChange={this.handleChange}>Pizza</Radio>
               <Radio value="Mexican" id="SearchTerm" onChange={this.handleChange}>Mexican</Radio>
               <Radio value="Greek" id="SearchTerm" onChange={this.handleChange}>Greek</Radio>
@@ -114,6 +114,7 @@ export default class UserForm extends Component {
               <Radio value="Thai" id="SearchTerm" onChange={this.handleChange}>Thai</Radio>
               <Radio value="Italian" id="SearchTerm" onChange={this.handleChange}>Italian</Radio>
               <Radio value="French" id="SearchTerm" onChange={this.handleChange}>French</Radio>
+              <Radio value="Dessert" id="SearchTerm" onChange={this.handleChange}>Dessert</Radio>
             </HStack>
           </RadioGroup>
         </FormControl>
