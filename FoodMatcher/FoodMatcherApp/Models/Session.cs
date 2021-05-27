@@ -12,6 +12,7 @@ namespace FoodMatcherApp.Models
         public string Category { get; set; }
         public string SearchTerm { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool Completed { get; set; }
 
     }
 }

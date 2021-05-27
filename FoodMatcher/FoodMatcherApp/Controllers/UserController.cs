@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FoodMatcherApp.Models;
 
 namespace FoodMatcherApp.Controllers
 {
@@ -36,6 +37,13 @@ namespace FoodMatcherApp.Controllers
             }
 
             return Ok(user);
+        }
+
+        [HttpPost]
+        public IActionResult AddAUser(User user)
+        {
+            var Id = _repo.AddAUser(user);
+            return Ok(Id);
         }
     }
 }

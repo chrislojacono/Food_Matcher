@@ -1,15 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ChakraProvider, Flex } from '@chakra-ui/react';
 import Routes from '../../Helpers/Routes';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App d-flex justify-content-center">
+      <ChakraProvider>
+      <Flex justifyContent="center" alignItems="center">
         <Router>
           <Routes/>
         </Router>
-      </div>
+      </Flex>
+      </ChakraProvider>
     );
   }
 }
