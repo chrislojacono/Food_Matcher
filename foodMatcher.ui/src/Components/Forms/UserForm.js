@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   Flex,
   FormControl,
@@ -7,8 +8,12 @@ import {
   FormHelperText,
   Button,
   Heading,
+  Radio,
+  RadioGroup,
+  HStack,
 } from '@chakra-ui/react';
 import userData from '../../Helpers/Data/UserData';
+import sessionData from '../../Helpers/Data/SessionData';
 
 export default class UserForm extends Component {
     state = {
@@ -44,8 +49,24 @@ export default class UserForm extends Component {
       userData.AddAUser(userObject).then((response) => {
         this.setState({
           UserId: response,
+          userForm: false,
         });
       });
+    }
+
+    handleSubmit2 = (e) => {
+      e.preventDefault();
+      const {
+        Location,
+        SearchTerm,
+        UserId,
+      } = this.state;
+      const sessionObject = {
+        Location,
+        SearchTerm,
+        User1Id: UserId,
+      };
+      sessionData.AddASession(sessionObject).then(() => <Redirect to='/'/>);
     }
 
     render() {
@@ -53,7 +74,7 @@ export default class UserForm extends Component {
 
       return (
         <>
-        {UserForm ? <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10}>
+        {userForm ? <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10}>
         <FormControl id='FirstName' onChange={this.handleChange} isRequired>
           <FormLabel>First name</FormLabel>
           <Input placeholder='First name' />
@@ -82,28 +103,28 @@ export default class UserForm extends Component {
       </Flex>
           : <>
         <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10}>
-        <Heading>What are you in the mood for?</Heading>
-        <FormControl id='FirstName' onChange={this.handleChange} isRequired>
-          <FormLabel>First name</FormLabel>
-          <Input placeholder='First name' />
+        <FormControl id="SearchTerm" onChange={this.handleChange}>
+        <FormLabel as="legend">What are you in the mood for?</FormLabel>
+          <RadioGroup defaultValue="Pizza">
+            <HStack spacing="24px">
+              <Radio value="Pizza" id="SearchTerm" onChange={this.handleChange}>Pizza</Radio>
+              <Radio value="Mexican" id="SearchTerm" onChange={this.handleChange}>Mexican</Radio>
+              <Radio value="Greek" id="SearchTerm" onChange={this.handleChange}>Greek</Radio>
+              <Radio value="Indian" id="SearchTerm" onChange={this.handleChange}>Indian</Radio>
+              <Radio value="Thai" id="SearchTerm" onChange={this.handleChange}>Thai</Radio>
+              <Radio value="Italian" id="SearchTerm" onChange={this.handleChange}>Italian</Radio>
+              <Radio value="French" id="SearchTerm" onChange={this.handleChange}>French</Radio>
+            </HStack>
+          </RadioGroup>
         </FormControl>
-        <FormControl id='LastName' onChange={this.handleChange} isRequired>
-          <FormLabel>Last name</FormLabel>
-          <Input placeholder='First name' />
-        </FormControl>
-        <FormControl id='EmailAddress' onChange={this.handleChange} isRequired>
-        <FormLabel>Email address</FormLabel>
-          <Input type='email' />
-          <FormHelperText>We'll never share your email.</FormHelperText>
-        </FormControl>
-        <FormControl id='Image_Url' onChange={this.handleChange} isRequired>
-          <FormLabel>Image Url</FormLabel>
-          <Input placeholder='Image Url' />
+        <FormControl id='Location' onChange={this.handleChange} isRequired>
+          <FormLabel>Where are you heading?</FormLabel>
+          <Input placeholder='ex: Nashville, Tn' />
         </FormControl>
         <Button
           mt={4}
           colorScheme="teal"
-          onClick={this.handleSubmit1}
+          onClick={this.handleSubmit2}
           type="submit"
         >
           Submit

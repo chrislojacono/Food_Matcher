@@ -8,7 +8,7 @@ import {
 export default class HomePageView extends Component {
   render() {
     return (
-      <Flex height="30vh" width="30vw" alignItems="center" background="yellow.100" mt={300} justifyContent="center" direction='column' p="24" rounded={6} bgImg="url('../../Helpers/Images/eatBackground.jpg)">
+      <Flex height="40%" width="40%" alignItems="center" background="yellow.100" mt="10%" mb="10%" justifyContent="center" direction='column' p="40" rounded={6} bgImg="url('../../Helpers/Images/eatBackground.jpg)">
         <Heading mb={6} fontFamily="body">Welcome to Let's Eat!</Heading>
         <Button colorScheme="cyan" size="lg" mt="10">Start a Session!</Button>
       </Flex>

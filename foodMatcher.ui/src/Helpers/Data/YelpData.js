@@ -13,4 +13,4 @@ const yelpQuery = (location, term) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default yelpQuery;
+export default { yelpQuery };
