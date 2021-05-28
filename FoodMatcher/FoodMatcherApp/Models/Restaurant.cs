@@ -12,7 +12,7 @@ namespace FoodMatcherApp.Models
         public string Address { get; set; }
         public double Rating { get; set; }
         public string Image_Url { get; set; }
-        public string Url { get; set; }
-        public Int64 Distance { get; set; }
+        public string YelpUrl { get; set; }
+        public double Distance { get; set; }
     }
 }
