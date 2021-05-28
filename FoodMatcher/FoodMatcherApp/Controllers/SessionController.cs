@@ -20,7 +20,7 @@ namespace FoodMatcherApp.Controllers
             _repo = new SessionRepository();
         }
 
-        [HttpGet("${id}")]
+        [HttpGet("{id}")]
         public IActionResult GetSingleSessionById(Guid id)
         {
             var session = _repo.GetASessionById(id);
