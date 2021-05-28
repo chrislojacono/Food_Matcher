@@ -14,7 +14,5 @@ namespace FoodMatcherApp.Models
         public string Image_Url { get; set; }
         public string Url { get; set; }
         public Int64 Distance { get; set; }
-        public string YelpId { get; set; }
-
     }
 }
