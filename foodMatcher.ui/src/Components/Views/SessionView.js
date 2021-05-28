@@ -44,21 +44,21 @@ export default class SessionView extends Component {
 
   likeButton = (yelpData) => {
     const restaurantObject = {
-      Id: yelpData.id,
       Name: yelpData.name,
       Address: `${yelpData.location.display_address[0]}, ${yelpData.location.display_address[1]}`,
       Rating: yelpData.rating,
       Image_Url: yelpData.image_url,
       YelpUrl: yelpData.url,
+      YelpId: yelpData.id,
       Distance: yelpData.distance,
     };
-    const { sessionData } = this.state;
-    const sessionLikeObject = {
-      UserId: sessionData.user1Id,
-      RestaurantId: yelpData.id,
-      SessionId: sessionData.id,
-    };
-    RestaurantData.AddARestaurant(restaurantObject).then(() => {
+    RestaurantData.AddARestaurant(restaurantObject).then((responseId) => {
+      const { sessionData } = this.state;
+      const sessionLikeObject = {
+        UserId: sessionData.user1Id,
+        RestaurantId: responseId,
+        SessionId: sessionData.id,
+      };
       SessionLikeData.AddASessionLike(sessionLikeObject);
     });
   }
