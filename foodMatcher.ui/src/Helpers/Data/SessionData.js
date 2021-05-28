@@ -9,4 +9,10 @@ const AddASession = (SessionObject) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { AddASession };
+const GetASession = (sessionId) => new Promise((resolve, reject) => {
+  axios.get(`${SessionDataUrl}/${sessionId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+export default { AddASession, GetASession };
