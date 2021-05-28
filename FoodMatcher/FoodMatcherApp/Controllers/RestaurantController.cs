@@ -23,9 +23,17 @@ namespace FoodMatcherApp.Controllers
         [HttpPost]
         public IActionResult AddARestaurant(Restaurant restaurant)
         {
-            _repo.AddARestaurant(restaurant);
+            var allRestaruarnts = _repo.GetAllRestaurants();
 
-            return Created($"api/Restaurants/{restaurant.Id}", restaurant);
+            if (allRestaruarnts.Contains(restaurant))
+            {
+                return Ok();
+            }
+            else
+            {
+                var Id = _repo.AddARestaurant(restaurant);
+                return Ok(Id);
+            }     
         }
     }
 }

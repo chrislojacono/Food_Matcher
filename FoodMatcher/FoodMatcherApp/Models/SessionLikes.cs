@@ -8,8 +8,8 @@ namespace FoodMatcherApp.Models
     public class SessionLikes
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
-        public string RestaurantId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid RestaurantId { get; set; }
         public Guid SessionId { get; set; }
 
     }
