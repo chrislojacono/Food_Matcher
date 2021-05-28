@@ -10,7 +10,7 @@ export default class HomePageView extends Component {
   render() {
     return (
       <Flex height="40%" width="40%" alignItems="center" background="whitesmoke" mt="10%" mb="10%" justifyContent="center" direction='column' p="40" rounded={6}>
-        <Heading mb={6} fontFamily="body">Welcome to Let's Eat!</Heading>
+        <Heading mb={6} whiteSpace="nowrap">Welcome to Let's Eat!</Heading>
         <Link to={{
           pathname: '/userForm',
         }}>

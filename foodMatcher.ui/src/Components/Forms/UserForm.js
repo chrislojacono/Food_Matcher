@@ -26,7 +26,7 @@ class UserForm extends Component {
       Image_Url: '',
       userForm: true,
       Location: '',
-      SearchTerm: '',
+      SearchTerm: 'Pizza',
       ShowAlert: false,
     }
 
@@ -47,7 +47,7 @@ class UserForm extends Component {
         FirstName,
         LastName,
         EmailAddress,
-        Image_Url: this.state.Image_Url,
+        // Image_Url: this.state.Image_Url,
       };
       userData.AddAUser(userObject).then((response) => {
         this.setState({
@@ -100,10 +100,10 @@ class UserForm extends Component {
           <Input type='email' />
           <FormHelperText>We'll never share your email.</FormHelperText>
         </FormControl>
-        <FormControl id='Image_Url' onChange={this.handleChange} isRequired>
+        {/* <FormControl id='Image_Url' onChange={this.handleChange} isRequired>
           <FormLabel>Image Url</FormLabel>
           <Input placeholder='Image Url' />
-        </FormControl>
+        </FormControl> */}
         <Button
           mt={4}
           colorScheme="teal"
