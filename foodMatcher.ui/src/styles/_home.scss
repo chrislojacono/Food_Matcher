@@ -1,0 +1,108 @@
+
+.userInfo{
+    height: 35px;
+    border-radius: 50%;
+    margin: 0  0  0 6px;
+    padding: 0 4px;
+    position: fixed;
+    top: 10px;
+    right: 40px;
+}
+
+.logout-dropdown{
+    position: fixed;
+    top: 10px;
+    right: 20px;
+}
+
+.homeModal{
+    margin-top: 30px;
+    height: 60px;
+    width: 150px;
+}
+.navbarLogo{
+    width: 100%;
+}
+
+.homePageLogo{
+    width: 50%;
+}
+
+.loginLogo{
+    position: relative;
+    width: 80vw;
+    height: 80vh;
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+    object-fit: cover;
+    margin: 40px auto;
+}
+
+.login{
+    margin-top: 250px;
+    width: 20%; 
+    position: absolute;
+    background-color: white;
+    bottom: 5%;
+    left: 40%;
+}
+
+.login:hover{
+    background-color: teal;
+}
+.loginButtonImg{
+    width: 100%;
+}
+
+@media screen and (max-width: 400px){
+    .login{
+        width: 100%;
+        img{
+            width: 100%;
+        }     
+    }
+    .userInfo{
+        width: 20%;
+        height: 30%;
+        border-radius: 50%;
+        margin: 0  0  0 6px;
+        padding: 0 4px;
+        position: static;
+    }
+    
+    .logout-dropdown{
+        position: static;
+    }
+    .homePageLogo{
+        width:90%;
+    
+    }
+    .loginLogo{
+        position: relative;
+        width: 80vw;
+        height: 90vh;
+        background-size: contain;
+        background-position: center;
+        background-repeat:no-repeat;
+        object-fit: cover;
+        margin-top: 0;
+
+    }
+    
+    .login{
+        margin-top: 250px;
+        width: 40%; 
+        background-color: white;
+        position: absolute;
+        bottom: 30%;
+        left: 30%;
+    }
+
+}
+
+.anchors, .anchors:hover, .anchors:active{
+    text-decoration: none;
+    color: black;
+
+}

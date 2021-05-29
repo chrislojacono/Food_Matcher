@@ -9,4 +9,10 @@ const AddAUser = (userObject) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { AddAUser };
+const GetSingleUser = (UserId) => new Promise((resolve, reject) => {
+  axios.get(`${userDataUrl}/${UserId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+export default { AddAUser, GetSingleUser };

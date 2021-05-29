@@ -5,6 +5,7 @@ package-lock.json
 dist/
 .firebase/
 .env
+config.json
 # dependencies
 /node_modules
 /.pnp

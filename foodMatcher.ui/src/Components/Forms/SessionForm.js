@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   Flex,
   FormControl,
@@ -14,22 +14,14 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react';
-import userData from '../../Helpers/Data/UserData';
+import sessionData from '../../Helpers/Data/SessionData';
 
-class UserForm extends Component {
+class SessionForm extends Component {
     state = {
-      UserId: '',
-      FirstName: '',
-      LastName: '',
-      EmailAddress: '',
-      Image_Url: '',
-<<<<<<< HEAD
-=======
-      userForm: true,
+      UserId: this.props.user.id,
       Location: '',
       SearchTerm: 'Pizza',
       ShowAlert: false,
->>>>>>> main
     }
 
     handleChange = (e) => {
@@ -38,30 +30,7 @@ class UserForm extends Component {
       });
     };
 
-    handleSubmit1 = (e) => {
-      e.preventDefault();
-      const {
-        FirstName,
-        LastName,
-        EmailAddress,
-      } = this.state;
-      const userObject = {
-        FirstName,
-        LastName,
-        EmailAddress,
-        // Image_Url: this.state.Image_Url,
-      };
-      userData.AddAUser(userObject).then((response) => {
-        this.setState({
-          UserId: response,
-          userForm: false,
-        });
-      });
-    }
-
-<<<<<<< HEAD
-=======
-    handleSubmit2 = (e) => {
+    handleSubmit = (e) => {
       e.preventDefault();
       const {
         Location,
@@ -85,49 +54,14 @@ class UserForm extends Component {
       });
     }
 
->>>>>>> main
     render() {
-      const { userForm, ShowAlert } = this.state;
+      const { ShowAlert } = this.state;
 
       return (
         <>
-<<<<<<< HEAD
-       <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>
-=======
-        {userForm ? <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>
->>>>>>> main
-        <FormControl id='FirstName' onChange={this.handleChange} isRequired>
-          <FormLabel>First name</FormLabel>
-          <Input placeholder='First name' />
-        </FormControl>
-        <FormControl id='LastName' onChange={this.handleChange} isRequired>
-          <FormLabel>Last name</FormLabel>
-          <Input placeholder='First name' />
-        </FormControl>
-        <FormControl id='EmailAddress' onChange={this.handleChange} isRequired>
-        <FormLabel>Email address</FormLabel>
-          <Input type='email' />
-          <FormHelperText>We'll never share your email.</FormHelperText>
-        </FormControl>
-        {/* <FormControl id='Image_Url' onChange={this.handleChange} isRequired>
-          <FormLabel>Image Url</FormLabel>
-          <Input placeholder='Image Url' />
-        </FormControl> */}
-        <Button
-          mt={4}
-          colorScheme="teal"
-          onClick={this.handleSubmit1}
-          type="submit"
-        >
-          Submit
-        </Button>
-      </Flex>
-<<<<<<< HEAD
-=======
-          : <>
         <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
         {ShowAlert
-          && <Alert status="success">
+          && <Alert status="success" marginY="5px">
                 <AlertIcon />
                 Your session has been created!
             </Alert>}
@@ -137,6 +71,9 @@ class UserForm extends Component {
             <HStack spacing="30px" wrap="wrap" justify="center">
               <Radio value="Pizza" id="SearchTerm" onChange={this.handleChange}>Pizza</Radio>
               <Radio value="Mexican" id="SearchTerm" onChange={this.handleChange}>Mexican</Radio>
+              <Radio value="Healthy" id="SearchTerm" onChange={this.handleChange}>Healthy</Radio>
+              <Radio value="Vegan" id="SearchTerm" onChange={this.handleChange}>Vegan</Radio>
+              <Radio value="Chinese" id="SearchTerm" onChange={this.handleChange}>Chinese</Radio>
               <Radio value="Greek" id="SearchTerm" onChange={this.handleChange}>Greek</Radio>
               <Radio value="Indian" id="SearchTerm" onChange={this.handleChange}>Indian</Radio>
               <Radio value="Thai" id="SearchTerm" onChange={this.handleChange}>Thai</Radio>
@@ -153,17 +90,15 @@ class UserForm extends Component {
         <Button
           mt={4}
           colorScheme="teal"
-          onClick={this.handleSubmit2}
+          onClick={this.handleSubmit}
           type="submit"
         >
           Submit
         </Button>
       </Flex>
-      </>}
->>>>>>> main
       </>
       );
     }
 }
 
-export default withRouter(UserForm);
+export default withRouter(SessionForm);
