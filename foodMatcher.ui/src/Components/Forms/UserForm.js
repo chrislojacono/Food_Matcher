@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   Flex,
   FormControl,
@@ -7,12 +7,6 @@ import {
   Input,
   FormHelperText,
   Button,
-  Heading,
-  Radio,
-  RadioGroup,
-  HStack,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react';
 import userData from '../../Helpers/Data/UserData';
 
@@ -53,8 +47,6 @@ class UserForm extends Component {
     }
 
     render() {
-      const { userForm, ShowAlert } = this.state;
-
       return (
         <>
        <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>

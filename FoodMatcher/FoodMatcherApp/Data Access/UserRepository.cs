@@ -39,7 +39,13 @@ namespace FoodMatcherApp.Data_Access
                         VALUES(@Id,@FirstName,@LastName,@EmailAddress,@Image_Url)
                         END;";
 
-           var id = db.ExecuteScalar<string>(sql, new { Id = user.Id, EmailAddress = user.EmailAddress, FirstName = user.FirstName, LastName = user.LastName, Image_Url = user.Image_Url });
+           var id = db.ExecuteScalar<string>(sql, new { 
+               Id = user.Id, 
+               EmailAddress = user.EmailAddress, 
+               FirstName = user.FirstName, 
+               LastName = user.LastName, 
+               Image_Url = user.Image_Url 
+           });
 
            user.Id = id;
 

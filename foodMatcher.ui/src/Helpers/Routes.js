@@ -2,11 +2,11 @@ import React from 'react';
 import {
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
 import SessionForm from '../Components/Forms/SessionForm';
-import SessionView from '../Components/Views/SessionView';
+import SessionView from '../Components/Views/ActiveSessionView';
 import ToAuthOrNot from '../Components/Views/ToAuthOrNot';
+import YourSessions from '../Components/Views/YourSessions';
 
 export default function Routes({ user }) {
   return (
@@ -14,6 +14,7 @@ export default function Routes({ user }) {
         <Route exact path='/' component={() => <ToAuthOrNot user={user}/>} />
         <Route exact path='/SessionForm' component={() => <SessionForm user={user}/>} />
         <Route exact path='/session/:id' component={(props) => <SessionView {...props} user={user}/>} />
+        <Route exact path='/mySessions' component={(props) => <YourSessions {...props} user={user}/>} />
       </Switch>
   );
 }

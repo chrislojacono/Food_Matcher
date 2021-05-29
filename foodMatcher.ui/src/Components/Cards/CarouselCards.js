@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-  Flex,
   Image,
   Box,
-  Typography,
   Heading,
 } from '@chakra-ui/react';
 import { SwiperSlide } from 'swiper/react';

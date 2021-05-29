@@ -56,5 +56,16 @@ namespace FoodMatcherApp.Data_Access
 
             db.Execute(sql, new { Id = sessionId });
         }
+
+        public List<Session> GetASessionByUserId(string userId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Select * 
+                        From Sessions
+                        Where User1Id = @User1Id or User2Id = @User2Id";
+
+            return db.Query<Session>(sql, new { User1Id = userId, User2Id = userId }).ToList();
+        }
     }
 }
