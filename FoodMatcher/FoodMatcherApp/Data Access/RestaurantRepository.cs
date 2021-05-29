@@ -25,11 +25,29 @@ namespace FoodMatcherApp.Data_Access
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"INSERT INTO [dbo].[Restaurants]([Name],[Address],[Rating],[Image_Url],[YelpUrl],[YelpId],[Distance])
-                        Output inserted.id
-                        VALUES(@Name,@Address,@Rating,@Image_Url,@YelpUrl,@YelpId,@Distance)";
+            var sql = @"IF EXISTS (SELECT * FROM Restaurants WHERE YelpId = @YelpId)
+                        BEGIN
+                        UPDATE [dbo].[Restaurants]
+                        SET [Name] = @Name,[Address] = @Address,[Rating] = @Rating, [Image_Url] = @Image_Url,[YelpUrl] = @YelpUrl,[YelpId] = @YelpId, [Distance] = @Distance
+                        WHERE YelpId = @YelpId
+                        SELECT Id from Users where YelpId = @YelpId
+                        END
+                        ELSE
+                        BEGIN
+	                    INSERT INTO [dbo].[Restaurants]([Name],[Address],[Rating],[Image_Url],[YelpUrl],[YelpId],[Distance])
+                        OUTPUT inserted.Id
+                        VALUES(@Name,@Address,@Rating,@Image_Url, @YelpUrl,@YelpId,@Distance)
+                        END;";
 
-           var id = db.ExecuteScalar<Guid>(sql, restaurant);
+           var id = db.ExecuteScalar<Guid>(sql, new { 
+               Name = restaurant.Name, 
+               Address = restaurant.Address,
+               Rating = restaurant.Rating,
+               Image_Url = restaurant.Image_Url,
+               YelpUrl = restaurant.YelpUrl,
+               YelpId = restaurant.YelpId,
+               Distance = restaurant.Distance,
+           });
 
            restaurant.Id = id;
 
