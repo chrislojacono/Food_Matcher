@@ -6,6 +6,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import SessionData from '../../Helpers/Data/SessionData';
+import SessionCard from '../Cards/SessionCard';
 
 export default class YourSessionsView extends Component {
   state = {
@@ -25,9 +26,27 @@ export default class YourSessionsView extends Component {
   }
 
   render() {
+    const { sessions } = this.state;
     return (
-      <Flex height="40%" width="40%" alignItems="center" background="whitesmoke" mt="10%" mb="10%" justifyContent="center" direction='column'rounded={6}>
-        <Heading whiteSpace="nowrap">Your Sessions</Heading>
+      <Flex
+        height='70%'
+        width='70%'
+        alignItems='center'
+        background='whitesmoke'
+        mt='10%'
+        mb='10%'
+        justifyContent='center'
+        direction='column'
+        rounded={6}
+      >
+        <Heading whiteSpace='nowrap'>Your Sessions</Heading>
+        <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
+        {sessions.length ? (
+          sessions.map((session) => <SessionCard sessionData={session} />)
+        ) : (
+          <></>
+        )}
+        </Flex>
       </Flex>
     );
   }
