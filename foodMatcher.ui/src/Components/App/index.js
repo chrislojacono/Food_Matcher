@@ -5,6 +5,7 @@ import { ChakraProvider, Flex } from '@chakra-ui/react';
 import fbConnection from '../../Helpers/Data/fbConnection';
 import Routes from '../../Helpers/Routes';
 import UserData from '../../Helpers/Data/UserData';
+import MyNavbar from '../MyNavbar';
 
 fbConnection();
 
@@ -33,11 +34,12 @@ class App extends React.Component {
   render() {
     return (
       <ChakraProvider>
-      <Flex justifyContent="center" alignItems="center">
-        <Router>
+      <Router>
+          <MyNavbar user={this.state.user}/>
+          <Flex justifyContent="center" alignItems="center" direction="column">
           <Routes user={this.state.user}/>
+          </Flex>
         </Router>
-      </Flex>
       </ChakraProvider>
     );
   }

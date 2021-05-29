@@ -71,6 +71,9 @@ class SessionForm extends Component {
             <HStack spacing="30px" wrap="wrap" justify="center">
               <Radio value="Pizza" id="SearchTerm" onChange={this.handleChange}>Pizza</Radio>
               <Radio value="Mexican" id="SearchTerm" onChange={this.handleChange}>Mexican</Radio>
+              <Radio value="Healthy" id="SearchTerm" onChange={this.handleChange}>Healthy</Radio>
+              <Radio value="Vegan" id="SearchTerm" onChange={this.handleChange}>Vegan</Radio>
+              <Radio value="Chinese" id="SearchTerm" onChange={this.handleChange}>Chinese</Radio>
               <Radio value="Greek" id="SearchTerm" onChange={this.handleChange}>Greek</Radio>
               <Radio value="Indian" id="SearchTerm" onChange={this.handleChange}>Indian</Radio>
               <Radio value="Thai" id="SearchTerm" onChange={this.handleChange}>Thai</Radio>
