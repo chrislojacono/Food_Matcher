@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BusinessCard({ businessData }) {
+export default function BusinessCard({ yelpData }) {
   const classes = useStyles();
 
   return (
@@ -25,15 +25,15 @@ export default function BusinessCard({ businessData }) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={businessData.image_url}
-          title={businessData.name}
+          image={yelpData.image_url}
+          title={yelpData.name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-          {businessData.name}
+          {yelpData.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {`${businessData.location.display_address[0]}, ${businessData.location.display_address[1]}`}
+            {`${yelpData.location.display_address[0]}, ${yelpData.location.display_address[1]}`}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -41,7 +41,7 @@ export default function BusinessCard({ businessData }) {
         <Button size="small" color="primary">
           Share
         </Button>
-        <a href={businessData.url} target='_blank' rel='noreferrer'>
+        <a href={yelpData.url} target='_blank' rel='noreferrer'>
         <Button size="small" color="primary">
           Visit Website
         </Button>

@@ -25,11 +25,21 @@ namespace FoodMatcherApp.Data_Access
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"INSERT INTO [dbo].[Users]([FirstName],[LastName],[EmailAddress],[Image_Url])
+            var sql = @"IF EXISTS (SELECT * FROM Users WHERE EmailAddress = @EmailAddress)
+                        BEGIN
+                        UPDATE [dbo].[Users]
+                        SET [FirstName] = @FirstName,[LastName] = @LastName,[EmailAddress] = @EmailAddress
+                        WHERE EmailAddress = @EmailAddress
+                        SELECT Id from Users where EmailAddress = @EmailAddress
+                        END
+                        ELSE
+                        BEGIN
+	                    INSERT INTO [dbo].[Users]([FirstName],[LastName],[EmailAddress],[Image_Url])
                         OUTPUT inserted.Id
-                        VALUES(@FirstName,@LastName,@EmailAddress,@Image_Url)";
+                        VALUES(@FirstName,@LastName,@EmailAddress,@Image_Url)
+                        END;";
 
-           var id = db.ExecuteScalar<Guid>(sql, user);
+           var id = db.ExecuteScalar<Guid>(sql, new { EmailAddress = user.EmailAddress, FirstName = user.FirstName, LastName = user.LastName, Image_Url = user.Image_Url });
 
            user.Id = id;
 

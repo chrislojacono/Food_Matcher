@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FoodMatcherApp.Data_Access;
+using FoodMatcherApp.Models;
 
 namespace FoodMatcherApp.Controllers
 {
@@ -19,6 +20,20 @@ namespace FoodMatcherApp.Controllers
             _repo = new RestaurantRepository();
         }
 
+        [HttpPost]
+        public IActionResult AddARestaurant(Restaurant restaurant)
+        {
+            var allRestaruarnts = _repo.GetAllRestaurants();
 
+            if (allRestaruarnts.Contains(restaurant))
+            {
+                return Ok();
+            }
+            else
+            {
+                var Id = _repo.AddARestaurant(restaurant);
+                return Ok(Id);
+            }     
+        }
     }
 }
