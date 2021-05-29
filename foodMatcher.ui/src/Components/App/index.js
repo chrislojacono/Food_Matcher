@@ -37,7 +37,7 @@ class App extends React.Component {
       <Router>
           <MyNavbar user={this.state.user}/>
           <Flex justifyContent="center" alignItems="center" direction="column">
-          <Routes user={this.state.user}/>
+          <Routes user={this.state?.user}/>
           </Flex>
         </Router>
       </ChakraProvider>

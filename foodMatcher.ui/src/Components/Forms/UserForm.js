@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   Flex,
   FormControl,
@@ -7,12 +7,6 @@ import {
   Input,
   FormHelperText,
   Button,
-  Heading,
-  Radio,
-  RadioGroup,
-  HStack,
-  Alert,
-  AlertIcon,
 } from '@chakra-ui/react';
 import userData from '../../Helpers/Data/UserData';
 

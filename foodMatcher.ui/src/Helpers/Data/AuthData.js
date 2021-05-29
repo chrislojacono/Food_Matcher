@@ -39,4 +39,8 @@ const logoutClickEvent = (e) => {
   window.location.href = '/';
 };
 
-export default { getUid, loginClickEvent, logoutClickEvent };
+export default {
+  getUid,
+  loginClickEvent,
+  logoutClickEvent,
+};

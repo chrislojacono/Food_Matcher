@@ -15,4 +15,10 @@ const GetASession = (sessionId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { AddASession, GetASession };
+const GetASessionByUserId = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${SessionDataUrl}/byUserId/${userId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+// eslint-disable-next-line
+export default { AddASession, GetASession, GetASessionByUserId };
