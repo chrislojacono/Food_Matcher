@@ -62,7 +62,6 @@ export default class SessionView extends Component {
         SessionId: sessionData.id,
       };
       SessionLikeData.AddASessionLike(sessionLikeObject);
-<<<<<<< HEAD
       this.setState({
         ShowAlert: true,
       });
@@ -71,22 +70,13 @@ export default class SessionView extends Component {
           ShowAlert: false,
         });
       }, 2000);
-=======
->>>>>>> main
     });
   }
 
   render() {
-<<<<<<< HEAD
     const { restaurants, ShowAlert } = this.state;
     return (
       <Flex
-=======
-    const { restaurants } = this.state;
-    return (
-      <Flex
-        height='40%'
->>>>>>> main
         width='70%'
         alignItems='center'
         background='whitesmoke'
@@ -94,24 +84,17 @@ export default class SessionView extends Component {
         mb='10%'
         justifyContent='center'
         direction='column'
-<<<<<<< HEAD
-=======
-        p='40'
->>>>>>> main
         rounded={6}
       >
         <Swiper navigation={true} className='mySwiper'>
           {restaurants.map((restaurant) => (
                 <SwiperSlide key={restaurant.id}>
                 <Flex justifyContent="center" alignItems="center" direction="column">
-<<<<<<< HEAD
                 {ShowAlert
                 && <Alert status="success">
                     <AlertIcon />
                     {restaurant.name} was added to your likes!
                     </Alert>}
-=======
->>>>>>> main
                   <Flex justifyContent="space-around" alignItems="center">
                   <Heading className='legend' margin={30}>{restaurant.name}</Heading>
                   <Button backgroundColor="cyan.500" ml="auto" onClick={() => this.likeButton(restaurant)}>Like</Button>
