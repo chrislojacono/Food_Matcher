@@ -16,7 +16,7 @@ export default class YourSessionsView extends Component {
 
   componentDidMount() {
     const { userId } = this.state;
-    if (userId != undefined) {
+    if (userId !== undefined) {
       SessionData.GetASessionByUserId(userId).then((response) => {
         this.setState({
           sessions: response,

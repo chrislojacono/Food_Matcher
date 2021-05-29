@@ -47,8 +47,6 @@ class UserForm extends Component {
     }
 
     render() {
-      const { userForm, ShowAlert } = this.state;
-
       return (
         <>
        <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>

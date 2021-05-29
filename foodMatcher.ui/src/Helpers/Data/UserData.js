@@ -14,5 +14,5 @@ const GetSingleUser = (UserId) => new Promise((resolve, reject) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
-
+// eslint-disable-next-line
 export default { AddAUser, GetSingleUser };

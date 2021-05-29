@@ -1,10 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import axios from 'axios';
-import { baseUrl } from '../config.json';
 import UserData from './UserData';
-
-const userDataUrl = `${baseUrl}/Users`;
 
 const getUid = () => firebase.auth().onAuthStateChanged((user) => {
   if (user) {
@@ -38,7 +34,7 @@ const logoutClickEvent = (e) => {
   firebase.auth().signOut();
   window.location.href = '/';
 };
-
+// eslint-disable-next-line
 export default {
   getUid,
   loginClickEvent,
