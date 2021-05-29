@@ -28,31 +28,18 @@ namespace FoodMatcherApp.Data_Access
             var sql = @"IF EXISTS (SELECT * FROM Users WHERE EmailAddress = @EmailAddress)
                         BEGIN
                         UPDATE [dbo].[Users]
-<<<<<<< HEAD
                         SET [Id] = @Id,[FirstName] = @FirstName,[LastName] = @LastName,[EmailAddress] = @EmailAddress, [Image_Url] = @Image_Url
-=======
-                        SET [FirstName] = @FirstName,[LastName] = @LastName,[EmailAddress] = @EmailAddress
->>>>>>> main
                         WHERE EmailAddress = @EmailAddress
                         SELECT Id from Users where EmailAddress = @EmailAddress
                         END
                         ELSE
                         BEGIN
-<<<<<<< HEAD
 	                    INSERT INTO [dbo].[Users]([Id],[FirstName],[LastName],[EmailAddress],[Image_Url])
                         OUTPUT inserted.Id
                         VALUES(@Id,@FirstName,@LastName,@EmailAddress,@Image_Url)
                         END;";
 
            var id = db.ExecuteScalar<string>(sql, new { Id = user.Id, EmailAddress = user.EmailAddress, FirstName = user.FirstName, LastName = user.LastName, Image_Url = user.Image_Url });
-=======
-	                    INSERT INTO [dbo].[Users]([FirstName],[LastName],[EmailAddress],[Image_Url])
-                        OUTPUT inserted.Id
-                        VALUES(@FirstName,@LastName,@EmailAddress,@Image_Url)
-                        END;";
-
-           var id = db.ExecuteScalar<Guid>(sql, new { EmailAddress = user.EmailAddress, FirstName = user.FirstName, LastName = user.LastName, Image_Url = user.Image_Url });
->>>>>>> main
 
            user.Id = id;
 
