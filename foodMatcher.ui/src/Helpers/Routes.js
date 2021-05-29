@@ -4,7 +4,6 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import Home from '../Components/Views/HomeView';
 import SessionForm from '../Components/Forms/SessionForm';
 import SessionView from '../Components/Views/SessionView';
 import ToAuthOrNot from '../Components/Views/ToAuthOrNot';
