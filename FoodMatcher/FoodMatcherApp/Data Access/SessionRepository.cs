@@ -36,6 +36,16 @@ namespace FoodMatcherApp.Data_Access
             return id;
         }
 
+        public Session GetASessionById(Guid sessionId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Select * 
+                        From Sessions
+                        Where Id = @Id";
+            return db.QueryFirstOrDefault<Session>(sql, new { Id = sessionId });
+        }
+
         public void CompleteSession(Guid sessionId)
         {
             using var db = new SqlConnection(ConnectionString);

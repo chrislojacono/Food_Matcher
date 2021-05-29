@@ -26,7 +26,7 @@ class UserForm extends Component {
       Image_Url: '',
       userForm: true,
       Location: '',
-      SearchTerm: '',
+      SearchTerm: 'Pizza',
       ShowAlert: false,
     }
 
@@ -47,7 +47,7 @@ class UserForm extends Component {
         FirstName,
         LastName,
         EmailAddress,
-        Image_Url: this.state.Image_Url,
+        // Image_Url: this.state.Image_Url,
       };
       userData.AddAUser(userObject).then((response) => {
         this.setState({
@@ -71,7 +71,7 @@ class UserForm extends Component {
       };
       sessionData.AddASession(sessionObject).then((responseId) => {
         this.setState({
-          Alert: true,
+          ShowAlert: true,
         });
         setTimeout(() => {
           setTimeout(() => {
@@ -86,7 +86,7 @@ class UserForm extends Component {
 
       return (
         <>
-        {userForm ? <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10}>
+        {userForm ? <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>
         <FormControl id='FirstName' onChange={this.handleChange} isRequired>
           <FormLabel>First name</FormLabel>
           <Input placeholder='First name' />
@@ -100,10 +100,10 @@ class UserForm extends Component {
           <Input type='email' />
           <FormHelperText>We'll never share your email.</FormHelperText>
         </FormControl>
-        <FormControl id='Image_Url' onChange={this.handleChange} isRequired>
+        {/* <FormControl id='Image_Url' onChange={this.handleChange} isRequired>
           <FormLabel>Image Url</FormLabel>
           <Input placeholder='Image Url' />
-        </FormControl>
+        </FormControl> */}
         <Button
           mt={4}
           colorScheme="teal"
@@ -114,7 +114,7 @@ class UserForm extends Component {
         </Button>
       </Flex>
           : <>
-        <Flex direction="column" backgroundColor="whiteAlpha.900" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
+        <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
         {ShowAlert
           && <Alert status="success">
                 <AlertIcon />
