@@ -10,8 +10,8 @@ const AddAUser = (userObject) => new Promise((resolve, reject) => {
 });
 
 const GetSingleUser = (UserId) => new Promise((resolve, reject) => {
-  axios.get(userDataUrl, UserId).then((response) => {
-      resolve(response.data);
+  axios.get(`${userDataUrl}/${UserId}`).then((response) => {
+    resolve(response.data);
   }).catch((error) => reject(error));
 });
 

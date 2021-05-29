@@ -15,7 +15,6 @@ import {
   AlertIcon,
 } from '@chakra-ui/react';
 import userData from '../../Helpers/Data/UserData';
-import sessionData from '../../Helpers/Data/SessionData';
 
 class UserForm extends Component {
     state = {
@@ -24,10 +23,6 @@ class UserForm extends Component {
       LastName: '',
       EmailAddress: '',
       Image_Url: '',
-      userForm: true,
-      Location: '',
-      SearchTerm: 'Pizza',
-      ShowAlert: false,
     }
 
     handleChange = (e) => {
@@ -57,36 +52,12 @@ class UserForm extends Component {
       });
     }
 
-    handleSubmit2 = (e) => {
-      e.preventDefault();
-      const {
-        Location,
-        SearchTerm,
-        UserId,
-      } = this.state;
-      const sessionObject = {
-        Location,
-        SearchTerm,
-        User1Id: UserId,
-      };
-      sessionData.AddASession(sessionObject).then((responseId) => {
-        this.setState({
-          ShowAlert: true,
-        });
-        setTimeout(() => {
-          setTimeout(() => {
-            this.props.history.push(`/session/${responseId}`);
-          }, 3000);
-        });
-      });
-    }
-
     render() {
       const { userForm, ShowAlert } = this.state;
 
       return (
         <>
-        {userForm ? <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>
+       <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10}>
         <FormControl id='FirstName' onChange={this.handleChange} isRequired>
           <FormLabel>First name</FormLabel>
           <Input placeholder='First name' />
@@ -113,42 +84,6 @@ class UserForm extends Component {
           Submit
         </Button>
       </Flex>
-          : <>
-        <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
-        {ShowAlert
-          && <Alert status="success">
-                <AlertIcon />
-                Your session has been created!
-            </Alert>}
-        <FormControl as="fieldset">
-        <FormLabel as="legend">What are you in the mood for?</FormLabel>
-          <RadioGroup defaultValue="Pizza">
-            <HStack spacing="30px" wrap="wrap" justify="center">
-              <Radio value="Pizza" id="SearchTerm" onChange={this.handleChange}>Pizza</Radio>
-              <Radio value="Mexican" id="SearchTerm" onChange={this.handleChange}>Mexican</Radio>
-              <Radio value="Greek" id="SearchTerm" onChange={this.handleChange}>Greek</Radio>
-              <Radio value="Indian" id="SearchTerm" onChange={this.handleChange}>Indian</Radio>
-              <Radio value="Thai" id="SearchTerm" onChange={this.handleChange}>Thai</Radio>
-              <Radio value="Italian" id="SearchTerm" onChange={this.handleChange}>Italian</Radio>
-              <Radio value="French" id="SearchTerm" onChange={this.handleChange}>French</Radio>
-              <Radio value="Dessert" id="SearchTerm" onChange={this.handleChange}>Dessert</Radio>
-            </HStack>
-          </RadioGroup>
-        </FormControl>
-        <FormControl id='Location' onChange={this.handleChange} isRequired>
-          <FormLabel>Where are you heading?</FormLabel>
-          <Input placeholder='ex: Nashville, Tn' />
-        </FormControl>
-        <Button
-          mt={4}
-          colorScheme="teal"
-          onClick={this.handleSubmit2}
-          type="submit"
-        >
-          Submit
-        </Button>
-      </Flex>
-      </>}
       </>
       );
     }
