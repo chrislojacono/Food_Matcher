@@ -1,7 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import axios from 'axios';
-import { baseUrl } from './config.json';
+import { baseUrl } from '../config.json';
+import UserData from './UserData';
 
 const userDataUrl = `${baseUrl}/Users`;
 
@@ -23,9 +24,10 @@ const loginClickEvent = (e) => {
         Id: cred.user.uid,
         FirstName: user.given_name,
         LastName: user.family_name,
-        Email: user.email,
+        EmailAddress: user.email,
+        Image_Url: user.picture,
       };
-      axios.post(`${userDataUrl}`, userObj);
+      UserData.AddAUser(userObj);
     }
   });
 };
