@@ -33,6 +33,13 @@ namespace FoodMatcherApp.Controllers
             return Ok(session);
         }
 
+        [HttpGet("byUserId/{userId}")]
+        public IActionResult GetSingleSessionByUserId(string userId)
+        {
+            var session = _repo.GetASessionByUserId(userId);
+            return Ok(session);
+        }
+
         [HttpPost]
         public IActionResult AddASession(Session session)
         {
