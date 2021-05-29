@@ -7,6 +7,11 @@ import {
 } from '@chakra-ui/react';
 
 export default class HomePageView extends Component {
+  state = {
+    user: '',
+  }
+
+  componentDidMount()
   render() {
     return (
       <Flex height="40%" width="40%" alignItems="center" background="whitesmoke" mt="10%" mb="10%" justifyContent="center" direction='column' p="40" rounded={6}>
