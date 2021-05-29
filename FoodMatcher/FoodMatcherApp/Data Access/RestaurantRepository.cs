@@ -30,7 +30,7 @@ namespace FoodMatcherApp.Data_Access
                         UPDATE [dbo].[Restaurants]
                         SET [Name] = @Name,[Address] = @Address,[Rating] = @Rating, [Image_Url] = @Image_Url,[YelpUrl] = @YelpUrl,[YelpId] = @YelpId, [Distance] = @Distance
                         WHERE YelpId = @YelpId
-                        SELECT Id from Users where YelpId = @YelpId
+                        SELECT Id from Restaurants where YelpId = @YelpId
                         END
                         ELSE
                         BEGIN
