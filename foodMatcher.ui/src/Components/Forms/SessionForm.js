@@ -18,7 +18,7 @@ import sessionData from '../../Helpers/Data/SessionData';
 
 class SessionForm extends Component {
     state = {
-      UserId: this.props.user.Id,
+      UserId: this.props.user.id,
       Location: '',
       SearchTerm: 'Pizza',
       ShowAlert: false,

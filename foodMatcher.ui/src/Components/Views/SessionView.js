@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Button,
-  Box,
   Flex,
   Heading,
   Image,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
@@ -25,6 +26,7 @@ export default class SessionView extends Component {
   state = {
     sessionData: null,
     restaurants: [],
+    ShowAlert: false,
   };
 
   componentDidMount() {
@@ -60,14 +62,21 @@ export default class SessionView extends Component {
         SessionId: sessionData.id,
       };
       SessionLikeData.AddASessionLike(sessionLikeObject);
+      this.setState({
+        ShowAlert: true,
+      });
+      setTimeout(() => {
+        this.setState({
+          ShowAlert: false,
+        });
+      }, 2000);
     });
   }
 
   render() {
-    const { restaurants } = this.state;
+    const { restaurants, ShowAlert } = this.state;
     return (
       <Flex
-        height='40%'
         width='70%'
         alignItems='center'
         background='whitesmoke'
@@ -75,13 +84,17 @@ export default class SessionView extends Component {
         mb='10%'
         justifyContent='center'
         direction='column'
-        p='40'
         rounded={6}
       >
         <Swiper navigation={true} className='mySwiper'>
           {restaurants.map((restaurant) => (
                 <SwiperSlide key={restaurant.id}>
                 <Flex justifyContent="center" alignItems="center" direction="column">
+                {ShowAlert
+                && <Alert status="success">
+                    <AlertIcon />
+                    {restaurant.name} was added to your likes!
+                    </Alert>}
                   <Flex justifyContent="space-around" alignItems="center">
                   <Heading className='legend' margin={30}>{restaurant.name}</Heading>
                   <Button backgroundColor="cyan.500" ml="auto" onClick={() => this.likeButton(restaurant)}>Like</Button>
