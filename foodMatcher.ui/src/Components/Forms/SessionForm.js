@@ -61,7 +61,7 @@ class SessionForm extends Component {
         <>
         <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
         {ShowAlert
-          && <Alert status="success">
+          && <Alert status="success" marginY="5px">
                 <AlertIcon />
                 Your session has been created!
             </Alert>}
