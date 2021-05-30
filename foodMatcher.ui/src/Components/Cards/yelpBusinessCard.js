@@ -25,7 +25,7 @@ export default function BusinessCard({ yelpData }) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={yelpData.image_url}
+          image={yelpData.image_Url}
           title={yelpData.name}
         />
         <CardContent>
@@ -33,7 +33,10 @@ export default function BusinessCard({ yelpData }) {
           {yelpData.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {`${yelpData.location.display_address[0]}, ${yelpData.location.display_address[1]}`}
+            {`${yelpData.address}`}
+          </Typography>
+          <Typography variant="body2" color="textPrimary" component="p">
+           {yelpData.rating}/5 stars
           </Typography>
         </CardContent>
       </CardActionArea>

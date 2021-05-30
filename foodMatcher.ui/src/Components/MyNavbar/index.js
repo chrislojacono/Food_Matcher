@@ -58,7 +58,6 @@ function MyNavbar({ user }) {
                   alt={user?.firstName}
                 />
               </div>
-
                 <UncontrolledDropdown className='logout-dropdown'>
                   <DropdownToggle nav caret></DropdownToggle>
                   <DropdownMenu right>

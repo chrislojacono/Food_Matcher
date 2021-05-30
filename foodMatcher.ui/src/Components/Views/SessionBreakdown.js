@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  Button,
   Flex,
   Heading,
 } from '@chakra-ui/react';
-import SessionData from '../../Helpers/Data/SessionData';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
+import YelpCard from '../Cards/yelpBusinessCard';
+import MatchCard from '../Cards/MatchCard';
 
 export default class SessionMatchesView extends Component {
   state = {
@@ -31,7 +30,10 @@ export default class SessionMatchesView extends Component {
   }
 
   render() {
-    const { sessions, userId } = this.state;
+    const {
+      matches,
+      yourLikedRestaurants,
+    } = this.state;
     return (
       <Flex
         height='70%'
@@ -44,8 +46,16 @@ export default class SessionMatchesView extends Component {
         direction='column'
         rounded={6}
       >
-        <Heading whiteSpace='nowrap'>Your Matches</Heading>
-        <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
+        <Heading whiteSpace='nowrap'>Session Breakdown</Heading>
+        <Flex justifyContent="center" direction="column" alignItems="center" flexWrap="wrap">
+        <h2>You guys agreed on</h2>
+            <Flex justify="center" align="center">
+                {matches.map((restaurant) => <MatchCard key={restaurant.id} yelpData={restaurant}/>)}
+            </Flex>
+            <h2>You liked</h2>
+            <Flex justify="center" alignItems="center">
+                {yourLikedRestaurants.map((restaurant) => <YelpCard key={restaurant.id} yelpData={restaurant}/>)}
+            </Flex>
         </Flex>
       </Flex>
     );
