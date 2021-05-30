@@ -1,5 +1,7 @@
 # Let's Eat! (Back-End Capstone Project)
 This is an app to help people make a democratic decison on where to go out to eat. It will use the Yelp API to pull in a selection of restaurants and two users will vote on where they would like to go. Then they will be notified when they come across a match!
+<br>
+<br>
 ![meme](https://user-images.githubusercontent.com/66916708/120119218-219cac80-c15c-11eb-89e2-060393c8c89a.PNG)
 <br>
 Say no more Nathan! It's happening!!
