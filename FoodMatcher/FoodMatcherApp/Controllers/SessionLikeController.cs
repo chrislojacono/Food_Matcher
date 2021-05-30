@@ -35,7 +35,7 @@ namespace FoodMatcherApp.Controllers
             return Ok(restaurants);
         }
 
-        [HttpGet("matches/{sessionId")]
+        [HttpGet("matches/{sessionId}")]
         public IActionResult GetMatches(Guid sessionId)
         {
             var restaurants = _repo.GetMatches(sessionId);
