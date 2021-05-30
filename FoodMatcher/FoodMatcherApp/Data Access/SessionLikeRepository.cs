@@ -39,12 +39,12 @@ namespace FoodMatcherApp.Data_Access
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"SELECT R.Id, R.Name, R.Address, R.Rating, R.Image_Url, R.Distance
+            var sql = @"SELECT R.Id, R.Name, R.Address, R.Rating, R.Image_Url, R.Distance, R.YelpUrl, R.YelpId
                         FROM Session_Likes Sl
                             JOIN Restaurants R
 	                            ON r.id = sl.RestaurantId
                         WHERE sl.SessionId = @SessionId
-                        GROUP by R.Id, R.Name,  R.Address, R.Rating, R.Image_Url, R.Distance
+                        GROUP by R.Id, R.Name,  R.Address, R.Rating, R.Image_Url, R.Distance,  R.YelpUrl, R.YelpId
                         HAVING Count(sl.RestaurantId) >= 2";
 
             return db.Query<Restaurant>(sql, new { SessionId = sessionId }).ToList();
