@@ -65,7 +65,7 @@ namespace FoodMatcherApp.Data_Access
                         From Sessions
                         Where User1Id = @User1Id or User2Id = @User2Id";
 
-            return db.Query<Session>(sql, new { User1Id = userId, User2Id = userId }).ToList();
+            return db.Query<Session>(sql, new { User1Id = userId, User2Id = userId }).OrderByDescending(session => session.CreatedDate).ToList();
         }
     }
 }
