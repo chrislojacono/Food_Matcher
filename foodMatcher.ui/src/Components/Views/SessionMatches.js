@@ -6,23 +6,28 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import SessionData from '../../Helpers/Data/SessionData';
-import SessionCard from '../Cards/SessionCard';
+import SessionLikesData from '../../Helpers/Data/SessionLikeData';
 
-export default class YourSessionsView extends Component {
+export default class SessionMatchesView extends Component {
   state = {
-    sessions: [],
+    yourLikedRestaurants: [],
+    matches: [],
     userId: this.props.user?.id,
+    sessionId: this.props.match.params.id,
   }
 
   componentDidMount() {
-    const { userId } = this.state;
-    if (userId !== undefined) {
-      SessionData.GetASessionByUserId(userId).then((response) => {
-        this.setState({
-          sessions: response,
-        });
+    const { userId, sessionId } = this.state;
+    SessionLikesData.GetMatches(sessionId).then((response) => {
+      this.setState({
+        matches: response,
       });
-    }
+    });
+    SessionLikesData.GetLikesOfAUserPerSession(userId, sessionId).then((response) => {
+      this.setState({
+        yourLikedRestaurants: response,
+      });
+    });
   }
 
   render() {
@@ -39,13 +44,8 @@ export default class YourSessionsView extends Component {
         direction='column'
         rounded={6}
       >
-        <Heading whiteSpace='nowrap'>Your Sessions</Heading>
+        <Heading whiteSpace='nowrap'>Your Matches</Heading>
         <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
-        {sessions.length ? (
-          sessions.map((session) => <SessionCard sessionData={session} userId={userId} key={session.id} />)
-        ) : (
-          <></>
-        )}
         </Flex>
       </Flex>
     );

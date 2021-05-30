@@ -8,5 +8,21 @@ const AddASessionLike = (SessionObject) => new Promise((resolve, reject) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
+
+const GetLikesOfAUserPerSession = (userId, sessionId) => new Promise((resolve, reject) => {
+  axios.get(`${SessionDataUrl}/${userId}/${sessionId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+const GetMatches = (sessionId) => new Promise((resolve, reject) => {
+  axios.get(`${SessionDataUrl}/matches/${sessionId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
 // eslint-disable-next-line
-export default { AddASessionLike };
+export default {
+  AddASessionLike,
+  GetLikesOfAUserPerSession,
+  GetMatches,
+};
