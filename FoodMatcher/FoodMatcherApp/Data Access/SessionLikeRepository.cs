@@ -46,6 +46,8 @@ namespace FoodMatcherApp.Data_Access
                         WHERE sl.SessionId = @SessionId
                         GROUP by R.Id, R.Name,  R.Address, R.Rating, R.Image_Url, R.Distance
                         HAVING Count(sl.RestaurantId) >= 2";
+
+            return db.Query<Restaurant>(sql, new { SessionId = sessionId }).ToList();
         }
     }
 }

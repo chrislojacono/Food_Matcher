@@ -31,6 +31,15 @@ namespace FoodMatcherApp.Controllers
         public IActionResult GetLikesOfAUserPerSession(string userId, Guid sessionId)
         {
             var restaurants = _repo.GetLikesOfAUserPerSession(userId, sessionId);
+
+            return Ok(restaurants);
+        }
+
+        [HttpGet("matches/{sessionId")]
+        public IActionResult GetMatches(Guid sessionId)
+        {
+            var restaurants = _repo.GetMatches(sessionId);
+
             return Ok(restaurants);
         }
     }
