@@ -9,7 +9,7 @@ export default function JoinerAuth(props) {
     if (props.user === null) {
       component = <Loader />;
     } else if (props.user) {
-      component = <JoinerSession />;
+      component = <JoinerSession {...props}/>;
     } else {
       component = <Auth />;
     }
