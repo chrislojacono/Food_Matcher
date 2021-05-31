@@ -16,10 +16,13 @@ namespace FoodMatcherApp.Data_Access
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"INSERT INTO [dbo].[Session_Likes]([UserId],[RestaurantId],[SessionId])
-                        VALUES(@UserId,@RestaurantId,@SessionId)";
+            var sql = @"IF NOT EXISTS (SELECT * FROM Session_Likes WHERE UserId = @UserId and RestaurantId = @RestaurantId and SessionId = @SessionId)
+                        BEGIN
+                        INSERT INTO [dbo].[Session_Likes]([UserId],[RestaurantId],[SessionId])
+                        VALUES(@UserId,@RestaurantId,@SessionId)
+                        END";
 
-            db.Execute(sql, sessionLike);
+            db.Execute(sql, new { UserId = sessionLike.UserId, RestaurantId = sessionLike.RestaurantId, SessionId = sessionLike.SessionId });
         }
 
         public List<Restaurant> GetLikesOfAUserPerSession(string userId, Guid sessionId)
