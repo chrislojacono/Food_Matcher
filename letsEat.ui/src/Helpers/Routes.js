@@ -15,6 +15,7 @@ export default function Routes({ user }) {
         <Route exact path='/' component={() => <ToAuthOrNot user={user}/>} />
         <Route exact path='/SessionForm' component={() => <SessionForm user={user}/>} />
         <Route exact path='/session/:id' component={(props) => <SessionView {...props} user={user}/>} />
+        <Route exact path='/session/join/:id' component={(props) => <SessionView {...props} user={user}/>} />
         <Route exact path='/mySessions' component={(props) => <YourSessions {...props} user={user}/>} />
         <Route exact path='/SessionBreakdown/:id' component={(props) => <SessionMatchesView {...props} user={user}/>} />
       </Switch>
