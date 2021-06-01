@@ -70,7 +70,7 @@ export default class JoinerSessionView extends Component {
         this.setState({
           ShowAlert: false,
         });
-      }, 2000);
+      }, 1000);
     });
   }
 

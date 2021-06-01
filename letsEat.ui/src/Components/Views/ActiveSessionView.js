@@ -69,12 +69,18 @@ export default class SessionView extends Component {
         this.setState({
           ShowAlert: false,
         });
-      }, 2000);
+      }, 1000);
     });
   }
 
+  copyCodeToClipboard = () => {
+    const el = this.textArea;
+    el.select();
+    document.execCommand('copy');
+  }
+
   render() {
-    const { restaurants, ShowAlert } = this.state;
+    const { restaurants, ShowAlert, sessionData } = this.state;
     return (
       <Flex
         width='70%'
@@ -88,20 +94,40 @@ export default class SessionView extends Component {
       >
         <Swiper navigation={true} className='mySwiper'>
           {restaurants.map((restaurant) => (
-                <SwiperSlide key={restaurant.id}>
-                <Flex justifyContent="center" alignItems="center" direction="column">
-                {ShowAlert
-                && <Alert status="success">
-                    <AlertIcon />
-                    {restaurant.name} was added to your likes!
-                    </Alert>}
-                  <Flex justifyContent="space-around" alignItems="center">
-                  <Heading className='legend' margin={30}>{restaurant.name}</Heading>
-                  <Button backgroundColor="cyan.500" ml="auto" onClick={() => this.likeButton(restaurant)}>Like</Button>
+            <>
+              <SwiperSlide key={restaurant.id}>
+                <Flex
+                  justifyContent='center'
+                  alignItems='center'
+                  direction='column'
+                >
+                  {ShowAlert && (
+                    <Alert status='success'>
+                      <AlertIcon />
+                      {restaurant.name} was added to your likes!
+                    </Alert>
+                  )}
+                  <Flex justifyContent='space-around' alignItems='center'>
+                    <Button bg='yellow.300' onClick={() => { navigator.clipboard.writeText(`http://localhost:8888/session/join/${sessionData.id}`); }}>Share Link with a friend!</Button>
+                    <Heading className='legend' margin={30}>
+                      {restaurant.name}
+                    </Heading>
+                    <Button
+                      backgroundColor='cyan.500'
+                      ml='auto'
+                      onClick={() => this.likeButton(restaurant)}
+                    >
+                      Like
+                    </Button>
                   </Flex>
-                  <Image src={restaurant.image_url} alt='carousel' objectFit="cover"/>
+                  <Image
+                    src={restaurant.image_url}
+                    alt='carousel'
+                    objectFit='cover'
+                  />
                 </Flex>
               </SwiperSlide>
+            </>
           ))}
         </Swiper>
       </Flex>
