@@ -10,7 +10,7 @@ const AddAFinalDecision = (FinalDecisionObject) => new Promise((resolve, reject)
 });
 
 const GetAFinalDecision = (sessionId) => new Promise((resolve, reject) => {
-  axios.post(FinalDecisionDataUrl, sessionId).then((response) => {
+  axios.get(`${FinalDecisionDataUrl}/${sessionId}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });

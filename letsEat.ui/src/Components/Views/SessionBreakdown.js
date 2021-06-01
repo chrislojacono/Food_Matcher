@@ -29,6 +29,7 @@ export default class SessionMatchesView extends Component {
         yourLikedRestaurants: response,
       });
     });
+    this.getFinalDecision();
   }
 
   getFinalDecision = () => {
