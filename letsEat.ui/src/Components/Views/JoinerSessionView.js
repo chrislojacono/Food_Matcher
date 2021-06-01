@@ -21,7 +21,7 @@ import RestaurantData from '../../Helpers/Data/RestaurantData';
 
 SwiperCore.use([Navigation]);
 
-export default class SessionView extends Component {
+export default class JoinerSessionView extends Component {
   state = {
     sessionData: null,
     restaurants: [],
@@ -30,6 +30,7 @@ export default class SessionView extends Component {
   };
 
   componentDidMount() {
+    SessionData.SetJoiner(this.props.match.params.id, this.props.user?.id);
     SessionData.GetASession(this.props.match.params.id).then((response) => {
       this.setState({
         sessionData: response,

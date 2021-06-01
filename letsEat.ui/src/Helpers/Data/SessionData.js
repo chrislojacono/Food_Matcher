@@ -20,5 +20,16 @@ const GetASessionByUserId = (userId) => new Promise((resolve, reject) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
+
+const SetJoiner = (sessionId, userId) => new Promise((resolve, reject) => {
+  axios.put(`${SessionDataUrl}/setJoiner/${sessionId}/${userId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
 // eslint-disable-next-line
-export default { AddASession, GetASession, GetASessionByUserId };
+export default {
+  AddASession,
+  GetASession,
+  GetASessionByUserId,
+  SetJoiner,
+};

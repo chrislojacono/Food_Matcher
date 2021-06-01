@@ -55,5 +55,13 @@ namespace FoodMatcherApp.Controllers
             return NoContent();
         }
 
+        [HttpPut("setJoiner/{sessionId}/{userId}")]
+        public IActionResult SetUser2Id(Guid sessionId, string userId)
+        {
+            _repo.SetUser2Id(sessionId, userId);
+
+            return NoContent();
+        }
+
     }
 }
