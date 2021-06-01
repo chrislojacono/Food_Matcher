@@ -42,5 +42,12 @@ namespace FoodMatcherApp.Controllers
 
             return Ok(restaurants);
         }
+
+        [HttpDelete("{userId}/{sessionId}/{restaurantId}")]
+        public IActionResult RemoveALike(string userId, Guid sessionId, Guid restaurantId)
+        {
+            _repo.RemoveALike(userId,sessionId,restaurantId);
+            return NoContent();
+        }
     }
 }
