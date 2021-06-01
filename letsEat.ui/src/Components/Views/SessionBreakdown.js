@@ -6,6 +6,7 @@ import {
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
 import NonMatchCard from '../Cards/NonMatchCard';
 import MatchCard from '../Cards/MatchCard';
+import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
 
 export default class SessionMatchesView extends Component {
   state = {
@@ -13,6 +14,7 @@ export default class SessionMatchesView extends Component {
     matches: [],
     userId: this.props.user?.id,
     sessionId: this.props.match.params.id,
+    finalDecision: '',
   }
 
   componentDidMount() {
@@ -27,6 +29,26 @@ export default class SessionMatchesView extends Component {
         yourLikedRestaurants: response,
       });
     });
+  }
+
+  getFinalDecision = () => {
+    const { sessionId } = this.state;
+    FinalDecisionData.GetAFinalDecision(sessionId).then((response) => {
+      this.setState({
+        finalDecision: response,
+      });
+    });
+  }
+
+  makeAFinalDecision = (restaurantId) => {
+    const { sessionId } = this.state;
+    const finalObject = {
+      SessionId: sessionId,
+      RestaurantId: restaurantId,
+    }
+    FinalDecisionData.AddAFinalDecision(finalObject).then(() => {
+      this.getFinalDecision();
+    })
   }
 
   render() {
@@ -70,7 +92,7 @@ export default class SessionMatchesView extends Component {
             rounded='20px'
           >
             {matches.map((restaurant) => (
-              <MatchCard key={restaurant.id} yelpData={restaurant} />
+              <MatchCard key={restaurant.id} yelpData={restaurant} makeFinalDecision={this.makeAFinalDecision}/>
             ))}
           </Flex>
           <Heading
