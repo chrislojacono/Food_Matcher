@@ -10,9 +10,9 @@ const AddAFinalDecision = (FinalDecisionObject) => new Promise((resolve, reject)
 });
 
 const GetAFinalDecision = (sessionId) => new Promise((resolve, reject) => {
-    axios.post(FinalDecisionDataUrl, sessionId).then((response) => {
-      resolve(response.data);
-    }).catch((error) => reject(error));
-  });
+  axios.post(FinalDecisionDataUrl, sessionId).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
 // eslint-disable-next-line
 export default { AddAFinalDecision, GetAFinalDecision };

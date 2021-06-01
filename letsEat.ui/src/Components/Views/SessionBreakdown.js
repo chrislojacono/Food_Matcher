@@ -45,10 +45,10 @@ export default class SessionMatchesView extends Component {
     const finalObject = {
       SessionId: sessionId,
       RestaurantId: restaurantId,
-    }
+    };
     FinalDecisionData.AddAFinalDecision(finalObject).then(() => {
       this.getFinalDecision();
-    })
+    });
   }
 
   render() {

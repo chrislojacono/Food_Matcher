@@ -31,7 +31,7 @@ export default function MatchCard({ yelpData, makeFinalDecision }) {
       <Button bg='teal.300' ml='auto' mb={2}>More Details</Button>
       </a>
       <Button bg='green.300' ml='auto' mb={2} onClick={() => {
-        makeFinalDecision(yelpData.id)
+        makeFinalDecision(yelpData.id);
       }}>Let's Eat</Button>
       </Flex>
     </Box>
