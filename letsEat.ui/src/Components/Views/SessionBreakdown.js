@@ -40,22 +40,60 @@ export default class SessionMatchesView extends Component {
         width='70%'
         alignItems='center'
         background='whitesmoke'
-        mt='2%'
+        mt='1%'
         mb='10%'
         justifyContent='center'
         direction='column'
         rounded={6}
       >
-        <Heading whiteSpace='nowrap' m={2}>Session Breakdown</Heading>
-        <Flex justifyContent="center" direction="column" alignItems="center" flexWrap="wrap">
-        <Heading m={2}>You guys agreed on</Heading>
-            <Flex justify="center" align="center" flexWrap="wrap" bg='green.200'>
-                {matches.map((restaurant) => <MatchCard key={restaurant.id} yelpData={restaurant}/>)}
-            </Flex>
-            <Heading m={2}>You liked</Heading>
-            <Flex justify="center" alignItems="center" flexWrap="wrap" bg='blanchedalmond'>
-                {yourLikedRestaurants.map((restaurant) => <NonMatchCard key={restaurant.id} yelpData={restaurant}/>)}
-            </Flex>
+        <Flex
+          justifyContent='center'
+          direction='column'
+          alignItems='center'
+          flexWrap='wrap'
+        >
+          <Heading
+            m={2}
+            bg='yellow.100'
+            p={4}
+            textDecoration='underline'
+            rounded={4}
+          >
+            You guys agreed on
+          </Heading>
+          <Flex
+            justify='center'
+            align='center'
+            flexWrap='wrap'
+            bg='green.200'
+            w='98%'
+            rounded='20px'
+          >
+            {matches.map((restaurant) => (
+              <MatchCard key={restaurant.id} yelpData={restaurant} />
+            ))}
+          </Flex>
+          <Heading
+            m={2}
+            bg='blue.100'
+            p={4}
+            textDecoration='underline'
+            rounded={4}
+          >
+            You liked
+          </Heading>
+          <Flex
+            justify='center'
+            alignItems='center'
+            flexWrap='wrap'
+            bg='blanchedalmond'
+            w='98%'
+            rounded='20px'
+          >
+            {yourLikedRestaurants.map((restaurant) => (
+              <NonMatchCard key={restaurant.id} yelpData={restaurant} />
+            ))}
+          </Flex>
         </Flex>
       </Flex>
     );

@@ -80,7 +80,7 @@ export default class SessionView extends Component {
         width='70%'
         alignItems='center'
         background='whitesmoke'
-        mt='5%'
+        mt='1%'
         mb='10%'
         justifyContent='center'
         direction='column'

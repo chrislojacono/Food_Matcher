@@ -3,7 +3,6 @@ import {
   Image,
   Box,
   Heading,
-  Badge,
   Text,
   Button,
   Flex,
@@ -12,7 +11,7 @@ import { StarIcon } from '@chakra-ui/icons';
 
 export default function MatchCard({ yelpData }) {
   return (
-    <Box w='350px' rounded='20px' overflow='hidden' boxShadow='md' bg='gray.200'>
+    <Box w='350px' rounded='20px' overflow='hidden' boxShadow='md' bg='gray.200' m={2}>
       <Image src={yelpData.image_Url} alt='carousel' objectFit='cover'/>
       <Box p={5}>
         <Heading fontSize='xl' fontWeight='semibold'>
