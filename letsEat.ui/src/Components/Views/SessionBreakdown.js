@@ -56,6 +56,7 @@ export default class SessionMatchesView extends Component {
     const {
       matches,
       yourLikedRestaurants,
+      finalDecision,
     } = this.state;
     return (
       <Flex
@@ -75,6 +76,31 @@ export default class SessionMatchesView extends Component {
           alignItems='center'
           flexWrap='wrap'
         >
+{finalDecision !== ''
+&& <> <Heading
+            m={2}
+            bg='yellow.100'
+            p={4}
+            textDecoration='underline'
+            rounded={4}
+          >
+           The Final!
+          </Heading>
+          <Flex
+            justify='center'
+            align='center'
+            flexWrap='wrap'
+            bg='green.200'
+            w='98%'
+            rounded='20px'
+          >
+          <MatchCard
+                key={finalDecision.id}
+                yelpData={finalDecision}
+                makeFinalDecision={this.makeAFinalDecision}
+              />
+          </Flex>
+          </>}
           <Heading
             m={2}
             bg='yellow.100'
@@ -93,7 +119,11 @@ export default class SessionMatchesView extends Component {
             rounded='20px'
           >
             {matches.map((restaurant) => (
-              <MatchCard key={restaurant.id} yelpData={restaurant} makeFinalDecision={this.makeAFinalDecision}/>
+              <MatchCard
+                key={restaurant.id}
+                yelpData={restaurant}
+                makeFinalDecision={this.makeAFinalDecision}
+              />
             ))}
           </Flex>
           <Heading
