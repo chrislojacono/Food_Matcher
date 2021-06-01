@@ -4,7 +4,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
-import YelpCard from '../Cards/yelpBusinessCard';
+import NonMatchCard from '../Cards/NonMatchCard';
 import MatchCard from '../Cards/MatchCard';
 
 export default class SessionMatchesView extends Component {
@@ -40,21 +40,21 @@ export default class SessionMatchesView extends Component {
         width='70%'
         alignItems='center'
         background='whitesmoke'
-        mt='10%'
+        mt='2%'
         mb='10%'
         justifyContent='center'
         direction='column'
         rounded={6}
       >
-        <Heading whiteSpace='nowrap'>Session Breakdown</Heading>
+        <Heading whiteSpace='nowrap' m={2}>Session Breakdown</Heading>
         <Flex justifyContent="center" direction="column" alignItems="center" flexWrap="wrap">
-        <h2>You guys agreed on</h2>
-            <Flex justify="center" align="center">
+        <Heading m={2}>You guys agreed on</Heading>
+            <Flex justify="center" align="center" flexWrap="wrap" bg='green.200'>
                 {matches.map((restaurant) => <MatchCard key={restaurant.id} yelpData={restaurant}/>)}
             </Flex>
-            <h2>You liked</h2>
-            <Flex justify="center" alignItems="center">
-                {yourLikedRestaurants.map((restaurant) => <YelpCard key={restaurant.id} yelpData={restaurant}/>)}
+            <Heading m={2}>You liked</Heading>
+            <Flex justify="center" alignItems="center" flexWrap="wrap" bg='blanchedalmond'>
+                {yourLikedRestaurants.map((restaurant) => <NonMatchCard key={restaurant.id} yelpData={restaurant}/>)}
             </Flex>
         </Flex>
       </Flex>

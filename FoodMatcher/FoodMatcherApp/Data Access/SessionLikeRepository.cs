@@ -26,7 +26,7 @@ namespace FoodMatcherApp.Data_Access
         }
 
         public List<Restaurant> GetLikesOfAUserPerSession(string userId, Guid sessionId)
-        {
+         {
             using var db = new SqlConnection(ConnectionString);
 
             var sql = @"SELECT R.* 

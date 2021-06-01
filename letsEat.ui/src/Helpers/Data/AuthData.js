@@ -13,6 +13,9 @@ const loginClickEvent = (e) => {
   e.preventDefault();
 
   const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: 'select_account',
+  });
   firebase.auth().signInWithPopup(provider).then((cred) => {
     const user = cred.additionalUserInfo.profile;
     if (cred.additionalUserInfo.isNewUser) {

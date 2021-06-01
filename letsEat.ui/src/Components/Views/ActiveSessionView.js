@@ -26,6 +26,7 @@ export default class SessionView extends Component {
     sessionData: null,
     restaurants: [],
     ShowAlert: false,
+    userId: this.props.user?.id,
   };
 
   componentDidMount() {
@@ -54,9 +55,9 @@ export default class SessionView extends Component {
       Distance: yelpData.distance,
     };
     RestaurantData.AddARestaurant(restaurantObject).then((responseId) => {
-      const { sessionData } = this.state;
+      const { sessionData, userId } = this.state;
       const sessionLikeObject = {
-        UserId: sessionData.user1Id,
+        UserId: userId,
         RestaurantId: responseId,
         SessionId: sessionData.id,
       };
