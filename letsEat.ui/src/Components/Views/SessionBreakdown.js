@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Flex,
-  Heading,
-} from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
 import NonMatchCard from '../Cards/NonMatchCard';
 import MatchCard from '../Cards/MatchCard';
+import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
+import FinalCard from '../Cards/FinalCard';
 
 export default class SessionMatchesView extends Component {
   state = {
@@ -13,33 +12,65 @@ export default class SessionMatchesView extends Component {
     matches: [],
     userId: this.props.user?.id,
     sessionId: this.props.match.params.id,
-  }
+    finalDecision: '',
+  };
 
   componentDidMount() {
+    this.loadContent();
+    this.getFinalDecision();
+  }
+
+  loadContent = () => {
     const { userId, sessionId } = this.state;
     SessionLikesData.GetMatches(sessionId).then((response) => {
       this.setState({
         matches: response,
       });
     });
-    SessionLikesData.GetLikesOfAUserPerSession(userId, sessionId).then((response) => {
+    SessionLikesData.GetLikesOfAUserPerSession(userId, sessionId).then(
+      (response) => {
+        this.setState({
+          yourLikedRestaurants: response,
+        });
+      },
+    );
+  }
+
+  getFinalDecision = () => {
+    const { sessionId } = this.state;
+    FinalDecisionData.GetAFinalDecision(sessionId).then((response) => {
       this.setState({
-        yourLikedRestaurants: response,
+        finalDecision: response,
       });
+    });
+  };
+
+  makeAFinalDecision = (restaurantId) => {
+    const { sessionId } = this.state;
+    const finalObject = {
+      SessionId: sessionId,
+      RestaurantId: restaurantId,
+    };
+    FinalDecisionData.AddAFinalDecision(finalObject).then(() => {
+      this.getFinalDecision();
+    });
+  };
+
+  removeALike = (restaurantId) => {
+    const { sessionId, userId } = this.state;
+    SessionLikesData.RemoveALike(userId, sessionId, restaurantId).then(() => {
+      this.loadContent();
     });
   }
 
   render() {
-    const {
-      matches,
-      yourLikedRestaurants,
-    } = this.state;
+    const { matches, yourLikedRestaurants, finalDecision } = this.state;
     return (
       <Flex
         height='70%'
         width='70%'
         alignItems='center'
-        background='whitesmoke'
+        background='grey.200'
         mt='1%'
         mb='10%'
         justifyContent='center'
@@ -52,36 +83,85 @@ export default class SessionMatchesView extends Component {
           alignItems='center'
           flexWrap='wrap'
         >
-          <Heading
-            m={2}
-            bg='yellow.100'
-            p={4}
-            textDecoration='underline'
-            rounded={4}
-          >
-            You guys agreed on
-          </Heading>
+          {finalDecision !== '' && (
+            <>
+              <Flex
+                direction='column'
+                justify='center'
+                align='center'
+                bg='green.200'
+                w='98%'
+                rounded='20px'
+                my={2}
+              >
+                <Heading
+                  m={2}
+                  p={4}
+                  textDecoration='underline'
+                  rounded={4}
+                >
+                  The Final!
+                </Heading>
+              <Flex justify='center' align='center' flexWrap='wrap'>
+                <FinalCard
+                  key={finalDecision.id}
+                  yelpData={finalDecision}
+                />
+              </Flex>
+              </Flex>
+            </>
+          )}
+          <Flex
+                direction='column'
+                justify='center'
+                align='center'
+                bg='blue.200'
+                w='98%'
+                rounded='20px'
+                my={2}
+              >
+                <Heading
+                  m={2}
+                  p={4}
+                  textDecoration='underline'
+                  rounded={4}
+                >
+                You guys agreed on:
+                </Heading>
           <Flex
             justify='center'
             align='center'
             flexWrap='wrap'
-            bg='green.200'
+            bg='blue.200'
             w='98%'
             rounded='20px'
           >
             {matches.map((restaurant) => (
-              <MatchCard key={restaurant.id} yelpData={restaurant} />
+              <MatchCard
+                key={restaurant.id}
+                yelpData={restaurant}
+                makeFinalDecision={this.makeAFinalDecision}
+              />
             ))}
           </Flex>
-          <Heading
-            m={2}
-            bg='blue.100'
-            p={4}
-            textDecoration='underline'
-            rounded={4}
-          >
-            You liked
-          </Heading>
+          </Flex>
+          <Flex
+                direction='column'
+                justify='center'
+                align='center'
+                bg='blanchedAlmond'
+                w='98%'
+                rounded='20px'
+                my={2}
+              >
+                <Heading
+                  m={2}
+                  p={4}
+                  textDecoration='underline'
+                  rounded={4}
+                >
+                  Your Likes
+                </Heading>
           <Flex
             justify='center'
             alignItems='center'
@@ -91,9 +171,10 @@ export default class SessionMatchesView extends Component {
             rounded='20px'
           >
             {yourLikedRestaurants.map((restaurant) => (
-              <NonMatchCard key={restaurant.id} yelpData={restaurant} />
+              <NonMatchCard key={restaurant.id} yelpData={restaurant} removeALike={this.removeALike} />
             ))}
           </Flex>
+        </Flex>
         </Flex>
       </Flex>
     );

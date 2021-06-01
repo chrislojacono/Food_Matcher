@@ -6,6 +6,8 @@ import {
   Image,
   Alert,
   AlertIcon,
+  Box,
+  Spacer,
 } from '@chakra-ui/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
@@ -70,7 +72,7 @@ export default class JoinerSessionView extends Component {
         this.setState({
           ShowAlert: false,
         });
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -96,9 +98,23 @@ export default class JoinerSessionView extends Component {
                     <AlertIcon />
                     {restaurant.name} was added to your likes!
                     </Alert>}
-                  <Flex justifyContent="space-around" alignItems="center">
-                  <Heading className='legend' margin={30}>{restaurant.name}</Heading>
-                  <Button backgroundColor="cyan.500" ml="auto" onClick={() => this.likeButton(restaurant)}>Like</Button>
+                    <Flex alignItems='center'>
+                    <Box p='2'>
+                    <Heading className='legend'>
+                      {restaurant.name}
+                    </Heading>
+                    </Box>
+                    <Spacer />
+                    <Box pl='40px'>
+                    <Button
+                      backgroundColor='cyan.500'
+                      ml='auto'
+                      mx={2}
+                      onClick={() => this.likeButton(restaurant)}
+                    >
+                      Like
+                    </Button>
+                    </Box>
                   </Flex>
                   <Image src={restaurant.image_url} alt='carousel' objectFit="cover"/>
                 </Flex>

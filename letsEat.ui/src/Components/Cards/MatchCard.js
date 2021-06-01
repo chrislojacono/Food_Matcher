@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
 
-export default function MatchCard({ yelpData }) {
+export default function MatchCard({ yelpData, makeFinalDecision }) {
   return (
     <Box w='350px' rounded='20px' overflow='hidden' boxShadow='md' bg='gray.200' m={2}>
       <Image src={yelpData.image_Url} alt='carousel' objectFit='contain' />
@@ -28,8 +28,11 @@ export default function MatchCard({ yelpData }) {
       </Box>
       <Flex justify='center' alignItems='center'>
       <a href={yelpData.yelpUrl} target='_blank' rel='noreferrer' className='anchors'>
-      <Button bg='teal.300' ml='auto' mb={2}>More Details</Button>
+      <Button bg='teal.300' mb={2}>More Details</Button>
       </a>
+      <Button bg='green.300' mx={2} mb={2} onClick={() => {
+        makeFinalDecision(yelpData.id);
+      }}>Let's Eat</Button>
       </Flex>
     </Box>
   );

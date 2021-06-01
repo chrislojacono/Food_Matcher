@@ -52,5 +52,15 @@ namespace FoodMatcherApp.Data_Access
 
             return db.Query<Restaurant>(sql, new { SessionId = sessionId }).ToList();
         }
+
+        public void RemoveALike(string userId, Guid sessionId, Guid restaurantId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Delete From Session_Likes
+                        Where UserId = @UserId and RestaurantId = @RestaurantId and SessionId = @SessionId";
+
+            db.Execute(sql, new { UserId = userId, SessionId = sessionId, RestaurantId = restaurantId });
+        }
     }
 }
