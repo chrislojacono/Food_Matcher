@@ -6,7 +6,10 @@ import {
   Image,
   Alert,
   AlertIcon,
+  Spacer,
+  Box,
 } from '@chakra-ui/react';
+import { CopyIcon } from '@chakra-ui/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
@@ -107,18 +110,24 @@ export default class SessionView extends Component {
                       {restaurant.name} was added to your likes!
                     </Alert>
                   )}
-                  <Flex justifyContent='space-around' alignItems='center'>
-                    <Button bg='yellow.300' onClick={() => { navigator.clipboard.writeText(`http://localhost:8888/session/join/${sessionData.id}`); }}>Share Link with a friend!</Button>
-                    <Heading className='legend' margin={30}>
+                  <Flex alignItems='center'>
+                    <Box p='2'>
+                    <Heading className='legend'>
                       {restaurant.name}
                     </Heading>
+                    </Box>
+                    <Spacer />
+                    <Box pl='40px'>
                     <Button
                       backgroundColor='cyan.500'
                       ml='auto'
+                      mx={2}
                       onClick={() => this.likeButton(restaurant)}
                     >
                       Like
                     </Button>
+                    <Button bg='yellow.300' onClick={() => { navigator.clipboard.writeText(`http://localhost:8888/session/join/${sessionData.id}`); }}>Share Link with a friend!<CopyIcon mx={2}/></Button>
+                    </Box>
                   </Flex>
                   <Image
                     src={restaurant.image_url}
