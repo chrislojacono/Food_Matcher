@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Flex,
-  Heading,
-} from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
 import NonMatchCard from '../Cards/NonMatchCard';
 import MatchCard from '../Cards/MatchCard';
@@ -15,7 +12,7 @@ export default class SessionMatchesView extends Component {
     userId: this.props.user?.id,
     sessionId: this.props.match.params.id,
     finalDecision: '',
-  }
+  };
 
   componentDidMount() {
     const { userId, sessionId } = this.state;
@@ -24,11 +21,13 @@ export default class SessionMatchesView extends Component {
         matches: response,
       });
     });
-    SessionLikesData.GetLikesOfAUserPerSession(userId, sessionId).then((response) => {
-      this.setState({
-        yourLikedRestaurants: response,
-      });
-    });
+    SessionLikesData.GetLikesOfAUserPerSession(userId, sessionId).then(
+      (response) => {
+        this.setState({
+          yourLikedRestaurants: response,
+        });
+      },
+    );
     this.getFinalDecision();
   }
 
@@ -39,7 +38,7 @@ export default class SessionMatchesView extends Component {
         finalDecision: response,
       });
     });
-  }
+  };
 
   makeAFinalDecision = (restaurantId) => {
     const { sessionId } = this.state;
@@ -50,20 +49,16 @@ export default class SessionMatchesView extends Component {
     FinalDecisionData.AddAFinalDecision(finalObject).then(() => {
       this.getFinalDecision();
     });
-  }
+  };
 
   render() {
-    const {
-      matches,
-      yourLikedRestaurants,
-      finalDecision,
-    } = this.state;
+    const { matches, yourLikedRestaurants, finalDecision } = this.state;
     return (
       <Flex
         height='70%'
         width='70%'
         alignItems='center'
-        background='whitesmoke'
+        background='grey.200'
         mt='1%'
         mb='10%'
         justifyContent='center'
@@ -76,45 +71,57 @@ export default class SessionMatchesView extends Component {
           alignItems='center'
           flexWrap='wrap'
         >
-{finalDecision !== ''
-&& <> <Heading
-            m={2}
-            bg='yellow.100'
-            p={4}
-            textDecoration='underline'
-            rounded={4}
-          >
-           The Final!
-          </Heading>
+          {finalDecision !== '' && (
+            <>
+              <Flex
+                direction='column'
+                justify='center'
+                align='center'
+                bg='green.200'
+                w='98%'
+                rounded='20px'
+                my={2}
+              >
+                <Heading
+                  m={2}
+                  p={4}
+                  textDecoration='underline'
+                  rounded={4}
+                >
+                  The Final!
+                </Heading>
+              <Flex justify='center' align='center' flexWrap='wrap'>
+                <MatchCard
+                  key={finalDecision.id}
+                  yelpData={finalDecision}
+                  makeFinalDecision={this.makeAFinalDecision}
+                />
+              </Flex>
+              </Flex>
+            </>
+          )}
+          <Flex
+                direction='column'
+                justify='center'
+                align='center'
+                bg='blue.200'
+                w='98%'
+                rounded='20px'
+                my={2}
+              >
+                <Heading
+                  m={2}
+                  p={4}
+                  textDecoration='underline'
+                  rounded={4}
+                >
+                You guys agreed on:
+                </Heading>
           <Flex
             justify='center'
             align='center'
             flexWrap='wrap'
-            bg='green.200'
-            w='98%'
-            rounded='20px'
-          >
-          <MatchCard
-                key={finalDecision.id}
-                yelpData={finalDecision}
-                makeFinalDecision={this.makeAFinalDecision}
-              />
-          </Flex>
-          </>}
-          <Heading
-            m={2}
-            bg='yellow.100'
-            p={4}
-            textDecoration='underline'
-            rounded={4}
-          >
-            You guys agreed on
-          </Heading>
-          <Flex
-            justify='center'
-            align='center'
-            flexWrap='wrap'
-            bg='green.200'
+            bg='blue.200'
             w='98%'
             rounded='20px'
           >
@@ -126,15 +133,24 @@ export default class SessionMatchesView extends Component {
               />
             ))}
           </Flex>
-          <Heading
-            m={2}
-            bg='blue.100'
-            p={4}
-            textDecoration='underline'
-            rounded={4}
-          >
-            You liked
-          </Heading>
+          </Flex>
+          <Flex
+                direction='column'
+                justify='center'
+                align='center'
+                bg='blanchedAlmond'
+                w='98%'
+                rounded='20px'
+                my={2}
+              >
+                <Heading
+                  m={2}
+                  p={4}
+                  textDecoration='underline'
+                  rounded={4}
+                >
+                  Your Likes
+                </Heading>
           <Flex
             justify='center'
             alignItems='center'
@@ -147,6 +163,7 @@ export default class SessionMatchesView extends Component {
               <NonMatchCard key={restaurant.id} yelpData={restaurant} />
             ))}
           </Flex>
+        </Flex>
         </Flex>
       </Flex>
     );
