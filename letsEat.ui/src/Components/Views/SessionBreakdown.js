@@ -4,6 +4,7 @@ import SessionLikesData from '../../Helpers/Data/SessionLikeData';
 import NonMatchCard from '../Cards/NonMatchCard';
 import MatchCard from '../Cards/MatchCard';
 import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
+import FinalCard from '../Cards/FinalCard';
 
 export default class SessionMatchesView extends Component {
   state = {
@@ -15,6 +16,11 @@ export default class SessionMatchesView extends Component {
   };
 
   componentDidMount() {
+    this.loadContent();
+    this.getFinalDecision();
+  }
+
+  loadContent = () => {
     const { userId, sessionId } = this.state;
     SessionLikesData.GetMatches(sessionId).then((response) => {
       this.setState({
@@ -28,7 +34,6 @@ export default class SessionMatchesView extends Component {
         });
       },
     );
-    this.getFinalDecision();
   }
 
   getFinalDecision = () => {
@@ -50,6 +55,13 @@ export default class SessionMatchesView extends Component {
       this.getFinalDecision();
     });
   };
+
+  removeALike = (restaurantId) => {
+    const { sessionId, userId } = this.state;
+    SessionLikesData.RemoveALike(userId, sessionId, restaurantId).then(() => {
+      this.loadContent();
+    });
+  }
 
   render() {
     const { matches, yourLikedRestaurants, finalDecision } = this.state;
@@ -91,10 +103,9 @@ export default class SessionMatchesView extends Component {
                   The Final!
                 </Heading>
               <Flex justify='center' align='center' flexWrap='wrap'>
-                <MatchCard
+                <FinalCard
                   key={finalDecision.id}
                   yelpData={finalDecision}
-                  makeFinalDecision={this.makeAFinalDecision}
                 />
               </Flex>
               </Flex>
@@ -160,7 +171,7 @@ export default class SessionMatchesView extends Component {
             rounded='20px'
           >
             {yourLikedRestaurants.map((restaurant) => (
-              <NonMatchCard key={restaurant.id} yelpData={restaurant} />
+              <NonMatchCard key={restaurant.id} yelpData={restaurant} removeALike={this.removeALike} />
             ))}
           </Flex>
         </Flex>

@@ -20,9 +20,16 @@ const GetMatches = (sessionId) => new Promise((resolve, reject) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
+
+const RemoveALike = (userId, sessionId, restaurantId) => new Promise((resolve, reject) => {
+  axios.delete(`${SessionDataUrl}/${userId}/${sessionId}/${restaurantId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
 // eslint-disable-next-line
 export default {
   AddASessionLike,
   GetLikesOfAUserPerSession,
   GetMatches,
+  RemoveALike,
 };
