@@ -21,8 +21,8 @@ export default function MatchCard({ yelpData, makeFinalDecision }) {
           {yelpData.name}
         </Heading>
         <Text textTransform='initial' fontSize='md' m={2} color='gray.700'>
-          {Array(Math.round(yelpData.rating)).fill('').map((_, i) => (
-            <StarIcon color='yellow.400' key={i}/>
+          {Array(5).fill('').map((_, i) => (
+            <StarIcon key={i} color={i < yelpData.rating ? 'yellow.500' : 'gray.300'}/>
           ))} &bull; {parseFloat(yelpData.distance * 0.00062137).toFixed(2)} mile(s) away
         </Text>
       </Box>

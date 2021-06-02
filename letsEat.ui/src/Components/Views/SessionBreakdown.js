@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, Button } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
 import NonMatchCard from '../Cards/NonMatchCard';
 import MatchCard from '../Cards/MatchCard';
 import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
 import FinalCard from '../Cards/FinalCard';
+import RestaurantData from '../../Helpers/Data/RestaurantData';
+import SessionData from '../../Helpers/Data/SessionData';
 
 export default class SessionMatchesView extends Component {
   state = {
@@ -13,11 +15,13 @@ export default class SessionMatchesView extends Component {
     userId: this.props.user?.id,
     sessionId: this.props.match.params.id,
     finalDecision: '',
+    sessionObject: '',
   };
 
   componentDidMount() {
     this.loadContent();
     this.getFinalDecision();
+    this.getSessionData();
   }
 
   loadContent = () => {
@@ -34,6 +38,14 @@ export default class SessionMatchesView extends Component {
         });
       },
     );
+  }
+
+  getSessionData = () => {
+    SessionData.GetASession(this.state.sessionId).then((response) => {
+      this.setState({
+        sessionObject: response,
+      });
+    });
   }
 
   getFinalDecision = () => {
@@ -63,8 +75,20 @@ export default class SessionMatchesView extends Component {
     });
   }
 
+  getRandomRestaurant = () => {
+    const { sessionId } = this.state;
+    RestaurantData.GetRandomRestaurant(sessionId).then((response) => {
+      this.makeAFinalDecision(response.id);
+    });
+  }
+
   render() {
-    const { matches, yourLikedRestaurants, finalDecision } = this.state;
+    const {
+      matches,
+      yourLikedRestaurants,
+      finalDecision,
+      sessionObject,
+    } = this.state;
     return (
       <Flex
         height='70%'
@@ -84,50 +108,44 @@ export default class SessionMatchesView extends Component {
           flexWrap='wrap'
         >
           {finalDecision !== '' && (
-            <>
-              <Flex
-                direction='column'
-                justify='center'
-                align='center'
-                bg='green.200'
-                w='98%'
-                rounded='20px'
-                my={2}
-              >
-                <Heading
-                  m={2}
-                  p={4}
-                  textDecoration='underline'
-                  rounded={4}
-                >
-                  The Final!
-                </Heading>
-              <Flex justify='center' align='center' flexWrap='wrap'>
-                <FinalCard
-                  key={finalDecision.id}
-                  yelpData={finalDecision}
-                />
-              </Flex>
-              </Flex>
-            </>
+            <Flex
+              direction='column'
+              justify='center'
+              align='center'
+              bg='green.200'
+              w='98%'
+              rounded='20px'
+              my={2}
+            >
+                <>
+                  <Heading m={2} p={4} textDecoration='underline' rounded={4}>
+                    The Final!
+                  </Heading>
+                  <Flex justify='center' align='center' flexWrap='wrap'>
+                    <FinalCard
+                      key={finalDecision.id}
+                      yelpData={finalDecision}
+                    />
+                  </Flex>
+                </>
+            </Flex>
           )}
+          {sessionObject.user2Id !== null && (
+          <Button onClick={this.getRandomRestaurant}>Decide For Us!</Button>
+          )}
+          {matches.length && (
           <Flex
-                direction='column'
-                justify='center'
-                align='center'
-                bg='blue.200'
-                w='98%'
-                rounded='20px'
-                my={2}
-              >
-                <Heading
-                  m={2}
-                  p={4}
-                  textDecoration='underline'
-                  rounded={4}
-                >
-                You guys agreed on:
-                </Heading>
+          direction='column'
+          justify='center'
+          align='center'
+          bg='blue.200'
+          w='98%'
+          rounded='20px'
+          my={2}
+        >
+          <Heading m={2} p={4} textDecoration='underline' rounded={4}>
+            You guys agreed on:
+          </Heading>
           <Flex
             justify='center'
             align='center'
@@ -144,37 +162,37 @@ export default class SessionMatchesView extends Component {
               />
             ))}
           </Flex>
-          </Flex>
+        </Flex>
+          )}
           <Flex
-                direction='column'
-                justify='center'
-                align='center'
-                bg='blanchedAlmond'
-                w='98%'
-                rounded='20px'
-                my={2}
-              >
-                <Heading
-                  m={2}
-                  p={4}
-                  textDecoration='underline'
-                  rounded={4}
-                >
-                  Your Likes
-                </Heading>
-          <Flex
+            direction='column'
             justify='center'
-            alignItems='center'
-            flexWrap='wrap'
-            bg='blanchedalmond'
+            align='center'
+            bg='blanchedAlmond'
             w='98%'
             rounded='20px'
+            my={2}
           >
-            {yourLikedRestaurants.map((restaurant) => (
-              <NonMatchCard key={restaurant.id} yelpData={restaurant} removeALike={this.removeALike} />
-            ))}
+            <Heading m={2} p={4} textDecoration='underline' rounded={4}>
+              Your Likes
+            </Heading>
+            <Flex
+              justify='center'
+              alignItems='center'
+              flexWrap='wrap'
+              bg='blanchedalmond'
+              w='98%'
+              rounded='20px'
+            >
+              {yourLikedRestaurants.map((restaurant) => (
+                <NonMatchCard
+                  key={restaurant.id}
+                  yelpData={restaurant}
+                  removeALike={this.removeALike}
+                />
+              ))}
+            </Flex>
           </Flex>
-        </Flex>
         </Flex>
       </Flex>
     );
