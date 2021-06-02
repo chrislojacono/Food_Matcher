@@ -8,5 +8,11 @@ const AddARestaurant = (RestaurantObject) => new Promise((resolve, reject) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
+
+const GetRandomRestaurant = (sessionId) => new Promise((resolve, reject) => {
+  axios.get(`${RestaurantDataUrl}/random/${sessionId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
 // eslint-disable-next-line
-export default { AddARestaurant };
+export default { AddARestaurant, GetRandomRestaurant };
