@@ -30,6 +30,7 @@ export default class SessionView extends Component {
     restaurants: [],
     ShowAlert: false,
     userId: this.props.user?.id,
+    copiedToClipboard: false,
   };
 
   componentDidMount() {
@@ -76,14 +77,20 @@ export default class SessionView extends Component {
     });
   }
 
-  copyCodeToClipboard = () => {
-    const el = this.textArea;
-    el.select();
-    document.execCommand('copy');
+  copyToClipboard = (sessionId) => {
+    navigator.clipboard.writeText(`http://localhost:8888/session/join/${sessionId}`);
+    this.setState({
+      copiedToClipboard: true,
+    });
   }
 
   render() {
-    const { restaurants, ShowAlert, sessionData } = this.state;
+    const {
+      restaurants,
+      ShowAlert,
+      sessionData,
+      copiedToClipboard,
+    } = this.state;
     return (
       <Flex
         width='70%'
@@ -126,7 +133,9 @@ export default class SessionView extends Component {
                     >
                       Like
                     </Button>
-                    <Button bg='yellow.300' onClick={() => { navigator.clipboard.writeText(`http://localhost:8888/session/join/${sessionData.id}`); }}>Share Link with a friend!<CopyIcon mx={2}/></Button>
+                    <Button mx={4} bg='yellow.300' onClick={() => {
+                      this.copyToClipboard(sessionData.id);
+                    }}>{copiedToClipboard ? 'Copied!' : 'Share Link with a friend!'}<CopyIcon mx={2}/></Button>
                     </Box>
                   </Flex>
                   <Image

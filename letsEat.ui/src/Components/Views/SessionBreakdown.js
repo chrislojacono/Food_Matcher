@@ -131,7 +131,7 @@ export default class SessionMatchesView extends Component {
             </Flex>
           )}
           {sessionObject.user2Id !== null && (
-          <Button onClick={this.getRandomRestaurant}>Decide For Us!</Button>
+          <Button colorScheme='orange' onClick={this.getRandomRestaurant}>Decide For Us!</Button>
           )}
           {matches.length && (
           <Flex
