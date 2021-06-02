@@ -23,17 +23,16 @@ namespace FoodMatcherApp.Controllers
         [HttpPost]
         public IActionResult AddARestaurant(Restaurant restaurant)
         {
-            var allRestaruarnts = _repo.GetAllRestaurants();
-
-            if (allRestaruarnts.Contains(restaurant))
-            {
-                return Ok();
-            }
-            else
-            {
                 var Id = _repo.AddARestaurant(restaurant);
-                return Ok(Id);
-            }     
+                return Ok(Id);    
+        }
+
+        [HttpGet("random/{sessionId}")]
+        public IActionResult GetRandomRestaurant(Guid sessionId)
+        {
+            var restaurant = _repo.GetRandomRestaurantFromSession(sessionId);
+
+            return Ok(restaurant);
         }
     }
 }

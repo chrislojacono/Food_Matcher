@@ -53,5 +53,19 @@ namespace FoodMatcherApp.Data_Access
 
            return id;
         }
+
+        public Restaurant GetRandomRestaurantFromSession(Guid sessionId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"SELECT TOP 1 R.* 
+                        FROM Session_Likes Sl
+	                        JOIN Restaurants R
+	                        ON R.Id = Sl.RestaurantId
+                        WHERE sl.SessionId = @SessionId
+                        ORDER BY NEWID()";
+
+            return db.QueryFirstOrDefault<Restaurant>(sql, new { SessionId = sessionId });
+        }
     }
 }

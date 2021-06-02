@@ -19,7 +19,7 @@ export default function MatchCard({ yelpData, removeALike }) {
         </Heading>
         <Text textTransform='initial' fontSize='md' m={2} color='gray.700'>
           {Array(Math.round(yelpData.rating)).fill('').map((_, i) => (
-            <StarIcon color='yellow.400'/>
+            <StarIcon color={i < yelpData.rating ? 'yellow.500' : 'gray.300'} key={i}/>
           ))} &bull; {parseFloat(yelpData.distance * 0.00062137).toFixed(2)} mile(s) away
         </Text>
       </Box>
