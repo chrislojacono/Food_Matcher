@@ -47,7 +47,7 @@ class SessionForm extends Component {
         setTimeout(() => {
           setTimeout(() => {
             this.props.history.push(`/session/${responseId}`);
-          }, 3000);
+          }, 2000);
         });
       });
     }
