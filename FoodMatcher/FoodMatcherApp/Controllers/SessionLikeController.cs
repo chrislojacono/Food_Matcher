@@ -21,10 +21,10 @@ namespace FoodMatcherApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddASession(SessionLikes sessionLike)
+        public IActionResult AddASessionLike(SessionLikes sessionLike)
         {
-            _repo.AddASessionLike(sessionLike);
-            return Created($"api/SessionLikes/{sessionLike.Id}", sessionLike);
+            var isAMatch = _repo.AddASessionLike(sessionLike);
+            return Ok(isAMatch);
         }
 
         [HttpGet("{userId}/{sessionId}")]
