@@ -16,7 +16,7 @@ import sessionData from '../../Helpers/Data/SessionData';
 
 class SessionForm extends Component {
     state = {
-      UserId: this.props.user.id,
+      UserId: this.props.user?.id,
       Location: 'Nashville, TN',
       SearchTerm: 'Pizza',
       ShowAlert: false,
@@ -57,16 +57,17 @@ class SessionForm extends Component {
 
       return (
         <>
-        <Flex direction="column" backgroundColor="whiteSmoke" marginTop="10%" width="40%" p="18" rounded={10} flexWrap="wrap">
+        <Flex direction="column" backgroundColor="whiteSmoke" marginTop="2%" width="40%" p="18" rounded={10} flexWrap="wrap" bgGradient="linear(red.100 25%, orange.100 50%, yellow.100 100%)">
         {ShowAlert
           && <Alert status="success" marginY="5px">
                 <AlertIcon />
                 Your session has been created!
             </Alert>}
-        <FormControl as="fieldset">
-        <FormLabel as="legend">What are you in the mood for?</FormLabel>
-          <RadioGroup defaultValue="Pizza">
-            <HStack spacing="30px" wrap="wrap" justify="center">
+        <FormControl as="fieldset" p={3} justifyContent='center'>
+        <FormLabel as="legend" p={2}>What are you in the mood for?</FormLabel>
+          <RadioGroup defaultValue="Pizza" colorScheme='purple'>
+            <HStack spacing="30px" wrap="wrap" justify="center" alignItems='center'>
+              <Radio value="" id="SearchTerm" onChange={this.handleChange}>Anything</Radio>
               <Radio value="Pizza" id="SearchTerm" onChange={this.handleChange}>Pizza</Radio>
               <Radio value="Mexican" id="SearchTerm" onChange={this.handleChange}>Mexican</Radio>
               <Radio value="Healthy" id="SearchTerm" onChange={this.handleChange}>Healthy</Radio>
@@ -81,9 +82,9 @@ class SessionForm extends Component {
             </HStack>
           </RadioGroup>
         </FormControl>
-        <FormControl id='Location' onChange={this.handleChange} isRequired>
+        <FormControl id='Location' p={2} onChange={this.handleChange} isRequired>
           <FormLabel>Where are you heading?</FormLabel>
-          <Input placeholder='ex: Nashville, Tn' />
+          <Input bgColor='white' placeholder='ex: Nashville, Tn' />
         </FormControl>
         <Button
           mt={4}
