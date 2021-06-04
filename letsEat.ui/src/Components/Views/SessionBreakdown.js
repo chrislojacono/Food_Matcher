@@ -133,7 +133,7 @@ export default class SessionMatchesView extends Component {
           {sessionObject.user2Id !== null && (
           <Button colorScheme='orange' onClick={this.getRandomRestaurant}>Decide For Us!</Button>
           )}
-          {matches.length && (
+          {matches.length ? (
           <Flex
           direction='column'
           justify='center'
@@ -163,7 +163,7 @@ export default class SessionMatchesView extends Component {
             ))}
           </Flex>
         </Flex>
-          )}
+          ) : (<></>)}
           <Flex
             direction='column'
             justify='center'

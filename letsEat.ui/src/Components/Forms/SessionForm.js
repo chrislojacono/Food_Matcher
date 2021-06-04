@@ -17,7 +17,7 @@ import sessionData from '../../Helpers/Data/SessionData';
 class SessionForm extends Component {
     state = {
       UserId: this.props.user.id,
-      Location: '',
+      Location: 'Nashville, TN',
       SearchTerm: 'Pizza',
       ShowAlert: false,
     }
@@ -47,7 +47,7 @@ class SessionForm extends Component {
         setTimeout(() => {
           setTimeout(() => {
             this.props.history.push(`/session/${responseId}`);
-          }, 3000);
+          }, 2000);
         });
       });
     }

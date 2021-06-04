@@ -12,7 +12,7 @@ namespace FoodMatcherApp.Data_Access
     {
         const string ConnectionString = "Server=localhost;Database=FoodMatcher;Trusted_Connection=True;";
 
-        public void AddASessionLike(SessionLikes sessionLike)
+        public bool AddASessionLike(SessionLikes sessionLike)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -20,9 +20,18 @@ namespace FoodMatcherApp.Data_Access
                         BEGIN
                         INSERT INTO [dbo].[Session_Likes]([UserId],[RestaurantId],[SessionId])
                         VALUES(@UserId,@RestaurantId,@SessionId)
+
+                        SELECT CASE WHEN EXISTS (
+                        SELECT *
+                        FROM Session_Likes WHERE RestaurantId = @RestaurantId and SessionId = @SessionId
+                            )
+                        THEN CAST(1 AS BIT)
+                        ELSE CAST(0 AS BIT) END
                         END";
 
-            db.Execute(sql, new { UserId = sessionLike.UserId, RestaurantId = sessionLike.RestaurantId, SessionId = sessionLike.SessionId });
+           var isItAMatch = db.ExecuteScalar<bool>(sql, new { UserId = sessionLike.UserId, RestaurantId = sessionLike.RestaurantId, SessionId = sessionLike.SessionId });
+
+           return isItAMatch;
         }
 
         public List<Restaurant> GetLikesOfAUserPerSession(string userId, Guid sessionId)

@@ -28,7 +28,7 @@ function MyNavbar({ user }) {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <div className='myNavbar'>
       <Navbar color='light' light expand='md'>
         <NavbarBrand href='/'>Let's Eat!</NavbarBrand>
         <NavbarToggler onClick={toggle} />

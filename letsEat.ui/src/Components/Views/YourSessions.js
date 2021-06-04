@@ -28,14 +28,15 @@ export default class YourSessionsView extends Component {
     return (
       <Flex
         height='70%'
-        width='70%'
+        width='auto'
         alignItems='center'
         background='whitesmoke'
-        mt='10%'
+        mt='2%'
         mb='10%'
         justifyContent='center'
         direction='column'
         rounded={6}
+        bgGradient="linear(red.100 25%, orange.100 50%, yellow.100 100%)"
       >
         <Heading whiteSpace='nowrap'>Your Sessions</Heading>
         <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
