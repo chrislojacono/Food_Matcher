@@ -31,6 +31,7 @@ export default class SessionView extends Component {
     ShowAlert: false,
     userId: this.props.user?.id,
     copiedToClipboard: false,
+    showMatchAlert: false,
   };
 
   componentDidMount() {
@@ -65,13 +66,21 @@ export default class SessionView extends Component {
         RestaurantId: responseId,
         SessionId: sessionData.id,
       };
-      SessionLikeData.AddASessionLike(sessionLikeObject);
-      this.setState({
-        ShowAlert: true,
+      SessionLikeData.AddASessionLike(sessionLikeObject).then((response) => {
+        if (response === true) {
+          this.setState({
+            showMatchAlert: true,
+          });
+        } else {
+          this.setState({
+            ShowAlert: true,
+          });
+        }
       });
       setTimeout(() => {
         this.setState({
           ShowAlert: false,
+          showMatchAlert: false,
         });
       }, 1000);
     });
@@ -90,6 +99,7 @@ export default class SessionView extends Component {
       ShowAlert,
       sessionData,
       copiedToClipboard,
+      showMatchAlert,
     } = this.state;
     return (
       <Flex
@@ -117,6 +127,10 @@ export default class SessionView extends Component {
                       {restaurant.name} was added to your likes!
                     </Alert>
                   )}
+                  {showMatchAlert && (<Alert status="success">
+                    <AlertIcon />
+                    {restaurant.name} WAS A MATCH!!
+                    </Alert>)}
                   <Flex alignItems='center'>
                     <Box p='2'>
                     <Heading className='legend'>

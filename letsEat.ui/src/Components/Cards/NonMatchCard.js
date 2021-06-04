@@ -12,7 +12,7 @@ import { StarIcon } from '@chakra-ui/icons';
 export default function MatchCard({ yelpData, removeALike }) {
   return (
     <Box w='350px' rounded='20px' overflow='hidden' boxShadow='md' bg='gray.200' m={2}>
-      <Image src={yelpData.image_Url} alt='carousel' objectFit='cover'/>
+      <Image src={yelpData.image_Url} alt='carousel' objectFit='contain' boxSize='350px'/>
       <Box p={5}>
         <Heading fontSize='xl' fontWeight='semibold'>
           {yelpData.name}

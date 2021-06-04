@@ -29,6 +29,7 @@ export default class JoinerSessionView extends Component {
     restaurants: [],
     ShowAlert: false,
     userId: this.props.user?.id,
+    showMatchAlert: false,
   };
 
   componentDidMount() {
@@ -64,20 +65,28 @@ export default class JoinerSessionView extends Component {
         RestaurantId: responseId,
         SessionId: sessionData.id,
       };
-      SessionLikeData.AddASessionLike(sessionLikeObject);
-      this.setState({
-        ShowAlert: true,
+      SessionLikeData.AddASessionLike(sessionLikeObject).then((response) => {
+        if (response === true) {
+          this.setState({
+            showMatchAlert: true,
+          });
+        } else {
+          this.setState({
+            ShowAlert: true,
+          });
+        }
       });
       setTimeout(() => {
         this.setState({
           ShowAlert: false,
+          showMatchAlert: false,
         });
       }, 1000);
     });
   }
 
   render() {
-    const { restaurants, ShowAlert } = this.state;
+    const { restaurants, ShowAlert, showMatchAlert } = this.state;
     return (
       <Flex
         width='70%'
@@ -97,6 +106,11 @@ export default class JoinerSessionView extends Component {
                 && <Alert status="success">
                     <AlertIcon />
                     {restaurant.name} was added to your likes!
+                    </Alert>}
+                    {showMatchAlert
+                && <Alert status="success">
+                    <AlertIcon />
+                    {restaurant.name} WAS A MATCH!!
                     </Alert>}
                     <Flex alignItems='center'>
                     <Box p='2'>
