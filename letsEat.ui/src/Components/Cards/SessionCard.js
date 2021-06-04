@@ -4,6 +4,8 @@ import {
   Heading,
   Flex,
   Button,
+  WrapItem,
+  Avatar,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import UserData from '../../Helpers/Data/UserData';
@@ -49,6 +51,9 @@ export default class SessionCard extends Component {
         rounded={6}
       >
         <Heading whiteSpace="nowrap" p={5} fontSize="1.1rem" letterSpacing='wide'>Session with {otherUser.firstName}</Heading>
+        <WrapItem>
+          <Avatar size='lg' src={otherUser.image_Url} name={otherUser.firstName}/>
+        </WrapItem>
         <Text fontSize='lg' p={5}>Looking for {sessionData.searchTerm} Food</Text>
         <Text fontSize='medium' color='gray.400'>{date.toDateString()}</Text>
         <Flex>
