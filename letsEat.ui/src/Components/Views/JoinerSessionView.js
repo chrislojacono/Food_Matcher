@@ -112,7 +112,7 @@ export default class JoinerSessionView extends Component {
                     <AlertIcon />
                     {restaurant.name} WAS A MATCH!!
                     </Alert>}
-                    <Flex alignItems='center'>
+                    <Flex alignItems='center' direction='column' mb='1%'>
                     <Box p='2'>
                     <Heading className='legend'>
                       {restaurant.name}
@@ -128,6 +128,16 @@ export default class JoinerSessionView extends Component {
                     >
                       Like
                     </Button>
+                    <a
+                        href={restaurant.url}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='anchors'
+                      >
+                        <Button colorScheme='twitter' mx={2}>
+                          More Info
+                        </Button>
+                      </a>
                     </Box>
                   </Flex>
                   <Image src={restaurant.image_url} alt='carousel' objectFit="cover"/>
