@@ -28,10 +28,10 @@ export default class YourSessionsView extends Component {
     return (
       <Flex
         height='70%'
-        width='70%'
+        width='auto'
         alignItems='center'
         background='whitesmoke'
-        mt='10%'
+        mt='2%'
         mb='10%'
         justifyContent='center'
         direction='column'
