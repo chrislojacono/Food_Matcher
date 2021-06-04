@@ -65,9 +65,9 @@ class SessionForm extends Component {
             </Alert>}
         <FormControl as="fieldset" p={3} justifyContent='center'>
         <FormLabel as="legend" p={2}>What are you in the mood for?</FormLabel>
-          <RadioGroup defaultValue="Pizza" colorScheme='purple'>
+          <RadioGroup defaultValue="Pizza" colorScheme='purple' justify="center" alignItems='center'>
             <HStack spacing="30px" wrap="wrap" justify="center" alignItems='center'>
-              <Radio value="" id="SearchTerm" onChange={this.handleChange}>Anything</Radio>
+              <Radio value="Anything" id="SearchTerm" onChange={this.handleChange}>Anything</Radio>
               <Radio value="Pizza" id="SearchTerm" onChange={this.handleChange}>Pizza</Radio>
               <Radio value="Mexican" id="SearchTerm" onChange={this.handleChange}>Mexican</Radio>
               <Radio value="Healthy" id="SearchTerm" onChange={this.handleChange}>Healthy</Radio>

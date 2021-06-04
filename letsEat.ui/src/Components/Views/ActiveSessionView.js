@@ -13,9 +13,7 @@ import { CopyIcon } from '@chakra-ui/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
-import SwiperCore, {
-  Navigation,
-} from 'swiper/core';
+import SwiperCore, { Navigation } from 'swiper/core';
 import '../../styles/index.scss';
 import SessionData from '../../Helpers/Data/SessionData';
 import YelpData from '../../Helpers/Data/YelpData';
@@ -84,14 +82,16 @@ export default class SessionView extends Component {
         });
       }, 1000);
     });
-  }
+  };
 
   copyToClipboard = (sessionId) => {
-    navigator.clipboard.writeText(`http://localhost:8888/session/join/${sessionId}`);
+    navigator.clipboard.writeText(
+      `http://localhost:8888/session/join/${sessionId}`,
+    );
     this.setState({
       copiedToClipboard: true,
     });
-  }
+  };
 
   render() {
     const {
@@ -127,35 +127,54 @@ export default class SessionView extends Component {
                       {restaurant.name} was added to your likes!
                     </Alert>
                   )}
-                  {showMatchAlert && (<Alert status="success">
-                    <AlertIcon />
-                    {restaurant.name} WAS A MATCH!!
-                    </Alert>)}
-                  <Flex alignItems='center'>
+                  {showMatchAlert && (
+                    <Alert status='success'>
+                      <AlertIcon />
+                      {restaurant.name} WAS A MATCH!!
+                    </Alert>
+                  )}
+                  <Flex alignItems='center' direction='column' mb='1%'>
                     <Box p='2'>
-                    <Heading className='legend'>
-                      {restaurant.name}
-                    </Heading>
+                      <Heading className='legend' fontSize='2.2em' mb='5px'>{restaurant.name}</Heading>
                     </Box>
                     <Spacer />
-                    <Box pl='40px'>
-                    <Button
-                      backgroundColor='cyan.500'
-                      ml='auto'
-                      mx={2}
-                      onClick={() => this.likeButton(restaurant)}
-                    >
-                      Like
-                    </Button>
-                    <Button mx={4} bg='yellow.300' onClick={() => {
-                      this.copyToClipboard(sessionData.id);
-                    }}>{copiedToClipboard ? 'Copied!' : 'Share Link with a friend!'}<CopyIcon mx={2}/></Button>
+                    <Box>
+                      <Button
+                        colorScheme='teal'
+                        mx={2}
+                        onClick={() => this.likeButton(restaurant)}
+                      >
+                        Like
+                      </Button>
+                      <a
+                        href={restaurant.url}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='anchors'
+                      >
+                        <Button colorScheme='twitter' mx={2}>
+                          More Info
+                        </Button>
+                      </a>
+                      <Button
+                        mx={2}
+                        bg='yellow.300'
+                        onClick={() => {
+                          this.copyToClipboard(sessionData.id);
+                        }}
+                      >
+                        {copiedToClipboard
+                          ? 'Copied! '
+                          : 'Share Session'}
+                        <CopyIcon mx={2}/>
+                      </Button>
                     </Box>
                   </Flex>
                   <Image
                     src={restaurant.image_url}
                     alt='carousel'
-                    objectFit='cover'
+                    objectFit='contain'
+                    boxSize='80vh'
                   />
                 </Flex>
               </SwiperSlide>
