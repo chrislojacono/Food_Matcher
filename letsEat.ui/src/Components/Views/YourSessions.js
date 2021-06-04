@@ -36,6 +36,7 @@ export default class YourSessionsView extends Component {
         justifyContent='center'
         direction='column'
         rounded={6}
+        bgGradient="linear(red.100 25%, orange.100 50%, yellow.100 100%)"
       >
         <Heading whiteSpace='nowrap'>Your Sessions</Heading>
         <Flex justifyContent="center" alignItems="center" flexWrap="wrap">

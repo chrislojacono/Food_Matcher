@@ -33,7 +33,7 @@ export default class SessionCard extends Component {
         <Link to={{
           pathname: `/SessionBreakdown/${sessionData.id}`,
         }}>
-        <Button backgroundColor="turquoise" margin={3}>View the matches</Button>
+        <Button backgroundColor="turquoise" margin={3}>Session Breakdown</Button>
         </Link>
         </Flex>
       </Flex>
