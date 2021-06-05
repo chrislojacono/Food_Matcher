@@ -34,10 +34,10 @@ class App extends React.Component {
   render() {
     return (
       <ChakraProvider>
-      <Router>
-          <MyNavbar user={this.state.user}/>
-          <Flex justifyContent="center" alignItems="center" direction="column">
-          <Routes user={this.state?.user}/>
+        <Router>
+          <MyNavbar user={this.state.user} />
+          <Flex justifyContent='center' alignItems='center' direction='column'>
+            <Routes user={this.state?.user} />
           </Flex>
         </Router>
       </ChakraProvider>

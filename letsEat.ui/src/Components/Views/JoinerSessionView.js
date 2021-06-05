@@ -12,9 +12,7 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
-import SwiperCore, {
-  Navigation,
-} from 'swiper/core';
+import SwiperCore, { Navigation } from 'swiper/core';
 import '../../styles/index.scss';
 import SessionData from '../../Helpers/Data/SessionData';
 import YelpData from '../../Helpers/Data/YelpData';
@@ -83,7 +81,7 @@ export default class JoinerSessionView extends Component {
         });
       }, 1000);
     });
-  }
+  };
 
   render() {
     const { restaurants, ShowAlert, showMatchAlert } = this.state;
@@ -100,49 +98,61 @@ export default class JoinerSessionView extends Component {
       >
         <Swiper navigation={true} className='mySwiper'>
           {restaurants.map((restaurant) => (
-                <SwiperSlide key={restaurant.id}>
-                <Flex justifyContent="center" alignItems="center" direction="column">
-                {ShowAlert
-                && <Alert status="success">
+            <SwiperSlide key={restaurant.id}>
+              <Flex
+                justifyContent='center'
+                alignItems='center'
+                direction='column'
+              >
+                {ShowAlert && (
+                  <Alert status='success'>
                     <AlertIcon />
                     {restaurant.name} was added to your likes!
-                    </Alert>}
-                    {showMatchAlert
-                && <Alert status="success">
+                  </Alert>
+                )}
+                {showMatchAlert && (
+                  <Alert status='success'>
                     <AlertIcon />
                     {restaurant.name} WAS A MATCH!!
-                    </Alert>}
-                    <Flex alignItems='center' direction='column' mb='1%'>
-                    <Box p='2'>
-                    <Heading className='legend'>
-                      {restaurant.name}
-                    </Heading>
-                    </Box>
-                    <Spacer />
-                    <Box pl='40px'>
+                  </Alert>
+                )}
+                <Flex
+                  alignItems='center'
+                  direction='column'
+                  mb='1%'
+                  justifyContent='center'
+                >
+                  <Box p='2'>
+                    <Heading className='legend'>{restaurant.name}</Heading>
+                  </Box>
+                  <Spacer />
+                  <Box>
                     <Button
                       backgroundColor='cyan.500'
-                      ml='auto'
                       mx={2}
                       onClick={() => this.likeButton(restaurant)}
                     >
                       Like
                     </Button>
                     <a
-                        href={restaurant.url}
-                        target='_blank'
-                        rel='noreferrer'
-                        className='anchors'
-                      >
-                        <Button colorScheme='twitter' mx={2}>
-                          More Info
-                        </Button>
-                      </a>
-                    </Box>
-                  </Flex>
-                  <Image src={restaurant.image_url} alt='carousel' objectFit="cover"/>
+                      href={restaurant.url}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='anchors'
+                    >
+                      <Button colorScheme='twitter' mx={2}>
+                        More Info
+                      </Button>
+                    </a>
+                  </Box>
                 </Flex>
-              </SwiperSlide>
+                <Image
+                  src={restaurant.image_url}
+                  alt='carousel'
+                  objectFit='cover'
+                />
+              </Flex>
+            </SwiperSlide>
           ))}
         </Swiper>
       </Flex>
