@@ -16,9 +16,9 @@ export default class HomePageView extends Component {
         direction='column'
         p='40'
         rounded={6}
-        bgGradient='linear(red.100 25%, orange.100 50%, yellow.100 100%)'
+        bgGradient='linear(blue.100 25%, green.100 50%, orange.100 100%)'
       >
-        <Heading mb={6} whiteSpace='nowrap'>
+        <Heading mb={6} whiteSpace='nowrap' textShadow='xl'>
           Welcome to Let's Eat!
         </Heading>
         <Link
