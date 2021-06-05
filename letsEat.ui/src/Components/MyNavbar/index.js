@@ -51,13 +51,13 @@ function MyNavbar({ user }) {
             </NavItem>
             {user && (
               <>
-              <div className="userImgWrapper">
-              <img
-                  className='userInfo'
-                  src={user?.image_Url}
-                  alt={user?.firstName}
-                />
-              </div>
+                <div className='userImgWrapper'>
+                  <img
+                    className='userInfo'
+                    src={user?.image_Url}
+                    alt={user?.firstName}
+                  />
+                </div>
                 <UncontrolledDropdown className='logout-dropdown'>
                   <DropdownToggle nav caret></DropdownToggle>
                   <DropdownMenu right>
