@@ -61,7 +61,7 @@ class SessionForm extends Component {
           p='18'
           rounded={10}
           flexWrap='wrap'
-          bgGradient='linear(red.100 25%, orange.100 50%, yellow.100 100%)'
+          bgGradient='linear(blue.100 25%, green.100 50%, orange.100 100%)'
         >
           {ShowAlert && (
             <Alert status='success' marginY='5px'>
