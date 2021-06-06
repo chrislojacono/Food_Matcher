@@ -16,17 +16,17 @@ namespace FoodMatcherApp.Data_Access
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"IF NOT EXISTS (SELECT * FROM Session_Likes WHERE UserId = @UserId and RestaurantId = @RestaurantId and SessionId = @SessionId)
-                        BEGIN
-                        INSERT INTO [dbo].[Session_Likes]([UserId],[RestaurantId],[SessionId])
-                        VALUES(@UserId,@RestaurantId,@SessionId)
-
+            var sql = @"
                         SELECT CASE WHEN EXISTS (
                         SELECT *
                         FROM Session_Likes WHERE RestaurantId = @RestaurantId and SessionId = @SessionId
                             )
                         THEN CAST(1 AS BIT)
                         ELSE CAST(0 AS BIT) END
+                        IF NOT EXISTS (SELECT * FROM Session_Likes WHERE UserId = @UserId and RestaurantId = @RestaurantId and SessionId = @SessionId)
+                        BEGIN
+                        INSERT INTO [dbo].[Session_Likes]([UserId],[RestaurantId],[SessionId])
+                        VALUES(@UserId,@RestaurantId,@SessionId)
                         END";
 
            var isItAMatch = db.ExecuteScalar<bool>(sql, new { UserId = sessionLike.UserId, RestaurantId = sessionLike.RestaurantId, SessionId = sessionLike.SessionId });
