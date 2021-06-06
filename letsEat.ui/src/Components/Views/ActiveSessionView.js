@@ -30,17 +30,16 @@ export default function SessionView(props) {
   const [showMatchAlert, setShowMatchAlert] = useState(false);
 
   useEffect(() => {
+    const getYelpData = () => {
+      SessionData.GetASession(props.match.params.id).then((response) => {
+        setSessionData(response);
+        YelpData.yelpQuery(response.location, response.searchTerm).then(
+          (yelpResponse) => setRestaurants(yelpResponse),
+        );
+      });
+    };
     getYelpData();
   }, [props.user]);
-
-  const getYelpData = () => {
-    SessionData.GetASession(props.match.params.id).then((response) => {
-      setSessionData(response);
-      YelpData.yelpQuery(response.location, response.searchTerm).then(
-        (yelpResponse) => setRestaurants(yelpResponse),
-      );
-    });
-  };
 
   const likeButton = (yelpData) => {
     const restaurantObject = {
