@@ -9,6 +9,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons';
+import placeholder from '../../Helpers/Images/placeholder-restaurant.png';
 
 export default function MatchCard({ yelpData, makeFinalDecision }) {
   return (
@@ -20,12 +21,23 @@ export default function MatchCard({ yelpData, makeFinalDecision }) {
       bg='gray.200'
       m={2}
     >
-      <Image
-        src={yelpData.image_Url}
-        alt='carousel'
-        objectFit='contain'
-        boxSize='350px'
-      />
+      {yelpData.image_Url === '' ? (
+        <Image
+          src={placeholder}
+          alt='carousel'
+          objectFit='contain'
+          boxSize='350px'
+          pb={10}
+        />
+      ) : (
+        <Image
+          src={yelpData.image_Url}
+          alt='carousel'
+          objectFit='contain'
+          boxSize='350px'
+          pb={10}
+        />
+      )}
       <Box p={5}>
         <Badge varient='solid' rounded='full' bg='green.300' px={3} mb={2}>
           Match!!
