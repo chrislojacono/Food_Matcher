@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Flex, Heading, Image } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+} from '@chakra-ui/react';
 import mainGif from '../../Helpers/Images/LetsEat.gif';
 
 export default class HomePageView extends Component {
