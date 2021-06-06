@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Box,
@@ -8,9 +8,8 @@ import {
 } from '@chakra-ui/react';
 import mainGif from '../../Helpers/Images/LetsEat.gif';
 
-export default class HomePageView extends Component {
-  render() {
-    return (
+export default function HomePageView() {
+  return (
       <Flex
         height='40%'
         width='40%'
@@ -24,9 +23,6 @@ export default class HomePageView extends Component {
         rounded={6}
         bgGradient='linear(orange.200 25%, blue.200 50%, green.200 100%)'
       >
-        {/* <Heading mb={6} whiteSpace='nowrap' textShadow='xl'>
-          Welcome to Let's Eat!
-        </Heading> */}
         <Box size='lg'>
           <Image
             src={mainGif}
@@ -46,6 +42,5 @@ export default class HomePageView extends Component {
           </Button>
         </Link>
       </Flex>
-    );
-  }
+  );
 }

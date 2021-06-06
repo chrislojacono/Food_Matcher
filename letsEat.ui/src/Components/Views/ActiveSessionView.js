@@ -39,7 +39,7 @@ export default function SessionView(props) {
       });
     };
     getYelpData();
-  }, [props.user]);
+  }, [props.user, props.match.params.id]);
 
   const likeButton = (yelpData) => {
     const restaurantObject = {
