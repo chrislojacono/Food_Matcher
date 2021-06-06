@@ -151,6 +151,7 @@ export default function SessionView(props) {
                   alt='carousel'
                   objectFit='contain'
                   boxSize='80vh'
+                  pb={10}
                 />
               </Flex>
             </SwiperSlide>
