@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Flex,
@@ -31,7 +31,7 @@ export default function SessionView(props) {
 
   useEffect(() => {
     getYelpData();
-  }, []);
+  }, [props.user]);
 
   const getYelpData = () => {
     SessionData.GetASession(props.match.params.id).then((response) => {
@@ -121,7 +121,7 @@ export default function SessionView(props) {
                     <Button
                       colorScheme='teal'
                       mx={2}
-                      onClick={() => this.likeButton(restaurant)}
+                      onClick={() => likeButton(restaurant)}
                     >
                       Like
                     </Button>
