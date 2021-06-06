@@ -23,7 +23,7 @@ export default class HomePageView extends Component {
         direction='column'
         p='10'
         rounded={6}
-        bgGradient='linear(green.200 25%, orange.100 50%, green.200 100%)'
+        bgGradient='linear(orange.200 25%, blue.200 50%, green.200 100%)'
       >
         {/* <Heading mb={6} whiteSpace='nowrap' textShadow='xl'>
           Welcome to Let's Eat!

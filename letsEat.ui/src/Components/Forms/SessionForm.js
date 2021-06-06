@@ -61,7 +61,7 @@ class SessionForm extends Component {
           p='18'
           rounded={10}
           flexWrap='wrap'
-          bgGradient='linear(blue.100 25%, green.100 50%, orange.100 100%)'
+          bgGradient='linear(orange.200 25%, blue.200 50%, green.200 100%)'
         >
           {ShowAlert && (
             <Alert status='success' marginY='5px'>
@@ -78,6 +78,9 @@ class SessionForm extends Component {
               colorScheme='purple'
               justify='center'
               alignItems='center'
+              bgColor='white'
+              p={5}
+              rounded={5}
             >
               <HStack
                 spacing='30px'
@@ -179,7 +182,7 @@ class SessionForm extends Component {
           </FormControl>
           <Button
             mt={4}
-            colorScheme='teal'
+            colorScheme='facebook'
             onClick={this.handleSubmit}
             type='submit'
           >
