@@ -118,7 +118,7 @@ export default class SessionMatchesView extends Component {
               my={2}
             >
                 <>
-                  <Heading m={2} p={4} textDecoration='underline' rounded={4}>
+                  <Heading m={2} p={4} textDecoration='underline' rounded={4} whiteSpace='nowrap'>
                     The Final!
                   </Heading>
                   <Flex justify='center' align='center' flexWrap='wrap'>
@@ -143,8 +143,8 @@ export default class SessionMatchesView extends Component {
           rounded='20px'
           my={2}
         >
-          <Heading m={2} p={4} textDecoration='underline' rounded={4}>
-            You guys agreed on:
+          <Heading m={2} p={4} textDecoration='underline' rounded={4} whiteSpace='nowrap'>
+            You guys agreed on
           </Heading>
           <Flex
             justify='center'
@@ -173,7 +173,7 @@ export default class SessionMatchesView extends Component {
             rounded='20px'
             my={2}
           >
-            <Heading m={2} p={4} textDecoration='underline' rounded={4}>
+            <Heading m={2} p={4} textDecoration='underline' rounded={4} whiteSpace='nowrap'>
               Your Likes
             </Heading>
             <Flex
