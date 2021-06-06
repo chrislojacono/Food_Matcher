@@ -18,6 +18,7 @@ import SessionData from '../../Helpers/Data/SessionData';
 import YelpData from '../../Helpers/Data/YelpData';
 import SessionLikeData from '../../Helpers/Data/SessionLikeData';
 import RestaurantData from '../../Helpers/Data/RestaurantData';
+import placeholder from '../../Helpers/Images/placeholder-restaurant.png';
 
 SwiperCore.use([Navigation]);
 
@@ -131,13 +132,21 @@ export default function JoinerSessionView(props) {
                     </a>
                   </Box>
                 </Flex>
-                <Image
+                {restaurant.image_url === '' ? (
+                    <Image
+                      src={placeholder}
+                      alt='carousel'
+                      objectFit='contain'
+                      boxSize='80vh'
+                      pb={10}
+                    />
+                ) : (<Image
                   src={restaurant.image_url}
                   alt='carousel'
-                  objectFit='cover'
+                  objectFit='contain'
                   boxSize='80vh'
                   pb={10}
-                />
+                />)}
               </Flex>
             </SwiperSlide>
           ))}
