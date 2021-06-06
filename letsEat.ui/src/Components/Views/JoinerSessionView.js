@@ -150,6 +150,8 @@ export default class JoinerSessionView extends Component {
                   src={restaurant.image_url}
                   alt='carousel'
                   objectFit='cover'
+                  boxSize='80vh'
+                  pb={10}
                 />
               </Flex>
             </SwiperSlide>
