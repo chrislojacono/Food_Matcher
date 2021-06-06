@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   Button,
   Flex,
@@ -22,32 +22,27 @@ import RestaurantData from '../../Helpers/Data/RestaurantData';
 
 SwiperCore.use([Navigation]);
 
-export default class SessionView extends Component {
-  state = {
-    sessionData: null,
-    restaurants: [],
-    ShowAlert: false,
-    userId: this.props.user?.id,
-    copiedToClipboard: false,
-    showMatchAlert: false,
-  };
+export default function SessionView(props) {
+  const [sessionData, setSessionData] = useState(null);
+  const [restaurants, setRestaurants] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
+  const [showMatchAlert, setShowMatchAlert] = useState(false);
 
-  componentDidMount() {
-    SessionData.GetASession(this.props.match.params.id).then((response) => {
-      this.setState({
-        sessionData: response,
-      });
+  useEffect(() => {
+    getYelpData();
+  }, []);
+
+  const getYelpData = () => {
+    SessionData.GetASession(props.match.params.id).then((response) => {
+      setSessionData(response);
       YelpData.yelpQuery(response.location, response.searchTerm).then(
-        (yelpResponse) => {
-          this.setState({
-            restaurants: yelpResponse,
-          });
-        },
+        (yelpResponse) => setRestaurants(yelpResponse),
       );
     });
-  }
+  };
 
-  likeButton = (yelpData) => {
+  const likeButton = (yelpData) => {
     const restaurantObject = {
       Name: yelpData.name,
       Address: `${yelpData.location.display_address[0]}, ${yelpData.location.display_address[1]}`,
@@ -58,130 +53,110 @@ export default class SessionView extends Component {
       Distance: yelpData.distance,
     };
     RestaurantData.AddARestaurant(restaurantObject).then((responseId) => {
-      const { sessionData, userId } = this.state;
       const sessionLikeObject = {
-        UserId: userId,
+        UserId: props.user?.id,
         RestaurantId: responseId,
         SessionId: sessionData.id,
       };
       SessionLikeData.AddASessionLike(sessionLikeObject).then((response) => {
         if (response === true) {
-          this.setState({
-            showMatchAlert: true,
-          });
+          setShowMatchAlert(true);
         } else {
-          this.setState({
-            ShowAlert: true,
-          });
+          setShowAlert(true);
         }
       });
       setTimeout(() => {
-        this.setState({
-          ShowAlert: false,
-          showMatchAlert: false,
-        });
+        setShowAlert(false);
+        setShowMatchAlert(false);
       }, 1000);
     });
   };
 
-  copyToClipboard = (sessionId) => {
+  const copyToClipboard = (sessionId) => {
     navigator.clipboard.writeText(
       `http://localhost:8888/session/join/${sessionId}`,
     );
-    this.setState({
-      copiedToClipboard: true,
-    });
+    setCopiedToClipboard(true);
   };
 
-  render() {
-    const {
-      restaurants,
-      ShowAlert,
-      sessionData,
-      copiedToClipboard,
-      showMatchAlert,
-    } = this.state;
-    return (
-      <Flex
-        width='70%'
-        alignItems='center'
-        background='whitesmoke'
-        mt='1%'
-        mb='10%'
-        justifyContent='center'
-        direction='column'
-        rounded={6}
-      >
-        <Swiper navigation={true} className='mySwiper'>
-          {restaurants.map((restaurant) => (
-            <>
-              <SwiperSlide key={restaurant.id}>
-                <Flex
-                  justifyContent='center'
-                  alignItems='center'
-                  direction='column'
-                >
-                  {ShowAlert && (
-                    <Alert status='success'>
-                      <AlertIcon />
-                      {restaurant.name} was added to your likes!
-                    </Alert>
-                  )}
-                  {showMatchAlert && (
-                    <Alert status='success'>
-                      <AlertIcon />
-                      {restaurant.name} WAS A MATCH!!
-                    </Alert>
-                  )}
-                  <Flex alignItems='center' direction='column' mb='1%'>
-                    <Box p='2'>
-                      <Heading className='legend' fontSize='2.2em' mb='5px'>{restaurant.name}</Heading>
-                    </Box>
-                    <Spacer />
-                    <Box>
-                      <Button
-                        colorScheme='teal'
-                        mx={2}
-                        onClick={() => this.likeButton(restaurant)}
-                      >
-                        Like
+  return (
+    <Flex
+      width='70%'
+      alignItems='center'
+      background='whitesmoke'
+      mt='1%'
+      mb='10%'
+      justifyContent='center'
+      direction='column'
+      rounded={6}
+    >
+      <Swiper navigation={true} className='mySwiper'>
+        {restaurants.map((restaurant) => (
+            <SwiperSlide key={restaurant.id}>
+              <Flex
+                justifyContent='center'
+                alignItems='center'
+                direction='column'
+              >
+                {showAlert && (
+                  <Alert status='success'>
+                    <AlertIcon />
+                    {restaurant.name} was added to your likes!
+                  </Alert>
+                )}
+                {showMatchAlert && (
+                  <Alert status='success'>
+                    <AlertIcon />
+                    {restaurant.name} WAS A MATCH!!
+                  </Alert>
+                )}
+                <Flex alignItems='center' direction='column' mb='1%'>
+                  <Box p='2'>
+                    <Heading className='legend' fontSize='2.2em' mb='5px'>
+                      {restaurant.name}
+                    </Heading>
+                  </Box>
+                  <Spacer />
+                  <Box>
+                    <Button
+                      colorScheme='teal'
+                      mx={2}
+                      onClick={() => this.likeButton(restaurant)}
+                    >
+                      Like
+                    </Button>
+                    <a
+                      href={restaurant.url}
+                      target='_blank'
+                      rel='noreferrer'
+                      className='anchors'
+                    >
+                      <Button colorScheme='twitter' mx={2}>
+                        More Info
                       </Button>
-                      <a
-                        href={restaurant.url}
-                        target='_blank'
-                        rel='noreferrer'
-                        className='anchors'
-                      >
-                        <Button colorScheme='twitter' mx={2}>
-                          More Info
-                        </Button>
-                      </a>
-                      <Button
-                        mx={2}
-                        bg='yellow.300'
-                        onClick={() => {
-                          this.copyToClipboard(sessionData.id);
-                        }}
-                      >
-                        {copiedToClipboard
-                          ? 'Copied! '
-                          : 'Share Session'}
-                        <CopyIcon mx={2}/>
-                      </Button>
-                    </Box>
-                  </Flex>
-                  <Image
-                    src={restaurant.image_url}
-                    alt='carousel'
-                    objectFit='contain'
-                    boxSize='80vh'
-                  />
+                    </a>
+                    <Button
+                      mx={2}
+                      bg='yellow.300'
+                      onClick={() => {
+                        copyToClipboard(sessionData.id);
+                      }}
+                    >
+                      {copiedToClipboard ? 'Copied! ' : 'Share Session'}
+                      <CopyIcon mx={2} />
+                    </Button>
+                  </Box>
                 </Flex>
-              </SwiperSlide>
-            </>
-          ))}
-        </Swiper>
-      </Flex>
-    );
-  }
+                <Image
+                  src={restaurant.image_url}
+                  alt='carousel'
+                  objectFit='contain'
+                  boxSize='80vh'
+                />
+              </Flex>
+            </SwiperSlide>
+        ))}
+      </Swiper>
+    </Flex>
+  );
 }
