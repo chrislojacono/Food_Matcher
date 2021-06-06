@@ -1,28 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex, Heading } from '@chakra-ui/react';
 import SessionData from '../../Helpers/Data/SessionData';
 import SessionCard from '../Cards/SessionCard';
 
-export default class YourSessionsView extends Component {
-  state = {
-    sessions: [],
-    userId: this.props.user?.id,
-  };
+export default function YourSessionsView({ user }) {
+  const [sessions, setSessions] = useState([]);
 
-  componentDidMount() {
-    const { userId } = this.state;
-    if (userId !== undefined) {
-      SessionData.GetASessionByUserId(userId).then((response) => {
-        this.setState({
-          sessions: response,
-        });
-      });
-    }
-  }
+  useEffect(() => {
+    SessionData.GetASessionByUserId(user?.id).then((response) => {
+      setSessions(response);
+    });
+  }, [user?.id]);
 
-  render() {
-    const { sessions, userId } = this.state;
-    return (
+  return (
       <Flex
         height='70%'
         width='auto'
@@ -41,7 +31,7 @@ export default class YourSessionsView extends Component {
             sessions.map((session) => (
               <SessionCard
                 sessionData={session}
-                userId={userId}
+                userId={user?.id}
                 key={session.id}
               />
             ))
@@ -50,6 +40,5 @@ export default class YourSessionsView extends Component {
           )}
         </Flex>
       </Flex>
-    );
-  }
+  );
 }

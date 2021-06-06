@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   Image,
 } from '@chakra-ui/react';
 import mainGif from '../../Helpers/Images/LetsEat.gif';
