@@ -21,7 +21,7 @@ export default function SessionMatchesView(props) {
     getFinalDecision();
     getSessionData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId, userId]);
+  }, []);
 
   const loadContent = () => {
     SessionLikesData.GetMatches(props.match.params.id).then((response) => {
