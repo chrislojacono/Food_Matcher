@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Flex,
@@ -21,32 +21,26 @@ import RestaurantData from '../../Helpers/Data/RestaurantData';
 
 SwiperCore.use([Navigation]);
 
-export default class JoinerSessionView extends Component {
-  state = {
-    sessionData: null,
-    restaurants: [],
-    ShowAlert: false,
-    userId: this.props.user?.id,
-    showMatchAlert: false,
-  };
+export default function JoinerSessionView(props) {
+  const [sessionData, setSessionData] = useState(null);
+  const [restaurants, setRestaurants] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [showMatchAlert, setShowMatchAlert] = useState(false);
 
-  componentDidMount() {
-    SessionData.SetJoiner(this.props.match.params.id, this.props.user?.id);
-    SessionData.GetASession(this.props.match.params.id).then((response) => {
-      this.setState({
-        sessionData: response,
+  useEffect(() => {
+    const getYelpData = () => {
+      SessionData.GetASession(props.match.params.id).then((response) => {
+        setSessionData(response);
+        YelpData.yelpQuery(response.location, response.searchTerm).then(
+          (yelpResponse) => setRestaurants(yelpResponse),
+        );
       });
-      YelpData.yelpQuery(response.location, response.searchTerm).then(
-        (yelpResponse) => {
-          this.setState({
-            restaurants: yelpResponse,
-          });
-        },
-      );
-    });
-  }
+    };
+    getYelpData();
+    SessionData.SetJoiner(props.match.params.id, props.user?.id);
+  }, [props.user, props.match.params.id]);
 
-  likeButton = (yelpData) => {
+  const likeButton = (yelpData) => {
     const restaurantObject = {
       Name: yelpData.name,
       Address: `${yelpData.location.display_address[0]}, ${yelpData.location.display_address[1]}`,
@@ -57,35 +51,26 @@ export default class JoinerSessionView extends Component {
       Distance: yelpData.distance,
     };
     RestaurantData.AddARestaurant(restaurantObject).then((responseId) => {
-      const { sessionData, userId } = this.state;
       const sessionLikeObject = {
-        UserId: userId,
+        UserId: props.user?.id,
         RestaurantId: responseId,
         SessionId: sessionData.id,
       };
       SessionLikeData.AddASessionLike(sessionLikeObject).then((response) => {
         if (response === true) {
-          this.setState({
-            showMatchAlert: true,
-          });
+          setShowMatchAlert(true);
         } else {
-          this.setState({
-            ShowAlert: true,
-          });
+          setShowAlert(true);
         }
       });
       setTimeout(() => {
-        this.setState({
-          ShowAlert: false,
-          showMatchAlert: false,
-        });
+        setShowAlert(false);
+        setShowMatchAlert(false);
       }, 1000);
     });
   };
 
-  render() {
-    const { restaurants, ShowAlert, showMatchAlert } = this.state;
-    return (
+  return (
       <Flex
         width='70%'
         alignItems='center'
@@ -104,7 +89,7 @@ export default class JoinerSessionView extends Component {
                 alignItems='center'
                 direction='column'
               >
-                {ShowAlert && (
+                {showAlert && (
                   <Alert status='success'>
                     <AlertIcon />
                     {restaurant.name} was added to your likes!
@@ -130,7 +115,7 @@ export default class JoinerSessionView extends Component {
                     <Button
                       backgroundColor='cyan.500'
                       mx={2}
-                      onClick={() => this.likeButton(restaurant)}
+                      onClick={() => likeButton(restaurant)}
                     >
                       Like
                     </Button>
@@ -150,12 +135,13 @@ export default class JoinerSessionView extends Component {
                   src={restaurant.image_url}
                   alt='carousel'
                   objectFit='cover'
+                  boxSize='80vh'
+                  pb={10}
                 />
               </Flex>
             </SwiperSlide>
           ))}
         </Swiper>
       </Flex>
-    );
-  }
+  );
 }

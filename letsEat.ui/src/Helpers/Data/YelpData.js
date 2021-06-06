@@ -6,6 +6,7 @@ const yelpQuery = (location, term) => new Promise((resolve, reject) => {
       params: {
         location: `${location}`,
         term: `${term}`,
+        limit: 50,
       },
     }).then((response) => {
       resolve(Object.values(response.data.results.jsonBody.businesses));
