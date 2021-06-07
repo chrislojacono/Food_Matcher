@@ -75,7 +75,7 @@ class SessionForm extends Component {
             </FormLabel>
             <RadioGroup
               defaultValue='Pizza'
-              colorScheme='purple'
+              colorScheme='facebook'
               justify='center'
               alignItems='center'
               bgColor='white'
@@ -87,6 +87,7 @@ class SessionForm extends Component {
                 wrap='wrap'
                 justify='center'
                 alignItems='center'
+                letterSpacing='wide'
               >
                 <Radio value='' id='SearchTerm' onChange={this.handleChange}>
                   Anything
