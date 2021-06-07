@@ -1,4 +1,6 @@
 # Let's Eat! (Back-End Capstone Project)
+![Let's Eat! (1)](https://user-images.githubusercontent.com/66916708/121031097-af395700-c76f-11eb-986c-e37c3a3b6de0.gif)
+<br>
 This is an app to help people make a democratic decison on where to go out to eat. It will use the Yelp API to pull in a selection of restaurants and two users will vote on where they would like to go. Then they will be notified when they come across a match!
 <br>
 <br>
@@ -11,3 +13,12 @@ Say no more, Nathan! It's happening!!
 
 ## Wireframe
 [Figma Link](https://www.figma.com/file/8Y2m4wZ04D8z9p2339RMKL/Food-Matcher?node-id=0%3A1)
+
+## Technologies Used
+* C#/.Net Core
+* Asp.Net Core
+* React.js
+* T-SQL
+* SQL Server
+* Dapper (Micro-ORM)
+* Chakra UI
