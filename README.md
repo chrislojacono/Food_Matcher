@@ -20,4 +20,5 @@ Say no more, Nathan! It's happening!!
 * React.js
 * T-SQL
 * SQL Server
+* Dapper (Micro-ORM)
 * Chakra UI
