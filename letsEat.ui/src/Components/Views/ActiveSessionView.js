@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Flex,
@@ -166,6 +167,11 @@ export default function SessionView(props) {
             </SwiperSlide>
         ))}
       </Swiper>
+      <Link to={{
+        pathname: '/mySessions',
+      }}>
+      <Button bgColor='red.300'>Finish Swiping</Button>
+      </Link>
     </Flex>
   );
 }
