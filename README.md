@@ -13,3 +13,11 @@ Say no more, Nathan! It's happening!!
 
 ## Wireframe
 [Figma Link](https://www.figma.com/file/8Y2m4wZ04D8z9p2339RMKL/Food-Matcher?node-id=0%3A1)
+
+## Technologies Used
+* C#/.Net Core
+* Asp.Net Core
+* React.js
+* T-SQL
+* SQL Server
+* Chakra UI
