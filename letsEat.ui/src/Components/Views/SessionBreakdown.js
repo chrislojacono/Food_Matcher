@@ -15,11 +15,14 @@ export default function SessionBreakdown(props) {
   const [userId] = useState(props.user?.id);
   const [finalDecision, setFinalDecision] = useState('');
   const [sessionObject, setSessionObject] = useState('');
+  const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
     loadContent();
     getFinalDecision();
     getSessionData();
+    setDidMount(true);
+    return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId, userId]);
 
@@ -43,7 +46,10 @@ export default function SessionBreakdown(props) {
 
   const getFinalDecision = () => {
     FinalDecisionData.GetAFinalDecision(sessionId).then((response) => {
-      setFinalDecision(response);
+      if (response == null) {
+        return null;
+      }
+      return setFinalDecision(response);
     });
   };
 
@@ -68,6 +74,10 @@ export default function SessionBreakdown(props) {
       makeAFinalDecision(response.id);
     });
   };
+
+  if (!didMount) {
+    return null;
+  }
 
   return (
     <Flex
@@ -180,7 +190,7 @@ export default function SessionBreakdown(props) {
             alignItems='center'
             flexWrap='wrap'
             bg='blanchedalmond'
-            w='98%'
+            w='auto'
             rounded='20px'
           >
             {yourLikedRestaurants.map((restaurant) => (
