@@ -42,7 +42,7 @@ export default function MatchCard({ yelpData, removeALike }) {
           {yelpData.name}
         </Heading>
         <Text textTransform='initial' fontSize='md' m={2} color='gray.700'>
-          {Array(Math.round(yelpData.rating))
+          {Array(5)
             .fill('')
             .map((_, i) => (
               <StarIcon

@@ -99,7 +99,7 @@ export default function SessionView(props) {
                 direction='column'
               >
                 {showAlert && (
-                  <Alert status='success'>
+                  <Alert status='info'>
                     <AlertIcon />
                     {restaurant.name} was added to your likes!
                   </Alert>

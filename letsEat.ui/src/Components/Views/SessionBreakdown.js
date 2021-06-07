@@ -8,7 +8,7 @@ import FinalCard from '../Cards/FinalCard';
 import RestaurantData from '../../Helpers/Data/RestaurantData';
 import SessionData from '../../Helpers/Data/SessionData';
 
-export default function SessionMatchesView(props) {
+export default function SessionBreakdown(props) {
   const [yourLikedRestaurants, setYourLikedRestaurants] = useState([]);
   const [matches, setMatches] = useState([]);
   const [sessionId] = useState(props.match.params.id);
@@ -21,7 +21,7 @@ export default function SessionMatchesView(props) {
     getFinalDecision();
     getSessionData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sessionId, userId]);
 
   const loadContent = () => {
     SessionLikesData.GetMatches(props.match.params.id).then((response) => {
