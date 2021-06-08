@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Flex,
@@ -72,85 +73,113 @@ export default function JoinerSessionView(props) {
   };
 
   return (
-      <Flex
-        width='70%'
-        alignItems='center'
-        background='whitesmoke'
-        mt='1%'
-        mb='10%'
-        justifyContent='center'
-        direction='column'
-        rounded={6}
-      >
-        <Swiper navigation={true} className='mySwiper'>
-          {restaurants.map((restaurant) => (
-            <SwiperSlide key={restaurant.id}>
+    <Flex
+      width='70%'
+      alignItems='center'
+      background='whitesmoke'
+      mt='1%'
+      mb='10%'
+      justifyContent='center'
+      direction='column'
+      rounded={6}
+      bgColor='blue.100'
+    >
+      <Swiper navigation={true} className='mySwiper'>
+        {restaurants.map((restaurant) => (
+          <SwiperSlide key={restaurant.id}>
+            <Flex
+              justifyContent='center'
+              alignItems='center'
+              direction='column'
+            >
+              {showAlert && (
+                <Alert status='info'>
+                  <AlertIcon />
+                  {restaurant.name} was added to your likes!
+                </Alert>
+              )}
+              {showMatchAlert && (
+                <Alert status='success'>
+                  <AlertIcon />
+                  {restaurant.name} WAS A MATCH!!
+                </Alert>
+              )}
               <Flex
-                justifyContent='center'
                 alignItems='center'
                 direction='column'
+                mb='1%'
+                justifyContent='center'
               >
-                {showAlert && (
-                  <Alert status='info'>
-                    <AlertIcon />
-                    {restaurant.name} was added to your likes!
-                  </Alert>
-                )}
-                {showMatchAlert && (
-                  <Alert status='success'>
-                    <AlertIcon />
-                    {restaurant.name} WAS A MATCH!!
-                  </Alert>
-                )}
-                <Flex
-                  alignItems='center'
-                  direction='column'
-                  mb='1%'
-                  justifyContent='center'
-                >
-                  <Box p='2'>
-                    <Heading className='legend'>{restaurant.name}</Heading>
-                  </Box>
-                  <Spacer />
-                  <Box>
+                <Box p='2'>
+                  <Heading className='legend'>{restaurant.name}</Heading>
+                </Box>
+                <Spacer />
+                <Box>
+                  <Button
+                    backgroundColor='cyan.500'
+                    mx={2}
+                    onClick={() => likeButton(restaurant)}
+                    _hover={{
+                      transform: 'scale(1.1)',
+                    }}
+                  >
+                    Like
+                  </Button>
+                  <a
+                    href={restaurant.url}
+                    target='_blank'
+                    rel='noreferrer'
+                    className='anchors'
+                  >
                     <Button
-                      backgroundColor='cyan.500'
+                      colorScheme='twitter'
                       mx={2}
-                      onClick={() => likeButton(restaurant)}
+                      _hover={{
+                        transform: 'scale(1.1)',
+                      }}
                     >
-                      Like
+                      More Info
                     </Button>
-                    <a
-                      href={restaurant.url}
-                      target='_blank'
-                      rel='noreferrer'
-                      className='anchors'
-                    >
-                      <Button colorScheme='twitter' mx={2}>
-                        More Info
-                      </Button>
-                    </a>
-                  </Box>
-                </Flex>
-                {restaurant.image_url === '' ? (
-                    <Image
-                      src={placeholder}
-                      alt='carousel'
-                      objectFit='contain'
-                      boxSize='80vh'
-                      pb={10}
-                    />
-                ) : (<Image
+                  </a>
+                </Box>
+              </Flex>
+              {restaurant.image_url === '' ? (
+                <Image
+                  src={placeholder}
+                  alt='carousel'
+                  objectFit='contain'
+                  boxSize='80vh'
+                  pb={10}
+                />
+              ) : (
+                <Image
                   src={restaurant.image_url}
                   alt='carousel'
                   objectFit='contain'
                   boxSize='80vh'
                   pb={10}
-                />)}
-              </Flex>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Flex>
+                />
+              )}
+            </Flex>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Link
+        to={{
+          pathname: '/mySessions',
+        }}
+        style={{ textDecoration: 'none' }}
+      >
+        <Button
+          colorScheme='red'
+          mb={5}
+          _hover={{
+            transform: 'scale(1.1)',
+          }}
+        >
+          Finish Swiping
+        </Button>
+      </Link>
+    </Flex>
   );
 }
