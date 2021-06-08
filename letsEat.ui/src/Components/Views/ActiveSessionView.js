@@ -9,6 +9,7 @@ import {
   AlertIcon,
   Spacer,
   Box,
+  transition,
 } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -93,84 +94,97 @@ export default function SessionView(props) {
     >
       <Swiper navigation={true} className='mySwiper'>
         {restaurants.map((restaurant) => (
-            <SwiperSlide key={restaurant.id}>
-              <Flex
-                justifyContent='center'
-                alignItems='center'
-                direction='column'
-              >
-                {showAlert && (
-                  <Alert status='info'>
-                    <AlertIcon />
-                    {restaurant.name} was added to your likes!
-                  </Alert>
-                )}
-                {showMatchAlert && (
-                  <Alert status='success'>
-                    <AlertIcon />
-                    {restaurant.name} WAS A MATCH!!
-                  </Alert>
-                )}
-                <Flex alignItems='center' direction='column' mb='1%'>
-                  <Box p='2'>
-                    <Heading className='legend' fontSize='2.2em' mb='5px'>
-                      {restaurant.name}
-                    </Heading>
-                  </Box>
-                  <Spacer />
-                  <Box>
-                    <Button
-                      colorScheme='teal'
-                      mx={2}
-                      onClick={() => likeButton(restaurant)}
-                    >
-                      Like
+          <SwiperSlide key={restaurant.id}>
+            <Flex
+              justifyContent='center'
+              alignItems='center'
+              direction='column'
+            >
+              {showAlert && (
+                <Alert status='info'>
+                  <AlertIcon />
+                  {restaurant.name} was added to your likes!
+                </Alert>
+              )}
+              {showMatchAlert && (
+                <Alert status='success'>
+                  <AlertIcon />
+                  {restaurant.name} WAS A MATCH!!
+                </Alert>
+              )}
+              <Flex alignItems='center' direction='column' mb='1%'>
+                <Box p='2'>
+                  <Heading className='legend' fontSize='2.2em' mb='5px'>
+                    {restaurant.name}
+                  </Heading>
+                </Box>
+                <Spacer />
+                <Box>
+                  <Button
+                    colorScheme='teal'
+                    mx={2}
+                    onClick={() => likeButton(restaurant)}
+                  >
+                    Like
+                  </Button>
+                  <a
+                    href={restaurant.url}
+                    target='_blank'
+                    rel='noreferrer'
+                    className='anchors'
+                  >
+                    <Button colorScheme='twitter' mx={2}>
+                      More Info
                     </Button>
-                    <a
-                      href={restaurant.url}
-                      target='_blank'
-                      rel='noreferrer'
-                      className='anchors'
-                    >
-                      <Button colorScheme='twitter' mx={2}>
-                        More Info
-                      </Button>
-                    </a>
-                    <Button
-                      mx={2}
-                      bg='yellow.300'
-                      onClick={() => {
-                        copyToClipboard(sessionData.id);
-                      }}
-                    >
-                      {copiedToClipboard ? 'Copied! ' : 'Share Session'}
-                      <CopyIcon mx={2} />
-                    </Button>
-                  </Box>
-                </Flex>
-                {restaurant.image_url === '' ? (
-                    <Image
-                      src={placeholder}
-                      alt='carousel'
-                      objectFit='contain'
-                      boxSize='80vh'
-                      pb={10}
-                    />
-                ) : (<Image
+                  </a>
+                  <Button
+                    mx={2}
+                    bg='yellow.300'
+                    onClick={() => {
+                      copyToClipboard(sessionData.id);
+                    }}
+                  >
+                    {copiedToClipboard ? 'Copied! ' : 'Share Session'}
+                    <CopyIcon mx={2} />
+                  </Button>
+                </Box>
+              </Flex>
+              {restaurant.image_url === '' ? (
+                <Image
+                  src={placeholder}
+                  alt='carousel'
+                  objectFit='contain'
+                  boxSize='80vh'
+                  pb={10}
+                />
+              ) : (
+                <Image
                   src={restaurant.image_url}
                   alt='carousel'
                   objectFit='contain'
                   boxSize='80vh'
                   pb={10}
-                />)}
-              </Flex>
-            </SwiperSlide>
+                />
+              )}
+            </Flex>
+          </SwiperSlide>
         ))}
       </Swiper>
-      <Link to={{
-        pathname: '/mySessions',
-      }}>
-      <Button bgColor='red.300'>Finish Swiping</Button>
+      <Link
+        to={{
+          pathname: '/mySessions',
+        }}
+        style={{ textDecoration: 'none' }}
+      >
+        <Button
+          colorScheme='red'
+          mb={5}
+          _hover={{
+            transform: 'scale(1.1)',
+          }}
+        >
+          Finish Swiping
+        </Button>
       </Link>
     </Flex>
   );
