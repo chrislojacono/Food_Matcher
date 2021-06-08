@@ -8,38 +8,43 @@ using System.Collections.Concurrent;
 using Newtonsoft.Json;
 using System.Text.Json;
 using System.Threading;
+using Microsoft.Data.SqlClient;
+using Dapper;
 
 namespace FoodMatcherApp.Hubs
 {
     public class NotifyHub : Hub
     {
 
-        private static ConcurrentBag<TaskItem> _tasks = new ConcurrentBag<TaskItem>();
+        const string ConnectionString = "Server=localhost;Database=FoodMatcher;Trusted_Connection=True;";
 
         //Going to be called from the client side
-        public async Task AddTask(object taskItem)
+        public async Task AddTask(TaskItem taskItem)
         {
-            TaskItem item = JsonConvert.DeserializeObject<TaskItem>(((JsonElement)taskItem).ToString());
+       
 
-            _tasks.Add(item);
+            _tasks.Add(taskItem);
+
+            #pragma warning disable
+            Task.Factory.StartNew(DoTasks);
+
             //Like a callback
            await Clients.All.SendAsync("AddedTask", taskItem);
+        }
+
+        public async Task TaskDone(object taskItem)
+        {
+            await Clients.All.SendAsync("TaskIsDone", taskItem);
         }
 
         private void DoTasks()
         {
             _tasks.ToList().ForEach(x =>
             {
-                Thread.Sleep(1000 * RandomNumber(1, 10));
+                Thread.Sleep(1000);
                 HubHelper.Notifier.NotifyDone(x);
             });
         }
 
-        public int RandomNumber(int min, int max)
-        {
-            Random random = new Random();
-
-            return random.Next(min, max);
-        }
     }
 }
