@@ -91,6 +91,7 @@ export default function SessionView(props) {
       justifyContent='center'
       direction='column'
       rounded={6}
+      bgColor='blue.100'
     >
       <Swiper navigation={true} className='mySwiper'>
         {restaurants.map((restaurant) => (
@@ -124,6 +125,9 @@ export default function SessionView(props) {
                     colorScheme='teal'
                     mx={2}
                     onClick={() => likeButton(restaurant)}
+                    _hover={{
+                      transform: 'scale(1.1)',
+                    }}
                   >
                     Like
                   </Button>
@@ -133,13 +137,20 @@ export default function SessionView(props) {
                     rel='noreferrer'
                     className='anchors'
                   >
-                    <Button colorScheme='twitter' mx={2}>
+                    <Button
+                      colorScheme='twitter'
+                      mx={2}
+                      _hover={{ transform: 'scale(1.1)' }}
+                    >
                       More Info
                     </Button>
                   </a>
                   <Button
                     mx={2}
                     bg='yellow.300'
+                    _hover={{
+                      transform: 'scale(1.1)',
+                    }}
                     onClick={() => {
                       copyToClipboard(sessionData.id);
                     }}
