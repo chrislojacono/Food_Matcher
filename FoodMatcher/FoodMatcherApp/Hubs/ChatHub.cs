@@ -20,7 +20,7 @@ namespace FoodMatcherApp.Hubs
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, userConnection.SessionId.ToString());
 
-            await Clients.Group(userConnection.SessionId.ToString()).SendAsync("RecieveMessage", userConnection.UserName, $"{userConnection.UserName} has entered the session : {userConnection.SessionId}");
+            await Clients.Group(userConnection.SessionId.ToString()).SendAsync("RecieveMessage", userConnection.UserName, $"{userConnection.UserName} has entered the chat");
 
         }
     }
