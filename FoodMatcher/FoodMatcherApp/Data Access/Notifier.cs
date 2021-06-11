@@ -9,14 +9,12 @@ namespace HubHelper
 {
     public static class Notifier
     {
-        public async static void NotifyDone(TaskItem task)
+        public async static void NotifyDone(Message message)
         {
             HubConnection connection;
             connection = new HubConnectionBuilder().WithUrl("https://localhost:44371/notify").Build();
             await connection.StartAsync();
-
-            task.Done = true;
-            await connection.InvokeAsync("TaskDone", task);
+            await connection.InvokeAsync("TaskDone", message);
         }
     }
 }

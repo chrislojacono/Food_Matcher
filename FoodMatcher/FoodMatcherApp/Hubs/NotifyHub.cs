@@ -19,27 +19,36 @@ namespace FoodMatcherApp.Hubs
         const string ConnectionString = "Server=localhost;Database=FoodMatcher;Trusted_Connection=True;";
 
         //Going to be called from the client side
-        public async Task AddTask(TaskItem taskItem)
+        public async Task AddMessage(Message message)
         {
-       
+            using var db = new SqlConnection(ConnectionString);
 
-            _tasks.Add(taskItem);
+            var sql = @"INSERT INTO [dbo].[Messages]([MessageDesc],[UserId],[SessionId])
+                        VALUES(@MessageDesc,@UserId,@SessionId)";
+
+            db.Execute(sql, message);
 
             #pragma warning disable
-            Task.Factory.StartNew(DoTasks);
+            Task.Factory.StartNew(() => DoTasks(message.SessionId));
 
             //Like a callback
-           await Clients.All.SendAsync("AddedTask", taskItem);
+           await Clients.All.SendAsync("AddedMessage", message);
         }
 
-        public async Task TaskDone(object taskItem)
+        public async Task TaskDone(Message message)
         {
-            await Clients.All.SendAsync("TaskIsDone", taskItem);
+            await Clients.All.SendAsync("TaskIsDone", message);
         }
 
-        private void DoTasks()
+        private void DoTasks(Guid sessionId)
         {
-            _tasks.ToList().ForEach(x =>
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Select * from Messages where sessionId = @SessionId";
+
+            var messages = db.Query<Message>(sql, new { SessionId = sessionId });
+
+            messages.ToList().ForEach(x =>
             {
                 Thread.Sleep(1000);
                 HubHelper.Notifier.NotifyDone(x);

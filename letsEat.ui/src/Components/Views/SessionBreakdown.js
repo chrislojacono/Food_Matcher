@@ -7,6 +7,7 @@ import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
 import FinalCard from '../Cards/FinalCard';
 import RestaurantData from '../../Helpers/Data/RestaurantData';
 import SessionData from '../../Helpers/Data/SessionData';
+import ChatRoom from './ChatRoom2';
 
 export default function SessionBreakdown(props) {
   const [yourLikedRestaurants, setYourLikedRestaurants] = useState([]);
@@ -80,13 +81,14 @@ export default function SessionBreakdown(props) {
   }
 
   return (
+    <>
     <Flex
       height='70%'
       width='70%'
       alignItems='center'
       background='grey.200'
       mt='1%'
-      mb='10%'
+      mb='1%'
       justifyContent='center'
       direction='column'
       rounded={6}
@@ -204,5 +206,7 @@ export default function SessionBreakdown(props) {
         </Flex>
       </Flex>
     </Flex>
+    <ChatRoom userId={userId} sessionId={sessionId}/>
+    </>
   );
 }

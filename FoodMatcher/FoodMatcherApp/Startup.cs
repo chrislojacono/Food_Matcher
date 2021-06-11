@@ -27,7 +27,21 @@ namespace FoodMatcherApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSignalR();
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:8888")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,12 +50,13 @@ namespace FoodMatcherApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+               // app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
@@ -49,6 +64,7 @@ namespace FoodMatcherApp
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<NotifyHub>("/notify");
+                endpoints.MapHub<ChatHub>("/chat");
             });
 
         }
