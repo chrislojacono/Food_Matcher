@@ -23,6 +23,17 @@ namespace FoodMatcherApp.Hubs
             _repo = new MessageRepository();
         }
 
+        public override Task OnDisconnectedAsync(Exception exception)
+        {
+            if(_connections.TryGetValue(Context.ConnectionId, out UserConnection userConnection))
+            {
+                _connections.Remove(Context.ConnectionId);
+                Clients.Group(userConnection.SessionId.ToString())
+                    .SendAsync("RecieveMessage", _botUser, $"{userConnection.UserName} has left the chat");
+            }
+            return base.OnDisconnectedAsync(exception);
+        }
+
         public async Task SendMessage(string message, Guid sessionId, string userName)
         {
             if(_connections.TryGetValue(Context.ConnectionId, out UserConnection userConnection))
