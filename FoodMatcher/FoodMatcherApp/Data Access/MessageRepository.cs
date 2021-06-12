@@ -12,7 +12,7 @@ namespace FoodMatcherApp.Data_Access
     {
         const string ConnectionString = "Server=localhost;Database=FoodMatcher;Trusted_Connection=True;";
 
-        public List<Message> GetSessionMessages(Guid sessionId)
+        public List<Messages> GetSessionMessages(Guid sessionId)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -20,10 +20,10 @@ namespace FoodMatcherApp.Data_Access
                         FROM Messages
                         WHERE SessionId = @SessionId";
 
-            return db.Query<Message>(sql, new { SessionId = sessionId }).OrderByDescending(message => message.CreatedDate).ToList();
+            return db.Query<Messages>(sql, new { SessionId = sessionId }).OrderByDescending(message => message.CreatedDate).ToList();
         }
 
-        public void AddMessage(Message message)
+        public void AddMessage(Messages message)
         {
             using var db = new SqlConnection(ConnectionString);
 

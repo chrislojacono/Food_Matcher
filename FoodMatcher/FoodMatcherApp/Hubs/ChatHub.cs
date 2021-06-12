@@ -23,15 +23,15 @@ namespace FoodMatcherApp.Hubs
             _repo = new MessageRepository();
         }
 
-        public async Task SendMessage(string message, Guid sessionId, string userId)
+        public async Task SendMessage(string message, Guid sessionId, string userName)
         {
             if(_connections.TryGetValue(Context.ConnectionId, out UserConnection userConnection))
             {
-                var sessionObj = new Message()
+                var sessionObj = new Messages()
                 {
-                    MessageDesc = message,
+                    Message = message,
                     SessionId = sessionId,
-                    UserId = userId,
+                    UserName = userName,
                 };
  
                 _repo.AddMessage(sessionObj);
