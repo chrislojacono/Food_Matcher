@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import { Button } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import Chat from './Chat';
 import UserData from '../../Helpers/Data/UserData';
 import MessageData from '../../Helpers/Data/MessageData';
@@ -54,13 +54,12 @@ export default function ChatRoom2({ userId, sessionId }) {
     return null;
   }
   return (
-    <div className='app mb-3'>
-      <hr className='line' />
+    <Flex className='app mb-3' width='auto' justify='center' align='center'>
       {!signalConnection ? (
         <Button onClick={joinChat}>Join Chat Room</Button>
       ) : (
         <Chat messages={messages} sendMessage={sendMessage}/>
       )}
-    </div>
+    </Flex>
   );
 }
