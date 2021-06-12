@@ -28,10 +28,10 @@ export default function ChatRoom2({ userId, sessionId }) {
         .withUrl('https://localhost:44371/chat')
         .configureLogging(LogLevel.Information)
         .build();
-      // eslint-disable-next-line
-      connection.on('RecieveMessage', (userName, message) => {
+
+      connection.on('RecieveMessage', (usersName, message) => {
         // eslint-disable-next-line
-        setMessages(messages => [...messages, { userName, message }]);
+        setMessages(messages => [...messages, { usersName, message }]);
       });
 
       await connection.start();
