@@ -21,7 +21,7 @@ export default function SendMessageForm({ sendMessage }) {
       <FormControl>
         <Flex flexDirection='row'>
           <Input
-            placeholder='message...'
+            placeholder='Type message here...'
             onChange={(e) => setMessage(e.target.value)}
             value={message}
             bg='whiteAlpha.900'
