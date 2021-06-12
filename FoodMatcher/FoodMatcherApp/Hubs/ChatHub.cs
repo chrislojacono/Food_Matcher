@@ -18,7 +18,7 @@ namespace FoodMatcherApp.Hubs
 
         public ChatHub(IDictionary<string, UserConnection> connections)
         {
-            _botUser = "MyChat Bot";
+            _botUser = "ChatBot";
             _connections = connections;
             _repo = new MessageRepository();
         }
