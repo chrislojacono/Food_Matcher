@@ -21,4 +21,4 @@ Say no more, Nathan! It's happening!!
 * T-SQL
 * SQL Server
 * Dapper (Micro-ORM)
-* Chakra U
+* Chakra UI
