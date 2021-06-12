@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FoodMatcherApp.Hubs;
+using FoodMatcherApp.Models;
 
 namespace FoodMatcherApp
 {
@@ -42,6 +43,7 @@ namespace FoodMatcherApp
                     .AllowCredentials();
                 });
             });
+            services.AddSingleton<IDictionary<string, UserConnection>>(opts => new Dictionary<string, UserConnection>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

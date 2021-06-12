@@ -8,12 +8,15 @@ export default function ChatRoom2({ userId, sessionId }) {
   const [signalConnection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [userName, setUserName] = useState();
+  const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
     UserData.GetSingleUser(userId).then((response) => {
       setUserName(response.firstName);
     });
-  });
+    setDidMount(true);
+    return () => setDidMount(false);
+  }, [messages, userId]);
 
   const joinChat = async () => {
     try {
@@ -44,6 +47,9 @@ export default function ChatRoom2({ userId, sessionId }) {
     }
   };
 
+  if (!didMount) {
+    return null;
+  }
   return (
     <div className='app mb-3'>
       <hr className='line' />
