@@ -13,7 +13,6 @@ export default function SendMessageForm({ sendMessage }) {
     e.preventDefault();
     sendMessage(message);
     setMessage('');
-    console.warn(message);
   };
 
   return (

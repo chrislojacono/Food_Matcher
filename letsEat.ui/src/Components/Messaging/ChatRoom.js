@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Button } from '@chakra-ui/react';
-import Chat from '../Messaging/Chat';
+import Chat from './Chat';
 import UserData from '../../Helpers/Data/UserData';
+import MessageData from '../../Helpers/Data/MessageData';
 
 export default function ChatRoom2({ userId, sessionId }) {
   const [signalConnection, setConnection] = useState();
@@ -14,9 +15,12 @@ export default function ChatRoom2({ userId, sessionId }) {
     UserData.GetSingleUser(userId).then((response) => {
       setUserName(response.firstName);
     });
+    MessageData.GetSessionMessages(sessionId).then((response) => {
+      setMessages(response);
+    });
     setDidMount(true);
     return () => setDidMount(false);
-  }, [messages, userId]);
+  }, [userId, sessionId, userName]);
 
   const joinChat = async () => {
     try {
@@ -26,9 +30,7 @@ export default function ChatRoom2({ userId, sessionId }) {
         .build();
       // eslint-disable-next-line
       connection.on('RecieveMessage', (userName, message) => {
-        console.warn(userName, message);
-        // eslint-disable-next-line
-        setMessages((messages) => [...messages, { userName, message }]);
+        setMessages([...messages, { userName, message }]);
       });
 
       await connection.start();
@@ -41,7 +43,7 @@ export default function ChatRoom2({ userId, sessionId }) {
 
   const sendMessage = async (message) => {
     try {
-      await signalConnection.invoke('SendMessage', message);
+      await signalConnection.invoke('SendMessage', message, sessionId, userName);
     } catch (e) {
       console.warn(e);
     }
