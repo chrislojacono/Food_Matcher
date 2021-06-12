@@ -20,7 +20,7 @@ namespace FoodMatcherApp.Data_Access
                         FROM Messages
                         WHERE SessionId = @SessionId";
 
-            return db.Query<Messages>(sql, new { SessionId = sessionId }).OrderByDescending(message => message.CreatedDate).ToList();
+            return db.Query<Messages>(sql, new { SessionId = sessionId }).OrderBy(message => message.CreatedDate).ToList();
         }
 
         public void AddMessage(Messages message)
