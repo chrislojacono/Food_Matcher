@@ -6,7 +6,7 @@ This is an app to help people make a democratic decison on where to go out to ea
 <br>
 ![meme](https://user-images.githubusercontent.com/66916708/120119218-219cac80-c15c-11eb-89e2-060393c8c89a.PNG)
 <br>
-Say no more, Nathan! It's happening!!
+Say no more, Nathan! It's happening!
 
 ## ERD
 ![Capture](https://user-images.githubusercontent.com/66916708/120247951-e2915880-c23a-11eb-8d1a-e6b97012a805.PNG)
