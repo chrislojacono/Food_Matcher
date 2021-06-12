@@ -6,7 +6,7 @@ import ToAuthOrNot from '../Components/Views/ToAuthOrNot';
 import YourSessions from '../Components/Views/YourSessions';
 import SessionMatchesView from '../Components/Views/SessionBreakdown';
 import JoinerAuth from '../Components/Views/JoinerAuth';
-import ChatRoom from '../Components/Views/ChatRoom2';
+import ChatRoom from '../Components/Views/ChatRoom';
 
 export default function Routes({ user }) {
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Button } from '@chakra-ui/react';
-import Chat from './Chat';
+import Chat from '../Messaging/Chat';
 import UserData from '../../Helpers/Data/UserData';
 
 export default function ChatRoom2({ userId, sessionId }) {
@@ -36,13 +36,21 @@ export default function ChatRoom2({ userId, sessionId }) {
     }
   };
 
+  const sendMessage = async (message) => {
+    try {
+      await signalConnection.invoke('SendMessage', message);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
   return (
     <div className='app mb-3'>
       <hr className='line' />
       {!signalConnection ? (
         <Button onClick={joinChat}>Join Chat Room</Button>
       ) : (
-        <Chat messages={messages} />
+        <Chat messages={messages} sendMessage={sendMessage}/>
       )}
     </div>
   );

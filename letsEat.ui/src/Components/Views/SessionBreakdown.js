@@ -7,7 +7,7 @@ import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
 import FinalCard from '../Cards/FinalCard';
 import RestaurantData from '../../Helpers/Data/RestaurantData';
 import SessionData from '../../Helpers/Data/SessionData';
-import ChatRoom from './ChatRoom2';
+import ChatRoom from './ChatRoom';
 
 export default function SessionBreakdown(props) {
   const [yourLikedRestaurants, setYourLikedRestaurants] = useState([]);
