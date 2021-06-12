@@ -9,7 +9,6 @@ import {
   AlertIcon,
   Spacer,
   Box,
-  transition,
 } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
 import { Swiper, SwiperSlide } from 'swiper/react';

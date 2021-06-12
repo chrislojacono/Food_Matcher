@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Flex, Heading, Button } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
 import NonMatchCard from '../Cards/NonMatchCard';
@@ -7,6 +8,7 @@ import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
 import FinalCard from '../Cards/FinalCard';
 import RestaurantData from '../../Helpers/Data/RestaurantData';
 import SessionData from '../../Helpers/Data/SessionData';
+import ChatRoom from '../Messaging/ChatRoom';
 
 export default function SessionBreakdown(props) {
   const [yourLikedRestaurants, setYourLikedRestaurants] = useState([]);
@@ -80,22 +82,14 @@ export default function SessionBreakdown(props) {
   }
 
   return (
-    <Flex
-      height='70%'
-      width='70%'
-      alignItems='center'
-      background='grey.200'
-      mt='1%'
-      mb='10%'
-      justifyContent='center'
-      direction='column'
-      rounded={6}
-    >
+    <Flex justify='center' align='center' direction='column' width='auto'>
+    <ChatRoom userId={userId} sessionId={sessionId}/>
       <Flex
         justifyContent='center'
         direction='column'
         alignItems='center'
         flexWrap='wrap'
+        width='auto'
       >
         {finalDecision !== '' && (
           <Flex
@@ -190,16 +184,23 @@ export default function SessionBreakdown(props) {
             alignItems='center'
             flexWrap='wrap'
             bg='blanchedalmond'
-            w='auto'
+            w='100%'
             rounded='20px'
           >
-            {yourLikedRestaurants.map((restaurant) => (
+            {yourLikedRestaurants.length ? yourLikedRestaurants.map((restaurant) => (
               <NonMatchCard
                 key={restaurant.id}
                 yelpData={restaurant}
                 removeALike={removeALike}
               />
-            ))}
+            )) : <Flex direction='column' justify='center' align='center'>
+            <Heading>No Likes Yet</Heading>
+            <Link to={{
+              pathname: `/session/${sessionId}`,
+            }}>
+            <Button backgroundColor='yellow.300' margin={3}>Keep Swiping</Button>
+            </Link>
+            </Flex>}
           </Flex>
         </Flex>
       </Flex>

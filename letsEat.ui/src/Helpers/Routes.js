@@ -6,6 +6,7 @@ import ToAuthOrNot from '../Components/Views/ToAuthOrNot';
 import YourSessions from '../Components/Views/YourSessions';
 import SessionMatchesView from '../Components/Views/SessionBreakdown';
 import JoinerAuth from '../Components/Views/JoinerAuth';
+import ChatRoom from '../Components/Messaging/ChatRoom';
 
 export default function Routes({ user }) {
   return (
@@ -35,6 +36,11 @@ export default function Routes({ user }) {
         exact
         path='/SessionBreakdown/:id'
         component={(props) => <SessionMatchesView {...props} user={user} />}
+      />
+      <Route
+        exact
+        path='/ChatRoom'
+        component={(props) => <ChatRoom {...props} user={user} />}
       />
     </Switch>
   );

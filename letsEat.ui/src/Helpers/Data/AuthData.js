@@ -21,16 +21,14 @@ const loginClickEvent = (e) => {
     .signInWithPopup(provider)
     .then((cred) => {
       const user = cred.additionalUserInfo.profile;
-      if (cred.additionalUserInfo.isNewUser) {
-        const userObj = {
-          Id: cred.user.uid,
-          FirstName: user.given_name,
-          LastName: user.family_name,
-          EmailAddress: user.email,
-          Image_Url: user.picture,
-        };
-        UserData.AddAUser(userObj);
-      }
+      const userObj = {
+        Id: cred.user.uid,
+        FirstName: user.given_name,
+        LastName: user.family_name,
+        EmailAddress: user.email,
+        Image_Url: user.picture,
+      };
+      UserData.AddAUser(userObj);
     });
 };
 

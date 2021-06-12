@@ -13,7 +13,7 @@ import placeholder from '../../Helpers/Images/placeholder-restaurant.png';
 export default function MatchCard({ yelpData, removeALike }) {
   return (
     <Box
-      w='350px'
+      w='300px'
       rounded='20px'
       overflow='hidden'
       boxShadow='md'
@@ -25,7 +25,7 @@ export default function MatchCard({ yelpData, removeALike }) {
           src={placeholder}
           alt='carousel'
           objectFit='contain'
-          boxSize='350px'
+          boxSize='300px'
           pb={10}
         />
       ) : (
