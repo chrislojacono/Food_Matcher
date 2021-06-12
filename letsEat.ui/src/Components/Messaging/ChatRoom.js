@@ -30,7 +30,8 @@ export default function ChatRoom2({ userId, sessionId }) {
         .build();
       // eslint-disable-next-line
       connection.on('RecieveMessage', (userName, message) => {
-        setMessages([...messages, { userName, message }]);
+        // eslint-disable-next-line
+        setMessages(messages => [...messages, { userName, message }]);
       });
 
       await connection.start();
