@@ -20,7 +20,7 @@ export default function ChatRoom2({ userId, sessionId }) {
     });
     setDidMount(true);
     return () => setDidMount(false);
-  }, [userId, sessionId, userName]);
+  }, [userId, sessionId, userName, signalConnection]);
 
   const joinChat = async () => {
     try {
@@ -32,6 +32,11 @@ export default function ChatRoom2({ userId, sessionId }) {
       connection.on('RecieveMessage', (userName, message) => {
         // eslint-disable-next-line
         setMessages(messages => [...messages, { userName, message }]);
+      });
+
+      connection.onclose((e) => {
+        setConnection('');
+        setMessages([]);
       });
 
       await connection.start();
@@ -50,6 +55,14 @@ export default function ChatRoom2({ userId, sessionId }) {
     }
   };
 
+  const closeConnection = async () => {
+    try {
+      await signalConnection.stop();
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
   if (!didMount) {
     return null;
   }
@@ -58,7 +71,7 @@ export default function ChatRoom2({ userId, sessionId }) {
       {!signalConnection ? (
         <Button onClick={joinChat}>Join Chat Room</Button>
       ) : (
-        <Chat messages={messages} sendMessage={sendMessage}/>
+        <Chat messages={messages} sendMessage={sendMessage} closeConnection={closeConnection}/>
       )}
     </Flex>
   );
