@@ -82,6 +82,7 @@ export default function SessionBreakdown(props) {
 
   return (
     <>
+    <ChatRoom userId={userId} sessionId={sessionId}/>
     <Flex
       height='70%'
       width='70%'
@@ -206,7 +207,6 @@ export default function SessionBreakdown(props) {
         </Flex>
       </Flex>
     </Flex>
-    <ChatRoom userId={userId} sessionId={sessionId}/>
     </>
   );
 }

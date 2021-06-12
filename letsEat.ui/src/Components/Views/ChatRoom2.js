@@ -40,7 +40,7 @@ export default function ChatRoom2({ userId, sessionId }) {
     <div className='app mb-3'>
       <hr className='line' />
       {!signalConnection ? (
-        <Button onClick={joinChat}>Join Room</Button>
+        <Button onClick={joinChat}>Join Chat Room</Button>
       ) : (
         <Chat messages={messages} />
       )}
