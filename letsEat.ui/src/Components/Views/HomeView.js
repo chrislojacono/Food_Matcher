@@ -11,8 +11,7 @@ import mainGif from '../../Helpers/Images/LetsEat.gif';
 export default function HomePageView() {
   return (
       <Flex
-        height='40%'
-        width='40%'
+        width='auto'
         alignItems='center'
         background='whitesmoke'
         mt='3%'
