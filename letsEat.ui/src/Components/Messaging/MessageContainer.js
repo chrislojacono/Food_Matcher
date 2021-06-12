@@ -6,7 +6,7 @@ export default function MessageContainer({ messages }) {
       {messages.map((mes, index) => (
         <div key={index} className='user-message'>
           <h2 className='message bg-primary px-2'>{mes.message}</h2>
-          <h2 className='from-user'>{mes.userName}</h2>
+          <h2 className='from-user m-1'>{mes.userName}</h2>
         </div>
       ))}
     </div>
