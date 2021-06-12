@@ -65,7 +65,6 @@ namespace FoodMatcherApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<NotifyHub>("/notify");
                 endpoints.MapHub<ChatHub>("/chat");
             });
 

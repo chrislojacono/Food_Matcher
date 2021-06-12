@@ -4,12 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using FoodMatcherApp.Models;
-using System.Collections.Concurrent;
-using Newtonsoft.Json;
-using System.Text.Json;
-using System.Threading;
-using Microsoft.Data.SqlClient;
-using Dapper;
+using FoodMatcherApp.Data_Access;
 
 namespace FoodMatcherApp.Hubs
 {
@@ -19,16 +14,27 @@ namespace FoodMatcherApp.Hubs
 
         private readonly IDictionary<string, UserConnection> _connections;
 
+        MessageRepository _repo;
+
         public ChatHub(IDictionary<string, UserConnection> connections)
         {
             _botUser = "MyChat Bot";
             _connections = connections;
+            _repo = new MessageRepository();
         }
 
-        public async Task SendMessage(string message)
+        public async Task SendMessage(string message, Guid sessionId, string userId)
         {
             if(_connections.TryGetValue(Context.ConnectionId, out UserConnection userConnection))
             {
+                var sessionObj = new Message()
+                {
+                    MessageDesc = message,
+                    SessionId = sessionId,
+                    UserId = userId,
+                };
+ 
+                _repo.AddMessage(sessionObj);
                 await Clients.Group(userConnection.SessionId.ToString())
                     .SendAsync("RecieveMessage", userConnection.UserName, message);
             }
