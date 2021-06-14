@@ -36,7 +36,7 @@ export default function HomePageView() {
             pathname: '/SessionForm',
           }}
         >
-          <Button colorScheme='telegram' size='lg' mt='10'>
+          <Button colorScheme='telegram' size='lg' mt='4'>
             Start a Session!
           </Button>
         </Link>
