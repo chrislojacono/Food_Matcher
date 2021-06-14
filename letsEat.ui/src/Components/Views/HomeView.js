@@ -20,7 +20,7 @@ export default function HomePageView() {
         direction='column'
         p='10'
         rounded={6}
-        bgGradient='linear(orange.200 25%, blue.200 50%, green.200 100%)'
+        bgColor='rgba(255, 255, 255, 0.0)'
       >
         <Box size='lg'>
           <Image
