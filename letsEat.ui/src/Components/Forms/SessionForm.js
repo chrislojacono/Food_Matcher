@@ -18,7 +18,7 @@ class SessionForm extends Component {
   state = {
     UserId: this.props.user?.id,
     Location: 'Nashville, TN',
-    SearchTerm: 'Pizza',
+    SearchTerm: '',
     ShowAlert: false,
   };
 
@@ -83,11 +83,9 @@ class SessionForm extends Component {
               rounded={5}
             >
               <HStack
-                spacing='30px'
                 wrap='wrap'
-                justify='center'
-                alignItems='center'
                 letterSpacing='wide'
+                justifyContent='space-evenly'
               >
                 <Radio value='' id='SearchTerm' onChange={this.handleChange}>
                   Anything
