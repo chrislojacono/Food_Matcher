@@ -19,6 +19,7 @@ export default function YourSessionsView({ user }) {
         alignItems='center'
         background='whitesmoke'
         mt='2%'
+        mx='10px'
         mb='10%'
         justifyContent='center'
         direction='column'
