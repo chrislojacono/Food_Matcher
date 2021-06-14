@@ -90,7 +90,7 @@ export default function SessionView(props) {
       justifyContent='center'
       direction='column'
       rounded={6}
-      bgColor='blue.100'
+      bgColor='rgba(255, 255, 255, 0.0)'
     >
       <Swiper navigation={true} className='mySwiper'>
         {restaurants.map((restaurant) => (
@@ -114,7 +114,13 @@ export default function SessionView(props) {
               )}
               <Flex alignItems='center' direction='column' mb='1%'>
                 <Box p='2'>
-                  <Heading className='legend' fontSize='2.2em' mb='5px'>
+                  <Heading
+                    className='legend'
+                    fontSize='2.2em'
+                    mb='5px'
+                    color='white'
+                    letterSpacing='wide'
+                  >
                     {restaurant.name}
                   </Heading>
                 </Box>
