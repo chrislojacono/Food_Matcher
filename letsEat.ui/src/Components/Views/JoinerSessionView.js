@@ -82,7 +82,7 @@ export default function JoinerSessionView(props) {
       justifyContent='center'
       direction='column'
       rounded={6}
-      bgColor='blue.100'
+      bgColor='rgba(255, 255, 255, 0.0)'
     >
       <Swiper navigation={true} className='mySwiper'>
         {restaurants.map((restaurant) => (
@@ -111,7 +111,15 @@ export default function JoinerSessionView(props) {
                 justifyContent='center'
               >
                 <Box p='2'>
-                  <Heading className='legend'>{restaurant.name}</Heading>
+                  <Heading
+                    className='legend'
+                    fontSize='2.2em'
+                    mb='5px'
+                    color='white'
+                    letterSpacing='wide'
+                  >
+                    {restaurant.name}
+                  </Heading>
                 </Box>
                 <Spacer />
                 <Box>
