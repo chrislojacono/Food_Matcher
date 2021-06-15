@@ -68,7 +68,7 @@ class SessionForm extends Component {
             </Alert>
           )}
           <FormControl as='fieldset' p={3} justifyContent='center'>
-            <FormLabel as='legend' p={2}>
+            <FormLabel as='legend' fontSize='larger' p={2}>
               What are you in the mood for?
             </FormLabel>
             <RadioGroup
@@ -174,7 +174,7 @@ class SessionForm extends Component {
             onChange={this.handleChange}
             isRequired
           >
-            <FormLabel>Where are you heading?</FormLabel>
+            <FormLabel fontSize='larger'>Where are you heading?</FormLabel>
             <Input bgColor='white' placeholder='ex: Nashville, Tn' />
           </FormControl>
           <Button
