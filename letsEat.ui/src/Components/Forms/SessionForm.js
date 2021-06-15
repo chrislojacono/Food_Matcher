@@ -18,7 +18,7 @@ class SessionForm extends Component {
   state = {
     UserId: this.props.user?.id,
     Location: 'Nashville, TN',
-    SearchTerm: '',
+    SearchTerm: 'Restaurants',
     ShowAlert: false,
   };
 
@@ -72,7 +72,7 @@ class SessionForm extends Component {
               What are you in the mood for?
             </FormLabel>
             <RadioGroup
-              defaultValue=''
+              defaultValue='Restaurants'
               colorScheme='facebook'
               justify='center'
               alignItems='center'
@@ -85,7 +85,7 @@ class SessionForm extends Component {
                 letterSpacing='wide'
                 justifyContent='space-evenly'
               >
-                <Radio value='' id='SearchTerm' onChange={this.handleChange}>
+                <Radio value='Restaurants' id='SearchTerm' onChange={this.handleChange}>
                   Anything
                 </Radio>
                 <Radio
