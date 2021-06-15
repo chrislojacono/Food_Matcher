@@ -16,11 +16,9 @@ namespace FoodMatcherApp.Data_Access
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"
-                        SELECT CASE WHEN EXISTS (
+            var sql = @"SELECT CASE WHEN EXISTS (
                         SELECT *
-                        FROM Session_Likes WHERE RestaurantId = @RestaurantId and SessionId = @SessionId
-                            )
+                        FROM Session_Likes WHERE RestaurantId = @RestaurantId and SessionId = @SessionId)
                         THEN CAST(1 AS BIT)
                         ELSE CAST(0 AS BIT) END
                         IF NOT EXISTS (SELECT * FROM Session_Likes WHERE UserId = @UserId and RestaurantId = @RestaurantId and SessionId = @SessionId)
