@@ -40,11 +40,9 @@ class SessionForm extends Component {
       this.setState({
         ShowAlert: true,
       });
-      setTimeout(() => {
         setTimeout(() => {
           this.props.history.push(`/session/${responseId}`);
         }, 2000);
-      });
     });
   };
 
@@ -74,7 +72,7 @@ class SessionForm extends Component {
               What are you in the mood for?
             </FormLabel>
             <RadioGroup
-              defaultValue='Pizza'
+              defaultValue=''
               colorScheme='facebook'
               justify='center'
               alignItems='center'
