@@ -40,9 +40,9 @@ class SessionForm extends Component {
       this.setState({
         ShowAlert: true,
       });
-        setTimeout(() => {
-          this.props.history.push(`/session/${responseId}`);
-        }, 2000);
+      setTimeout(() => {
+        this.props.history.push(`/session/${responseId}`);
+      }, 2000);
     });
   };
 
