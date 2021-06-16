@@ -89,7 +89,7 @@ export default function SessionBreakdown(props) {
         .withUrl('https://localhost:44371/session')
         .configureLogging(LogLevel.Information)
         .build();
-        // eslint-disable-next-line
+      // eslint-disable-next-line
       connection.on('GetFinals', () => {
         // eslint-disable-next-line
         getFinalDecision();
@@ -116,7 +116,7 @@ export default function SessionBreakdown(props) {
 
   return (
     <Flex justify='center' align='center' direction='column' width='auto'>
-    <ChatRoom userId={userId} sessionId={sessionId}/>
+      <ChatRoom userId={userId} sessionId={sessionId} />
       <Flex
         justifyContent='center'
         direction='column'
@@ -220,20 +220,28 @@ export default function SessionBreakdown(props) {
             w='100%'
             rounded='20px'
           >
-            {yourLikedRestaurants.length ? yourLikedRestaurants.map((restaurant) => (
-              <NonMatchCard
-                key={restaurant.id}
-                yelpData={restaurant}
-                removeALike={removeALike}
-              />
-            )) : <Flex direction='column' justify='center' align='center'>
-            <Heading>No Likes Yet</Heading>
-            <Link to={{
-              pathname: `/session/${sessionId}`,
-            }}>
-            <Button backgroundColor='yellow.300' margin={3}>Keep Swiping</Button>
-            </Link>
-            </Flex>}
+            {yourLikedRestaurants.length ? (
+              yourLikedRestaurants.map((restaurant) => (
+                <NonMatchCard
+                  key={restaurant.id}
+                  yelpData={restaurant}
+                  removeALike={removeALike}
+                />
+              ))
+            ) : (
+              <Flex direction='column' justify='center' align='center'>
+                <Heading>No Likes Yet</Heading>
+                <Link
+                  to={{
+                    pathname: `/session/${sessionId}`,
+                  }}
+                >
+                  <Button backgroundColor='yellow.300' margin={3}>
+                    Keep Swiping
+                  </Button>
+                </Link>
+              </Flex>
+            )}
           </Flex>
         </Flex>
       </Flex>
