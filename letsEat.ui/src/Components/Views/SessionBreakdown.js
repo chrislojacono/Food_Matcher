@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Link } from 'react-router-dom';
 import { Flex, Heading, Button } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
@@ -17,12 +18,14 @@ export default function SessionBreakdown(props) {
   const [userId] = useState(props.user?.id);
   const [finalDecision, setFinalDecision] = useState('');
   const [sessionObject, setSessionObject] = useState('');
+  const [signalConnection, setConnection] = useState();
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
     loadContent();
     getFinalDecision();
     getSessionData();
+    JoinRoomConnection();
     setDidMount(true);
     return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,6 +54,9 @@ export default function SessionBreakdown(props) {
       if (response == null) {
         return null;
       }
+      if (signalConnection) {
+        refreshFinalDecision();
+      }
       return setFinalDecision(response);
     });
   };
@@ -77,13 +83,40 @@ export default function SessionBreakdown(props) {
     });
   };
 
+  const JoinRoomConnection = async () => {
+    try {
+      const connection = new HubConnectionBuilder()
+        .withUrl('https://localhost:44371/session')
+        .configureLogging(LogLevel.Information)
+        .build();
+      // eslint-disable-next-line
+      connection.on('GetFinals', () => {
+        // eslint-disable-next-line
+        getFinalDecision();
+      });
+      await connection.start();
+      await connection.invoke('JoinRoom', { userId, sessionId });
+      setConnection(connection);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  const refreshFinalDecision = async () => {
+    try {
+      await signalConnection.invoke('GetFinalDecision', sessionId);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
   if (!didMount) {
     return null;
   }
 
   return (
     <Flex justify='center' align='center' direction='column' width='auto'>
-    <ChatRoom userId={userId} sessionId={sessionId}/>
+      <ChatRoom userId={userId} sessionId={sessionId} />
       <Flex
         justifyContent='center'
         direction='column'
@@ -187,20 +220,28 @@ export default function SessionBreakdown(props) {
             w='100%'
             rounded='20px'
           >
-            {yourLikedRestaurants.length ? yourLikedRestaurants.map((restaurant) => (
-              <NonMatchCard
-                key={restaurant.id}
-                yelpData={restaurant}
-                removeALike={removeALike}
-              />
-            )) : <Flex direction='column' justify='center' align='center'>
-            <Heading>No Likes Yet</Heading>
-            <Link to={{
-              pathname: `/session/${sessionId}`,
-            }}>
-            <Button backgroundColor='yellow.300' margin={3}>Keep Swiping</Button>
-            </Link>
-            </Flex>}
+            {yourLikedRestaurants.length ? (
+              yourLikedRestaurants.map((restaurant) => (
+                <NonMatchCard
+                  key={restaurant.id}
+                  yelpData={restaurant}
+                  removeALike={removeALike}
+                />
+              ))
+            ) : (
+              <Flex direction='column' justify='center' align='center'>
+                <Heading>No Likes Yet</Heading>
+                <Link
+                  to={{
+                    pathname: `/session/${sessionId}`,
+                  }}
+                >
+                  <Button backgroundColor='yellow.300' margin={3}>
+                    Keep Swiping
+                  </Button>
+                </Link>
+              </Flex>
+            )}
           </Flex>
         </Flex>
       </Flex>

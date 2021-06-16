@@ -18,7 +18,7 @@ class SessionForm extends Component {
   state = {
     UserId: this.props.user?.id,
     Location: 'Nashville, TN',
-    SearchTerm: '',
+    SearchTerm: 'Restaurants',
     ShowAlert: false,
   };
 
@@ -41,10 +41,8 @@ class SessionForm extends Component {
         ShowAlert: true,
       });
       setTimeout(() => {
-        setTimeout(() => {
-          this.props.history.push(`/session/${responseId}`);
-        }, 2000);
-      });
+        this.props.history.push(`/session/${responseId}`);
+      }, 2000);
     });
   };
 
@@ -70,11 +68,11 @@ class SessionForm extends Component {
             </Alert>
           )}
           <FormControl as='fieldset' p={3} justifyContent='center'>
-            <FormLabel as='legend' p={2}>
+            <FormLabel as='legend' fontSize='larger' p={2}>
               What are you in the mood for?
             </FormLabel>
             <RadioGroup
-              defaultValue='Pizza'
+              defaultValue='Restaurants'
               colorScheme='facebook'
               justify='center'
               alignItems='center'
@@ -87,7 +85,7 @@ class SessionForm extends Component {
                 letterSpacing='wide'
                 justifyContent='space-evenly'
               >
-                <Radio value='' id='SearchTerm' onChange={this.handleChange}>
+                <Radio value='Restaurants' id='SearchTerm' onChange={this.handleChange}>
                   Anything
                 </Radio>
                 <Radio
@@ -176,7 +174,7 @@ class SessionForm extends Component {
             onChange={this.handleChange}
             isRequired
           >
-            <FormLabel>Where are you heading?</FormLabel>
+            <FormLabel fontSize='larger'>Where are you heading?</FormLabel>
             <Input bgColor='white' placeholder='ex: Nashville, Tn' />
           </FormControl>
           <Button
