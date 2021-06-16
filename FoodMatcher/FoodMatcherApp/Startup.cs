@@ -66,6 +66,7 @@ namespace FoodMatcherApp
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("/chat");
+                endpoints.MapHub<SessionHub>("/session");
             });
 
         }

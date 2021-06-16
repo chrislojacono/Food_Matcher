@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Link } from 'react-router-dom';
 import { Flex, Heading, Button } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
@@ -17,12 +18,14 @@ export default function SessionBreakdown(props) {
   const [userId] = useState(props.user?.id);
   const [finalDecision, setFinalDecision] = useState('');
   const [sessionObject, setSessionObject] = useState('');
+  const [signalConnection, setConnection] = useState();
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
     loadContent();
     getFinalDecision();
     getSessionData();
+    getFinalDecisionAsync();
     setDidMount(true);
     return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,6 +54,7 @@ export default function SessionBreakdown(props) {
       if (response == null) {
         return null;
       }
+      refreshFinalDecision();
       return setFinalDecision(response);
     });
   };
@@ -75,6 +79,33 @@ export default function SessionBreakdown(props) {
     RestaurantData.GetRandomRestaurant(sessionId).then((response) => {
       makeAFinalDecision(response.id);
     });
+  };
+
+  const getFinalDecisionAsync = async () => {
+    try {
+      const connection = new HubConnectionBuilder()
+        .withUrl('https://localhost:44371/session')
+        .configureLogging(LogLevel.Information)
+        .build();
+        // eslint-disable-next-line
+      connection.on('GetFinals', () => {
+        // eslint-disable-next-line
+        getFinalDecision();
+      });
+      await connection.start();
+      await connection.invoke('JoinRoom', { userId, sessionId });
+      setConnection(connection);
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  const refreshFinalDecision = async () => {
+    try {
+      await signalConnection.invoke('GetFinalDecision', sessionId);
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   if (!didMount) {
