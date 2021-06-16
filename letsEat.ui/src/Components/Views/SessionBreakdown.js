@@ -25,7 +25,7 @@ export default function SessionBreakdown(props) {
     loadContent();
     getFinalDecision();
     getSessionData();
-    getFinalDecisionAsync();
+    JoinRoomConnection();
     setDidMount(true);
     return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,7 +54,9 @@ export default function SessionBreakdown(props) {
       if (response == null) {
         return null;
       }
-      refreshFinalDecision();
+      if (signalConnection) {
+        refreshFinalDecision();
+      }
       return setFinalDecision(response);
     });
   };
@@ -81,7 +83,7 @@ export default function SessionBreakdown(props) {
     });
   };
 
-  const getFinalDecisionAsync = async () => {
+  const JoinRoomConnection = async () => {
     try {
       const connection = new HubConnectionBuilder()
         .withUrl('https://localhost:44371/session')
