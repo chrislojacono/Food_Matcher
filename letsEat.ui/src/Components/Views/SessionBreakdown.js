@@ -79,13 +79,18 @@ export default function SessionBreakdown(props) {
 
   const getRandomRestaurant = () => {
     if (finalDecision === '') {
-      RestaurantData.GetRandomRestaurant(sessionId, '00000000-0000-0000-0000-000000000000').then((response) => {
+      RestaurantData.GetRandomRestaurant(
+        sessionId,
+        '00000000-0000-0000-0000-000000000000',
+      ).then((response) => {
         makeAFinalDecision(response.id);
       });
     } else {
-      RestaurantData.GetRandomRestaurant(sessionId, finalDecision.id).then((response) => {
-        makeAFinalDecision(response.id);
-      });
+      RestaurantData.GetRandomRestaurant(sessionId, finalDecision.id).then(
+        (response) => {
+          makeAFinalDecision(response.id);
+        },
+      );
     }
   };
 
@@ -123,7 +128,19 @@ export default function SessionBreakdown(props) {
 
   return (
     <Flex justify='center' align='center' direction='column' width='auto'>
-      <ChatRoom userId={userId} sessionId={sessionId} />
+      {sessionObject.user2Id !== null && (
+        <Flex justify='center' align='center'>
+          <Button
+            colorScheme='orange'
+            onClick={getRandomRestaurant}
+            mt='23px'
+            mr='10px'
+          >
+            Decide For Us!
+          </Button>
+          <ChatRoom userId={userId} sessionId={sessionId} />
+        </Flex>
+      )}
       <Flex
         justifyContent='center'
         direction='column'
@@ -156,11 +173,6 @@ export default function SessionBreakdown(props) {
               </Flex>
             </>
           </Flex>
-        )}
-        {sessionObject.user2Id !== null && (
-          <Button colorScheme='orange' onClick={getRandomRestaurant}>
-            Decide For Us!
-          </Button>
         )}
         {matches.length ? (
           <Flex
