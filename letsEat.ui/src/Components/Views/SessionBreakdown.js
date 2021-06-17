@@ -78,9 +78,15 @@ export default function SessionBreakdown(props) {
   };
 
   const getRandomRestaurant = () => {
-    RestaurantData.GetRandomRestaurant(sessionId, finalDecision.id).then((response) => {
-      makeAFinalDecision(response.id);
-    });
+    if (finalDecision === '') {
+      RestaurantData.GetRandomRestaurant(sessionId, '00000000-0000-0000-0000-000000000000').then((response) => {
+        makeAFinalDecision(response.id);
+      });
+    } else {
+      RestaurantData.GetRandomRestaurant(sessionId, finalDecision.id).then((response) => {
+        makeAFinalDecision(response.id);
+      });
+    }
   };
 
   const JoinRoomConnection = async () => {
