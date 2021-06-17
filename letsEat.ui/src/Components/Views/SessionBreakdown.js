@@ -250,17 +250,17 @@ export default function SessionBreakdown(props) {
             ) : (
               <Flex direction='column' justify='center' align='center'>
                 <Heading>No Likes Yet</Heading>
-                <Link
-                  to={{
-                    pathname: `/session/${sessionId}`,
-                  }}
-                >
-                  <Button backgroundColor='yellow.300' margin={3}>
-                    Keep Swiping
-                  </Button>
-                </Link>
               </Flex>
             )}
+         <Link
+          to={{
+            pathname: `/session/${sessionId}`,
+          }}
+            >
+            <Button backgroundColor='yellow.300' margin={3}>
+              Keep Swiping
+            </Button>
+         </Link>
           </Flex>
         </Flex>
       </Flex>
