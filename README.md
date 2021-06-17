@@ -13,7 +13,9 @@ This is an app to help people make a democratic decison on where to go out to ea
 Say no more, Nathan! It's happening!
 
 ## ERD
-![real deal](https://user-images.githubusercontent.com/66916708/122446575-7025b580-cf68-11eb-9df0-56027ff649d1.PNG)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/66916708/122446575-7025b580-cf68-11eb-9df0-56027ff649d1.PNG">
+</p>
 
 ## Wireframe
 [Figma Link](https://www.figma.com/file/8Y2m4wZ04D8z9p2339RMKL/Food-Matcher?node-id=0%3A1)
