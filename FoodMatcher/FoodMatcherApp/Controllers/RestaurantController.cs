@@ -27,10 +27,10 @@ namespace FoodMatcherApp.Controllers
                 return Ok(Id);    
         }
 
-        [HttpGet("random/{sessionId}")]
-        public IActionResult GetRandomRestaurant(Guid sessionId)
+        [HttpGet("random/{sessionId}/{restaurantId}")]
+        public IActionResult GetRandomRestaurant(Guid sessionId, Guid restaurantId)
         {
-            var restaurant = _repo.GetRandomRestaurantFromSession(sessionId);
+            var restaurant = _repo.GetRandomRestaurantFromSession(sessionId, restaurantId);
 
             return Ok(restaurant);
         }
