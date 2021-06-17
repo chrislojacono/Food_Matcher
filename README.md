@@ -7,7 +7,7 @@ This is an app to help people make a democratic decison on where to go out to ea
 <br>
 <br>
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/66916708/120119218-219cac80-c15c-11eb-89e2-060393c8c89a.PNG">
+  <img src="https://user-images.githubusercontent.com/66916708/120119218-219cac80-c15c-11eb-89e2-060393c8c89a.PNG">
 </p>
 <br>
 Say no more, Nathan! It's happening!
