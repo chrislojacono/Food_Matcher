@@ -78,7 +78,7 @@ export default function SessionBreakdown(props) {
   };
 
   const getRandomRestaurant = () => {
-    RestaurantData.GetRandomRestaurant(sessionId).then((response) => {
+    RestaurantData.GetRandomRestaurant(sessionId, finalDecision.id).then((response) => {
       makeAFinalDecision(response.id);
     });
   };
