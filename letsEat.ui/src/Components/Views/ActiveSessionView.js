@@ -186,22 +186,38 @@ export default function SessionView(props) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Link
-        to={{
-          pathname: '/mySessions',
-        }}
-        style={{ textDecoration: 'none' }}
-      >
-        <Button
-          colorScheme='red'
-          mb={5}
-          _hover={{
-            transform: 'scale(1.1)',
+      <Flex justify='center' align='center'>
+        <Link
+          to={{
+            pathname: `/SessionBreakdown/${sessionData?.id}`,
           }}
         >
-          Finish Swiping
-        </Button>
-      </Link>
+          <Button
+            backgroundColor='turquoise'
+            margin={3}
+            _hover={{
+              transform: 'scale(1.1)',
+            }}
+          >
+            Session Breakdown
+          </Button>
+        </Link>
+        <Link
+          to={{
+            pathname: '/mySessions',
+          }}
+          style={{ textDecoration: 'none' }}
+        >
+          <Button
+            colorScheme='red'
+            _hover={{
+              transform: 'scale(1.1)',
+            }}
+          >
+            Finish Swiping
+          </Button>
+        </Link>
+      </Flex>
     </Flex>
   );
 }
