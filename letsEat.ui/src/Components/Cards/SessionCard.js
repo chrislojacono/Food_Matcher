@@ -56,7 +56,7 @@ export default function SessionCard(props) {
         />
       </WrapItem>
       <Text fontSize='lg' p={5}>
-        Looking for {sessionData.searchTerm} Food
+        Looking for {sessionData.searchTerm}
       </Text>
       <Text fontSize='medium' color='gray.400'>
         {date.toDateString()}

@@ -9,8 +9,8 @@ const AddARestaurant = (RestaurantObject) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-const GetRandomRestaurant = (sessionId) => new Promise((resolve, reject) => {
-  axios.get(`${RestaurantDataUrl}/random/${sessionId}`).then((response) => {
+const GetRandomRestaurant = (sessionId, restaurantId) => new Promise((resolve, reject) => {
+  axios.get(`${RestaurantDataUrl}/random/${sessionId}/${restaurantId}`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });

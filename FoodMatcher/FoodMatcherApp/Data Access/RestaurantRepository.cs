@@ -54,7 +54,7 @@ namespace FoodMatcherApp.Data_Access
            return id;
         }
 
-        public Restaurant GetRandomRestaurantFromSession(Guid sessionId)
+        public Restaurant GetRandomRestaurantFromSession(Guid sessionId, Guid restaurantId)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -62,10 +62,10 @@ namespace FoodMatcherApp.Data_Access
                         FROM Session_Likes Sl
 	                        JOIN Restaurants R
 	                        ON R.Id = Sl.RestaurantId
-                        WHERE sl.SessionId = @SessionId
+                        WHERE sl.SessionId = @SessionId  and sl.RestaurantId != @RestaurantId
                         ORDER BY NEWID()";
 
-            return db.QueryFirstOrDefault<Restaurant>(sql, new { SessionId = sessionId });
+            return db.QueryFirstOrDefault<Restaurant>(sql, new { SessionId = sessionId, RestaurantId = restaurantId });
         }
     }
 }
