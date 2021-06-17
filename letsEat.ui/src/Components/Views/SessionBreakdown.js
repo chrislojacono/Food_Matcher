@@ -89,13 +89,14 @@ export default function SessionBreakdown(props) {
         .withUrl('https://localhost:44371/session')
         .configureLogging(LogLevel.Information)
         .build();
-      // eslint-disable-next-line
+
       connection.on('GetFinals', () => {
-        // eslint-disable-next-line
         getFinalDecision();
       });
+
       await connection.start();
       await connection.invoke('JoinRoom', { userId, sessionId });
+
       setConnection(connection);
     } catch (e) {
       console.warn(e);
