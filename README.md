@@ -14,7 +14,7 @@ Say no more, Nathan! It's happening!
 
 ## ERD
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/66916708/122446575-7025b580-cf68-11eb-9df0-56027ff649d1.PNG">
+  <img src="https://user-images.githubusercontent.com/66916708/122644279-04635a00-d0da-11eb-8188-f0f3ef518384.PNG">
 </p>
 
 ## Wireframe
