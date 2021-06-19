@@ -19,6 +19,7 @@ export default function MatchCard({ yelpData, removeALike }) {
       boxShadow='md'
       bg='gray.200'
       m={2}
+      px='5px'
     >
       {yelpData.image_Url === '' ? (
         <Image
