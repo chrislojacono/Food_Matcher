@@ -7,21 +7,22 @@ import {
   WrapItem,
   Avatar,
 } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 import UserData from '../../Helpers/Data/UserData';
 
-export default function SessionCard(props) {
+export default function SessionCard({ sessionInfo, userId, deleteSession }) {
   const [otherUser, setOtherUser] = useState('');
-  const [sessionData] = useState(props.sessionData);
-  const [myUserId] = useState(props.userId);
+  const [sessionData] = useState(sessionInfo);
+  const [myUserId] = useState(userId);
 
   useEffect(() => {
     const loadUsers = () => {
-      if (sessionData.user1Id === myUserId) {
+      if (sessionData.user1Id === myUserId && sessionData.user2Id !== null) {
         UserData.GetSingleUser(sessionData.user2Id).then((response) => {
           setOtherUser(response);
         });
-      } else {
+      } else if (sessionData.user2Id === myUserId) {
         UserData.GetSingleUser(sessionData.user1Id).then((response) => {
           setOtherUser(response);
         });
@@ -44,6 +45,7 @@ export default function SessionCard(props) {
       margin={5}
       background='whitesmoke'
       rounded={6}
+      className='sessionCard'
     >
       <Heading whiteSpace='nowrap' p={5} fontSize='1.1rem' letterSpacing='wide'>
         Session with {otherUser.firstName}
@@ -80,6 +82,9 @@ export default function SessionCard(props) {
             Session Breakdown
           </Button>
         </Link>
+        <Button colorScheme='red' margin={3} className='deleteSession' size='xs' onClick={() => deleteSession(sessionData.id)}>
+            <CloseIcon/>
+          </Button>
       </Flex>
     </Flex>
   );

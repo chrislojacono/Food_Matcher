@@ -12,6 +12,18 @@ export default function YourSessionsView({ user }) {
     });
   }, [user?.id]);
 
+  const getSessions = () => {
+    SessionData.GetASessionByUserId(user?.id).then((response) => {
+      setSessions(response);
+    });
+  };
+
+  const deleteSession = (sessionId) => {
+    SessionData.DeleteSession(sessionId).then(() => {
+      getSessions();
+    });
+  };
+
   return (
       <Flex
         height='70%'
@@ -31,9 +43,10 @@ export default function YourSessionsView({ user }) {
           {sessions.length ? (
             sessions.map((session) => (
               <SessionCard
-                sessionData={session}
+                sessionInfo={session}
                 userId={user?.id}
                 key={session.id}
+                deleteSession={deleteSession}
               />
             ))
           ) : (

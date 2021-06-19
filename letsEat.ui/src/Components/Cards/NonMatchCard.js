@@ -19,6 +19,7 @@ export default function MatchCard({ yelpData, removeALike }) {
       boxShadow='md'
       bg='gray.200'
       m={2}
+      px='5px'
     >
       {yelpData.image_Url === '' ? (
         <Image
@@ -61,13 +62,14 @@ export default function MatchCard({ yelpData, removeALike }) {
           rel='noreferrer'
           className='anchors'
         >
-          <Button bg='teal.300' m={2} mb={2}>
+          <Button bg='teal.300' m={1} mb={2}>
             More Details
           </Button>
         </a>
         <Button
           bg='red.300'
-          m={2}
+          m={1}
+          px='10px'
           mb={2}
           onClick={() => {
             removeALike(yelpData.id);

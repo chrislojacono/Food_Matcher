@@ -78,5 +78,17 @@ namespace FoodMatcherApp.Data_Access
 
             return db.Query<Session>(sql, new { User1Id = userId, User2Id = userId }).OrderByDescending(session => session.CreatedDate).ToList();
         }
+
+        public void DeleteSession(Guid sessionId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Delete From Final_Decisions Where SessionId = @SessionId;
+                        Delete From Session_Likes Where SessionId = @SessionId;
+                        Delete From Messages Where SessionId = @SessionId;
+                        Delete From Sessions Where Id = @SessionId;";
+
+            db.Execute(sql, new { SessionId = sessionId });
+        }
     }
 }
