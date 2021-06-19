@@ -252,6 +252,7 @@ export default function SessionBreakdown(props) {
                 <Heading>No Likes Yet</Heading>
               </Flex>
             )}
+          </Flex>
          <Link
           to={{
             pathname: `/session/${sessionId}`,
@@ -261,7 +262,6 @@ export default function SessionBreakdown(props) {
               Keep Swiping
             </Button>
          </Link>
-          </Flex>
         </Flex>
       </Flex>
     </Flex>
