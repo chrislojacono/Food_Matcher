@@ -7,6 +7,7 @@ import {
   WrapItem,
   Avatar,
 } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 import UserData from '../../Helpers/Data/UserData';
 
@@ -44,6 +45,7 @@ export default function SessionCard(props) {
       margin={5}
       background='whitesmoke'
       rounded={6}
+      className='sessionCard'
     >
       <Heading whiteSpace='nowrap' p={5} fontSize='1.1rem' letterSpacing='wide'>
         Session with {otherUser.firstName}
@@ -78,6 +80,9 @@ export default function SessionCard(props) {
         >
           <Button backgroundColor='turquoise' margin={3}>
             Session Breakdown
+          </Button>
+          <Button backgroundColor='red' margin={3} className='deleteSession' size='xs'>
+            <CloseIcon/>
           </Button>
         </Link>
       </Flex>
