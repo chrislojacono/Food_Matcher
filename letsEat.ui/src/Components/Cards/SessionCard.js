@@ -82,7 +82,7 @@ export default function SessionCard({ sessionInfo, userId, deleteSession }) {
             Session Breakdown
           </Button>
         </Link>
-        <Button backgroundColor='red' margin={3} className='deleteSession' size='xs' onClick={() => deleteSession(sessionData.id)}>
+        <Button colorScheme='red' margin={3} className='deleteSession' size='xs' onClick={() => deleteSession(sessionData.id)}>
             <CloseIcon/>
           </Button>
       </Flex>
