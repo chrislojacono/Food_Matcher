@@ -63,5 +63,12 @@ namespace FoodMatcherApp.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{sessionId}")]
+        public IActionResult DeleteSession(Guid sessionId)
+        {
+            _repo.DeleteSession(sessionId);
+            return NoContent();
+        }
+
     }
 }

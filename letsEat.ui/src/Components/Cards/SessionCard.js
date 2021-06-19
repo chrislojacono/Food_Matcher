@@ -11,10 +11,10 @@ import { CloseIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 import UserData from '../../Helpers/Data/UserData';
 
-export default function SessionCard(props) {
+export default function SessionCard({ sessionInfo, userId, deleteSession }) {
   const [otherUser, setOtherUser] = useState('');
-  const [sessionData] = useState(props.sessionData);
-  const [myUserId] = useState(props.userId);
+  const [sessionData] = useState(sessionInfo);
+  const [myUserId] = useState(userId);
 
   useEffect(() => {
     const loadUsers = () => {
@@ -81,10 +81,10 @@ export default function SessionCard(props) {
           <Button backgroundColor='turquoise' margin={3}>
             Session Breakdown
           </Button>
-          <Button backgroundColor='red' margin={3} className='deleteSession' size='xs'>
+        </Link>
+        <Button backgroundColor='red' margin={3} className='deleteSession' size='xs' onClick={() => deleteSession(sessionData.id)}>
             <CloseIcon/>
           </Button>
-        </Link>
       </Flex>
     </Flex>
   );
