@@ -150,6 +150,7 @@ export default function SessionView(props) {
                       More Info
                     </Button>
                   </a>
+                {sessionData.user2Id == null && (
                   <Button
                     mx={2}
                     bg='yellow.300'
@@ -160,9 +161,10 @@ export default function SessionView(props) {
                       copyToClipboard(sessionData.id);
                     }}
                   >
-                    {copiedToClipboard ? 'Copied! ' : 'Share Session'}
-                    <CopyIcon mx={2} />
+                  {copiedToClipboard ? 'Copied! ' : 'Share Session'}
+                  <CopyIcon mx={2} />
                   </Button>
+                )}
                 </Box>
               </Flex>
               {restaurant.image_url === '' ? (
