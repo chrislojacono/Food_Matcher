@@ -18,11 +18,11 @@ export default function SessionCard({ sessionInfo, userId, deleteSession }) {
 
   useEffect(() => {
     const loadUsers = () => {
-      if (sessionData.user1Id === myUserId) {
+      if (sessionData.user1Id === myUserId && sessionData.user2Id !== null) {
         UserData.GetSingleUser(sessionData.user2Id).then((response) => {
           setOtherUser(response);
         });
-      } else {
+      } else if (sessionData.user2Id === myUserId) {
         UserData.GetSingleUser(sessionData.user1Id).then((response) => {
           setOtherUser(response);
         });
