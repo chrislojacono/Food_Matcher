@@ -20,10 +20,13 @@ export default function ChatRoom2({ userId, sessionId }) {
     });
     setDidMount(true);
     return () => setDidMount(false);
-  }, [userId, sessionId, userName, signalConnection]);
+  }, [userId, sessionId, userName, signalConnection, messages]);
 
   const clearMessages = () => {
     MessageData.ClearMessages(sessionId);
+    MessageData.GetSessionMessages(sessionId).then((response) => {
+      setMessages(response);
+    });
   };
 
   const joinChat = async () => {
