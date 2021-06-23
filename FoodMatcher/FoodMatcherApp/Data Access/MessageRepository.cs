@@ -32,5 +32,10 @@ namespace FoodMatcherApp.Data_Access
 
             db.Execute(sql, message);
         }
+
+        public void ClearMessages(Guid sessionId)
+        {
+
+        }
     }
 }
