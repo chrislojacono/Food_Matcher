@@ -11,7 +11,12 @@ import {
 import { StarIcon } from '@chakra-ui/icons';
 import placeholder from '../../Helpers/Images/placeholder-restaurant.png';
 
-export default function MatchCard({ yelpData }) {
+export default function MatchCard({
+  yelpData,
+  finalCard,
+  match,
+  makeFinalDecision,
+}) {
   return (
     <Box
       w='300px'
@@ -39,9 +44,16 @@ export default function MatchCard({ yelpData }) {
         />
       )}
       <Box p={5}>
+        {finalCard && (
         <Badge varient='solid' rounded='full' bg='green.300' px={3} mb={2}>
-          Let's Eat!!
+        Let's Eat!!
         </Badge>
+        )}
+        {match && (
+        <Badge varient='solid' rounded='full' bg='green.300' px={3} mb={2}>
+          Match!!
+        </Badge>
+        )}
         <Heading fontSize='xl' fontWeight='semibold'>
           {yelpData.name}
         </Heading>
@@ -69,6 +81,18 @@ export default function MatchCard({ yelpData }) {
             More Details
           </Button>
         </a>
+        {match && (
+        <Button
+        bg='green.300'
+        mx={2}
+        mb={2}
+        onClick={() => {
+          makeFinalDecision(yelpData.id);
+        }}
+      >
+        Let's Eat
+      </Button>
+        )}
       </Flex>
     </Box>
   );

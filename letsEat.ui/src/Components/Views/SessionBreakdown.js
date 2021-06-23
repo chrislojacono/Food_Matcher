@@ -169,7 +169,7 @@ export default function SessionBreakdown(props) {
                 The Final!
               </Heading>
               <Flex justify='center' align='center' flexWrap='wrap'>
-                <FinalCard key={finalDecision.id} yelpData={finalDecision} />
+                <FinalCard key={finalDecision.id} yelpData={finalDecision} finalCard={true} />
               </Flex>
             </>
           </Flex>
@@ -202,10 +202,11 @@ export default function SessionBreakdown(props) {
               rounded='20px'
             >
               {matches.map((restaurant) => (
-                <MatchCard
+                <FinalCard
                   key={restaurant.id}
                   yelpData={restaurant}
                   makeFinalDecision={makeAFinalDecision}
+                  match={true}
                 />
               ))}
             </Flex>
