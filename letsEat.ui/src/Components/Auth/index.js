@@ -7,7 +7,7 @@ import AuthData from '../../Helpers/Data/AuthData';
 class Auth extends React.Component {
   render() {
     return (
-      <Flex className='Auth' marginTop='20%'>
+      <Flex className='Auth' marginTop='20%' width='300px'>
         <button
           onClick={AuthData.loginClickEvent}
           className='btn btn-secondary login'
