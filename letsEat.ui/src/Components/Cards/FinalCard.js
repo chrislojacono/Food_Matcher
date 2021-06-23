@@ -16,6 +16,8 @@ export default function MatchCard({
   finalCard,
   match,
   makeFinalDecision,
+  like,
+  removeALike,
 }) {
   return (
     <Box
@@ -92,6 +94,19 @@ export default function MatchCard({
       >
         Let's Eat
       </Button>
+        )}
+        {like && (
+        <Button
+          bg='red.300'
+          m={1}
+          px='10px'
+          mb={2}
+          onClick={() => {
+            removeALike(yelpData.id);
+          }}
+            >
+          Remove this Like
+        </Button>
         )}
       </Flex>
     </Box>

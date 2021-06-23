@@ -3,8 +3,6 @@ import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Link } from 'react-router-dom';
 import { Flex, Heading, Button } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
-import NonMatchCard from '../Cards/NonMatchCard';
-import MatchCard from '../Cards/MatchCard';
 import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
 import FinalCard from '../Cards/FinalCard';
 import RestaurantData from '../../Helpers/Data/RestaurantData';
@@ -242,10 +240,11 @@ export default function SessionBreakdown(props) {
           >
             {yourLikedRestaurants.length ? (
               yourLikedRestaurants.map((restaurant) => (
-                <NonMatchCard
+                <FinalCard
                   key={restaurant.id}
                   yelpData={restaurant}
                   removeALike={removeALike}
+                  like={true}
                 />
               ))
             ) : (
