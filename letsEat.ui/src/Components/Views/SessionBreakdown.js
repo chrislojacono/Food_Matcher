@@ -127,12 +127,11 @@ export default function SessionBreakdown(props) {
   return (
     <Flex justify='center' align='center' direction='column' width='auto'>
       {sessionObject.user2Id !== null && (
-        <Flex justify='center' align='center'>
+        <Flex justify='center' align='center' direction='column'>
           <Button
             colorScheme='orange'
             onClick={getRandomRestaurant}
             mt='23px'
-            mr='10px'
           >
             Decide For Us!
           </Button>

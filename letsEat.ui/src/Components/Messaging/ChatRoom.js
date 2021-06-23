@@ -76,12 +76,9 @@ export default function ChatRoom2({ userId, sessionId }) {
   return (
     <Flex className='app mb-3' width='auto' justify='center' align='center'>
       {!signalConnection ? (
-        <Button onClick={joinChat}>Join Chat Room</Button>
+        <Button onClick={joinChat} colorScheme='messenger'>Join Chat Room</Button>
       ) : (
-        <>
-        <Button onClick={() => MessageData.ClearMessages(sessionId)} mx={5}>Clear Messages</Button>
         <Chat messages={messages} sendMessage={sendMessage} clearMessages={clearMessages} closeConnection={closeConnection}/>
-        </>
       )}
     </Flex>
   );
