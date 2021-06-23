@@ -40,12 +40,8 @@
 }
 
 .login{
-    margin-top: 250px;
-    width: 20%; 
-    position: absolute;
+    width: 100%; 
     background-color: white;
-    bottom: 5%;
-    left: 40%;
 }
 
 .login:hover{
@@ -55,12 +51,17 @@
     width: 100%;
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 420px){
     .login{
         width: 100%;
         img{
             width: 100%;
         }     
+    }
+
+    .Auth{
+        margin-top: 300px !important;
+        height: 100px !important;
     }
     .userInfo{
         width: 20%;

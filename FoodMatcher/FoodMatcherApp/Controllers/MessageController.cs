@@ -28,5 +28,13 @@ namespace FoodMatcherApp.Controllers
             return Ok(messages);
         }
 
+        [HttpDelete("{sessionId}")]
+        public IActionResult ClearMessages(Guid sessionId)
+        {
+            _repo.ClearMessages(sessionId);
+
+            return NoContent();
+        }
+
     }
 }

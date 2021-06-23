@@ -112,7 +112,7 @@ export default function SessionView(props) {
                   {restaurant.name} WAS A MATCH!!
                 </Alert>
               )}
-              <Flex alignItems='center' direction='column' mb='1%'>
+              <Flex alignItems='center' direction='column' align='center' mb='1%'>
                 <Box p='2'>
                   <Heading
                     className='legend'
@@ -125,10 +125,11 @@ export default function SessionView(props) {
                   </Heading>
                 </Box>
                 <Spacer />
-                <Box>
+                <Box className='swiperButtons'>
                   <Button
                     colorScheme='teal'
                     mx={2}
+                    className='likeBtn'
                     onClick={() => likeButton(restaurant)}
                     _hover={{
                       transform: 'scale(1.1)',
@@ -144,6 +145,7 @@ export default function SessionView(props) {
                   >
                     <Button
                       colorScheme='twitter'
+                      className='moreInfoBtn'
                       mx={2}
                       _hover={{ transform: 'scale(1.1)' }}
                     >

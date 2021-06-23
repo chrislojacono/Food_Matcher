@@ -20,7 +20,14 @@ export default function ChatRoom2({ userId, sessionId }) {
     });
     setDidMount(true);
     return () => setDidMount(false);
-  }, [userId, sessionId, userName, signalConnection]);
+  }, [userId, sessionId, userName, signalConnection, messages]);
+
+  const clearMessages = () => {
+    MessageData.ClearMessages(sessionId);
+    MessageData.GetSessionMessages(sessionId).then((response) => {
+      setMessages(response);
+    });
+  };
 
   const joinChat = async () => {
     try {
@@ -69,9 +76,9 @@ export default function ChatRoom2({ userId, sessionId }) {
   return (
     <Flex className='app mb-3' width='auto' justify='center' align='center'>
       {!signalConnection ? (
-        <Button onClick={joinChat}>Join Chat Room</Button>
+        <Button onClick={joinChat} colorScheme='messenger'>Join Chat Room</Button>
       ) : (
-        <Chat messages={messages} sendMessage={sendMessage} closeConnection={closeConnection}/>
+        <Chat messages={messages} sendMessage={sendMessage} clearMessages={clearMessages} closeConnection={closeConnection}/>
       )}
     </Flex>
   );

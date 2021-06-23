@@ -3,10 +3,8 @@ import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Link } from 'react-router-dom';
 import { Flex, Heading, Button } from '@chakra-ui/react';
 import SessionLikesData from '../../Helpers/Data/SessionLikeData';
-import NonMatchCard from '../Cards/NonMatchCard';
-import MatchCard from '../Cards/MatchCard';
 import FinalDecisionData from '../../Helpers/Data/FinalDecisionData';
-import FinalCard from '../Cards/FinalCard';
+import MatchCard from '../Cards/MatchCard';
 import RestaurantData from '../../Helpers/Data/RestaurantData';
 import SessionData from '../../Helpers/Data/SessionData';
 import ChatRoom from '../Messaging/ChatRoom';
@@ -129,12 +127,11 @@ export default function SessionBreakdown(props) {
   return (
     <Flex justify='center' align='center' direction='column' width='auto'>
       {sessionObject.user2Id !== null && (
-        <Flex justify='center' align='center'>
+        <Flex justify='center' align='center' direction='column'>
           <Button
             colorScheme='orange'
             onClick={getRandomRestaurant}
             mt='23px'
-            mr='10px'
           >
             Decide For Us!
           </Button>
@@ -169,7 +166,7 @@ export default function SessionBreakdown(props) {
                 The Final!
               </Heading>
               <Flex justify='center' align='center' flexWrap='wrap'>
-                <FinalCard key={finalDecision.id} yelpData={finalDecision} />
+                <MatchCard key={finalDecision.id} yelpData={finalDecision} finalCard={true} />
               </Flex>
             </>
           </Flex>
@@ -191,7 +188,7 @@ export default function SessionBreakdown(props) {
               rounded={4}
               whiteSpace='nowrap'
             >
-              You guys agreed on
+              You both agreed on
             </Heading>
             <Flex
               justify='center'
@@ -206,6 +203,7 @@ export default function SessionBreakdown(props) {
                   key={restaurant.id}
                   yelpData={restaurant}
                   makeFinalDecision={makeAFinalDecision}
+                  match={true}
                 />
               ))}
             </Flex>
@@ -241,10 +239,11 @@ export default function SessionBreakdown(props) {
           >
             {yourLikedRestaurants.length ? (
               yourLikedRestaurants.map((restaurant) => (
-                <NonMatchCard
+                <MatchCard
                   key={restaurant.id}
                   yelpData={restaurant}
                   removeALike={removeALike}
+                  like={true}
                 />
               ))
             ) : (

@@ -32,5 +32,14 @@ namespace FoodMatcherApp.Data_Access
 
             db.Execute(sql, message);
         }
+
+        public void ClearMessages(Guid sessionId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = "Delete From Messages Where SessionId = @SessionId";
+
+            db.Execute(sql, new { SessionId = sessionId });
+        }
     }
 }
