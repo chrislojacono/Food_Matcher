@@ -8,5 +8,11 @@ const GetSessionMessages = (sessionId) => new Promise((resolve, reject) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
+
+const ClearMessages = (sessionId) => new Promise((resolve, reject) => {
+  axios.delete(`${userDataUrl}/${sessionId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
 // eslint-disable-next-line
-export default { GetSessionMessages };
+export default { GetSessionMessages, ClearMessages };

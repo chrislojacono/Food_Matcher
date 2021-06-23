@@ -22,6 +22,10 @@ export default function ChatRoom2({ userId, sessionId }) {
     return () => setDidMount(false);
   }, [userId, sessionId, userName, signalConnection]);
 
+  const clearMessages = () => {
+    MessageData.ClearMessages(sessionId);
+  };
+
   const joinChat = async () => {
     try {
       const connection = new HubConnectionBuilder()
@@ -71,7 +75,10 @@ export default function ChatRoom2({ userId, sessionId }) {
       {!signalConnection ? (
         <Button onClick={joinChat}>Join Chat Room</Button>
       ) : (
-        <Chat messages={messages} sendMessage={sendMessage} closeConnection={closeConnection}/>
+        <>
+        <Button onClick={() => MessageData.ClearMessages(sessionId)} mx={5}>Clear Messages</Button>
+        <Chat messages={messages} sendMessage={sendMessage} clearMessages={clearMessages} closeConnection={closeConnection}/>
+        </>
       )}
     </Flex>
   );
