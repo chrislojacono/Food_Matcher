@@ -20,13 +20,18 @@ export default function ChatRoom2({ userId, sessionId }) {
     });
     setDidMount(true);
     return () => setDidMount(false);
-  }, [userId, sessionId, userName, signalConnection, messages]);
+  }, [userId, sessionId, userName, signalConnection]);
 
-  const clearMessages = () => {
-    MessageData.ClearMessages(sessionId);
-    MessageData.GetSessionMessages(sessionId).then((response) => {
-      setMessages(response);
-    });
+  const clearMessages = async () => {
+    try {
+      await signalConnection.invoke('ClearMessages', sessionId);
+      MessageData.ClearMessages(sessionId);
+      MessageData.GetSessionMessages(sessionId).then((response) => {
+        setMessages(response);
+      });
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   const joinChat = async () => {
@@ -44,6 +49,13 @@ export default function ChatRoom2({ userId, sessionId }) {
       connection.onclose((e) => {
         setConnection('');
         setMessages([]);
+      });
+
+      connection.on('ClearMessages', () => {
+        MessageData.ClearMessages(sessionId);
+        MessageData.GetSessionMessages(sessionId).then((response) => {
+          setMessages(response);
+        });
       });
 
       await connection.start();
