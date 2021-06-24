@@ -12,6 +12,9 @@ This is an app to help people make a democratic decison on where to go out to ea
 <br>
 Say no more, Nathan! It's happening!
 
+## Walk Through
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/ee0052aa4cc047848924d953e0789872" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+
 ## ERD
 <p align="center">
   <img src="https://user-images.githubusercontent.com/66916708/122644279-04635a00-d0da-11eb-8188-f0f3ef518384.PNG">
