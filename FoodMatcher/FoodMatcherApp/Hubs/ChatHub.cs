@@ -59,5 +59,10 @@ namespace FoodMatcherApp.Hubs
             await Clients.Group(userConnection.SessionId.ToString()).SendAsync("RecieveMessage", _botUser, $"{userConnection.UserName} has entered the chat");
 
         }
+
+        public async Task ClearMessages(Guid sessionId)
+        {
+            await Clients.Group(sessionId.ToString()).SendAsync("ClearMessages");
+        }
     }
 }
