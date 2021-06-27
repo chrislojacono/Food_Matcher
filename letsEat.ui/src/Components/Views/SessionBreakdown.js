@@ -26,7 +26,7 @@ export default function SessionBreakdown(props) {
     JoinRoomConnection();
     setDidMount(true);
     return () => setDidMount(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [sessionId, userId]);
 
   const loadContent = () => {
