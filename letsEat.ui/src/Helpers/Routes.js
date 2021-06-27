@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import SessionForm from '../Components/Forms/SessionForm';
 import SessionView from '../Components/Views/ActiveSessionView';
 import ToAuthOrNot from '../Components/Views/ToAuthOrNot';
@@ -27,7 +27,7 @@ export default function Routes({ user }) {
         path='/session/join/:id'
         component={(props) => <JoinerAuth {...props} user={user} />}
       />
-      <Route
+      <PrivateRoute
         exact
         path='/mySessions'
         component={(props) => <YourSessions {...props} user={user} />}
